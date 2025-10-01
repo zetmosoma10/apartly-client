@@ -7,7 +7,7 @@ function Layout() {
       <header>
         <NavBar />
       </header>
-      <main className="bg-base-200 h-screen pt-7 px-2">
+      <main className="bg-base-200 min-h-screen py-7 px-2">
         <Outlet />
       </main>
     </section>
