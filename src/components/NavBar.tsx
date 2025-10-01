@@ -10,7 +10,9 @@ const NavBar = () => {
           Apartly
         </Link>
       </div>
-      <div>Listings</div>
+      <div>
+        <Link to="listings">Listings</Link>
+      </div>
       <div>profile</div>
     </nav>
   );
