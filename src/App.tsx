@@ -1,14 +1,12 @@
+import NavBar from "./components/NavBar";
+
 function App() {
   return (
     <section>
-      <main>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam,
-          molestias. Ipsam, ad numquam. Doloremque, neque porro. Molestias quos
-          vitae nihil?
-        </p>
-        <button className="btn btn-primary">submit</button>
-      </main>
+      <header>
+        <NavBar />
+      </header>
+      <main className="bg-base-200 h-screen"></main>
     </section>
   );
 }
