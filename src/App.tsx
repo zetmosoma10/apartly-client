@@ -2,7 +2,7 @@ function App() {
   return (
     <section>
       <main>
-        <h1>Hello world</h1>
+        <button className="btn btn-primary">submit</button>
       </main>
     </section>
   );
