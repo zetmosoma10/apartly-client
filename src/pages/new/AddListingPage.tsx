@@ -1,4 +1,5 @@
 import Input from "../../components/Input";
+import SelectInput from "./SelectInput";
 
 const AddListingPage = () => {
   return (
@@ -16,25 +17,26 @@ const AddListingPage = () => {
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             <Input id="city" label="City" placeholder="e.g Cape Town" />
-            <div>
-              <label htmlFor="type">Type</label>
-              <select className="select focus:select-warning w-full bg-base-200">
-                <option>Bachelor</option>
-                <option>Studio</option>
-                <option>Others</option>
-              </select>
-            </div>
+            <SelectInput
+              id="type"
+              label="Type"
+              options={[
+                "bachelor",
+                "1-bedrooms",
+                "2-bedrooms",
+                "3-bedrooms",
+                "studio",
+                "other",
+              ]}
+            />
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             <Input id="bathrooms" label="Bathrooms" placeholder="e.g 1" />
-            <div>
-              <label htmlFor="status">Status</label>
-              <select className="select focus:select-warning w-full bg-base-200">
-                <option>Available</option>
-                <option>Rented</option>
-                <option>Maintenance</option>
-              </select>
-            </div>
+            <SelectInput
+              id="status"
+              label="Status"
+              options={["Available", "Maintenance", "Rented"]}
+            />
           </div>
           <Input
             id="amenities"
