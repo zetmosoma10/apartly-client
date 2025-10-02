@@ -1,4 +1,8 @@
-const UploadBox = () => {
+type Props = {
+  onImageFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const UploadBox = ({ onImageFileChange }: Props) => {
   return (
     <div className="w-full">
       <label
@@ -20,12 +24,17 @@ const UploadBox = () => {
             />
           </svg>
           <p className="mb-2 text-sm text-gray-500">
-            <span className="font-semibold">Click to upload</span> or drag &
-            drop
+            <span className="font-semibold">Click to upload</span>
           </p>
-          <p className="text-xs text-gray-400">PNG, JPG, JPEG (max 5MB)</p>
+          <p className="text-xs text-gray-400">PNG, JPG, JPEG (max 10MB)</p>
         </div>
-        <input id="images" type="file" className="hidden" multiple />
+        <input
+          id="images"
+          type="file"
+          className="hidden"
+          multiple
+          onChange={onImageFileChange}
+        />
       </label>
     </div>
   );
