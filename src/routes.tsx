@@ -3,6 +3,7 @@ import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import ListingPage from "./pages/listings/ListingPage";
 import AddListingPage from "./pages/listings/new/AddListingPage";
+import ListingDetailPage from "./pages/listings/details/ListingDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "listings/new",
         element: <AddListingPage />,
+      },
+      {
+        path: "listings/:id",
+        element: <ListingDetailPage />,
       },
     ],
   },

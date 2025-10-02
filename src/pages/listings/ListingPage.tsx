@@ -30,12 +30,16 @@ const ListingPage = () => {
               {data?.apartments?.map((item) => (
                 <tr key={item._id} className="hover">
                   <td>
-                    <img
-                      src={item.images[0].url}
-                      className="object-cover h-20 w-36 rounded-xl"
-                    />
+                    <Link to={item._id}>
+                      <img
+                        src={item.images[0].url}
+                        className="object-cover h-20 w-36 rounded-xl"
+                      />
+                    </Link>
                   </td>
-                  <td>{item.address}</td>
+                  <td>
+                    <Link to={item._id}>{item.address}</Link>
+                  </td>
                   <td>{item.status}</td>
                   <td>
                     <div className="flex items-center justify-center h-full space-x-2 place-self-center">
