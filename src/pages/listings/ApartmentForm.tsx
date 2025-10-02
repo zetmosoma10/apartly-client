@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { apartmentSchema } from "./validationSchemas";
@@ -5,7 +6,7 @@ import { z } from "zod";
 import Input from "../../components/Input";
 import SelectInput from "./new/SelectInput";
 import UploadBox from "./new/UploadBox";
-import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -30,14 +31,17 @@ const ApartmentForm = () => {
     const validFiles = selectedFiles.filter((file) => {
       // * file type should be image
       if (!file.type.startsWith("image/")) {
-        console.log(`file: ${file} , is not an image`);
+        toast.error(`file: ${file} , is not an image. it will be removed`);
         return false;
       }
 
       const MAX_MB_SIZE = 10;
       // * validate size
       if (file.size > MAX_MB_SIZE * 1024 * 1024) {
-        console.log(`file: ${file}, too large (max : ${MAX_MB_SIZE})`);
+        console.log();
+        toast.error(
+          `file: ${file}, too large (max : ${MAX_MB_SIZE}). It will be removed`
+        );
         return false;
       }
 
@@ -58,7 +62,7 @@ const ApartmentForm = () => {
     const formData = new FormData();
 
     if (files.length === 0) {
-      alert("upload images");
+      toast.error("Please upload one or more image(s)");
       return;
     }
 
@@ -85,7 +89,7 @@ const ApartmentForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border rounded-xl mt-6 p-6 bg-base-100"
+      className="border rounded-xl mt-6 p-6 bg-base-100 shadown-sm"
     >
       <div className="space-y-3">
         <Input
