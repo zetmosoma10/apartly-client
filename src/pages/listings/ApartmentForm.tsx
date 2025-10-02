@@ -7,6 +7,7 @@ import Input from "../../components/Input";
 import SelectInput from "./new/SelectInput";
 import UploadBox from "./new/UploadBox";
 import toast from "react-hot-toast";
+import useCreateApartment from "../../hooks/useCreateApartment";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -58,6 +59,9 @@ const ApartmentForm = () => {
     };
   }, [previews]);
 
+  // * Submit the form
+  const { mutate, isPending } = useCreateApartment();
+
   const onSubmit = (data: FormData) => {
     const formData = new FormData();
 
@@ -76,20 +80,18 @@ const ApartmentForm = () => {
       formData.append("images", file);
     });
 
-    //* here you would send with axios
-    for (const [key, value] of formData.entries()) {
-      if (value instanceof File) {
-        console.log(key, value.name, value.size, value.type);
-      } else {
-        console.log(key, value);
-      }
-    }
+    mutate(formData, {
+      onError: (error) => {
+        toast.error(error.message);
+        console.log(error);
+      },
+    });
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border rounded-xl mt-6 p-6 bg-base-100 shadown-sm"
+      className="border rounded-xl mt-6 p-6 bg-base-100 shadow-md"
     >
       <div className="space-y-3">
         <Input
@@ -128,7 +130,7 @@ const ApartmentForm = () => {
             label="Type"
             options={[
               "bachelor",
-              "1-bedrooms",
+              "1-bedroom",
               "2-bedrooms",
               "3-bedrooms",
               "studio",
@@ -201,7 +203,12 @@ const ApartmentForm = () => {
         )}
       </div>
 
-      <button className="btn btn-warning mt-5">Submit New Apartment</button>
+      <button disabled={isPending} className="btn btn-warning mt-5">
+        Submit New Apartment
+        {isPending && (
+          <span className="loading loading-spinner loading-sm text-warning"></span>
+        )}
+      </button>
     </form>
   );
 };

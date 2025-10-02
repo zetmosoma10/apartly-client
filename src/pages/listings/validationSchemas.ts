@@ -24,7 +24,7 @@ export const apartmentSchema = z.object({
     message: "status is required",
   }),
   type: z.enum(
-    ["1-bedrooms", "2-bedrooms", "3-bedrooms", "studio", "bachelor", "other"],
+    ["1-bedroom", "2-bedrooms", "3-bedrooms", "studio", "bachelor", "other"],
     { message: "type is required" }
   ),
   amenities: z.string().optional(),
