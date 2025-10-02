@@ -5,9 +5,10 @@ type Props = {
   label: string;
   options: string[];
   register: UseFormRegisterReturn;
+  error?: string;
 };
 
-const SelectInput = ({ label, id, options, register }: Props) => {
+const SelectInput = ({ label, id, options, register, error }: Props) => {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
@@ -15,7 +16,9 @@ const SelectInput = ({ label, id, options, register }: Props) => {
         id={id}
         {...register}
         defaultValue=""
-        className="select focus:select-warning w-full bg-base-200"
+        className={`select focus:select-warning w-full bg-base-200 ${
+          error && "border-error"
+        }`}
       >
         <option disabled value="">
           --Choose--
@@ -26,6 +29,7 @@ const SelectInput = ({ label, id, options, register }: Props) => {
           </option>
         ))}
       </select>
+      {error && <p className="text-sm text-error">{error}</p>}
     </div>
   );
 };
