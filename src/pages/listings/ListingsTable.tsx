@@ -1,0 +1,50 @@
+import { Link } from "react-router-dom";
+import type { ResponseApartment } from "../../entities/Apartment";
+import dayjs from "dayjs";
+import Badge from "../../components/Badge";
+
+const ListingsTable = ({ data }: { data?: ResponseApartment }) => {
+  return (
+    <div className="mt-8 overflow-x-auto border rounded-lg shadow-md">
+      <table className="table">
+        <thead className="bg-base-300">
+          <tr>
+            <th>Property</th>
+            <th className="hidden sm:table-cell">Address</th>
+            <th>Status</th>
+            <th>Date Added</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white">
+          {data?.apartments?.map((item) => (
+            <tr key={item._id} className="hover:bg-base-300">
+              <td>
+                <Link to={item._id}>
+                  <img
+                    src={item.images[0].url}
+                    className="object-cover h-20 w-36 rounded-xl"
+                  />
+                </Link>
+              </td>
+              <td className="hidden sm:table-cell">
+                <Link to={item._id}>{item.address}</Link>
+              </td>
+              <td>
+                <Link to={item._id}>
+                  <Badge status={item.status} />
+                </Link>
+              </td>
+              <td>
+                <Link to={item._id}>
+                  {dayjs(item.createdAt).format("DD MMM YYYY")}
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default ListingsTable;
