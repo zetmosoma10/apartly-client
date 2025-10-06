@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import useGetAllListings from "../../hooks/useGetAllListings";
 import Badge from "../../components/Badge";
+import dayjs from "dayjs";
 
 const ListingPage = () => {
   const { data, isLoading, error } = useGetAllListings();
@@ -24,7 +25,7 @@ const ListingPage = () => {
                 <th>Property</th>
                 <th className="hidden sm:table-cell">Address</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th>Date Added</th>
               </tr>
             </thead>
             <tbody className="bg-white">
@@ -44,12 +45,7 @@ const ListingPage = () => {
                   <td>
                     <Badge status={item.status} />
                   </td>
-                  <td>
-                    <div className="flex items-center justify-center h-full space-x-2 place-self-center">
-                      <button className="btn btn-xs btn-neutral">Edit</button>
-                      <button className="btn btn-xs btn-error">Remove</button>
-                    </div>
-                  </td>
+                  <td>{dayjs(item.createdAt).format("DD MMM YYYY")}</td>
                 </tr>
               ))}
             </tbody>
