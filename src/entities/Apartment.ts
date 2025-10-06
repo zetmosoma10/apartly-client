@@ -1,12 +1,14 @@
 export type Apartment = {
   _id: string;
   address: string;
-  status: "available" | "rented" | "maintenance";
+  status: Status;
   images: {
     _id: string;
     url: string;
   }[];
 };
+
+export type Status = "available" | "rented" | "maintenance";
 
 export type ResponseApartment = {
   success: boolean;

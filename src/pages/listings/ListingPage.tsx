@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import useGetAllListings from "../../hooks/useGetAllListings";
+import Badge from "../../components/Badge";
 
 const ListingPage = () => {
   const { data, isLoading, error } = useGetAllListings();
@@ -40,7 +41,9 @@ const ListingPage = () => {
                   <td>
                     <Link to={item._id}>{item.address}</Link>
                   </td>
-                  <td>{item.status}</td>
+                  <td>
+                    <Badge status={item.status} />
+                  </td>
                   <td>
                     <div className="flex items-center justify-center h-full space-x-2 place-self-center">
                       <button className="btn btn-xs btn-neutral">Edit</button>
