@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import useGetAllListings from "../../hooks/useGetAllListings";
 import ListingsTable from "./ListingsTable";
+import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 
 const ListingPage = () => {
   const { data, isLoading, error } = useGetAllListings();
@@ -16,7 +17,7 @@ const ListingPage = () => {
           Add New Listing
         </Link>
       </div>
-      {!isLoading ? <ListingsTable data={data} /> : <p>Loading...</p>}
+      {!isLoading ? <ListingsTable data={data} /> : <ListingsTableSkeleton />}
     </section>
   );
 };

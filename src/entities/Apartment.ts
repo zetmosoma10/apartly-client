@@ -11,8 +11,4 @@ export type Apartment = {
 
 export type Status = "available" | "rented" | "maintenance";
 
-export type ResponseApartment = {
-  success: boolean;
-  count: number;
-  apartments: Apartment[];
-};
+

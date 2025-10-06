@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import type { ResponseApartment } from "../../entities/Apartment";
 import dayjs from "dayjs";
 import Badge from "../../components/Badge";
+import type { Response } from "../../../entities/Response"
+import type { Apartment } from "../../../entities/Apartment"
 
-const ListingsTable = ({ data }: { data?: ResponseApartment }) => {
+const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
   return (
     <div className="mt-8 overflow-x-auto border rounded-lg shadow-md">
       <table className="table">
@@ -16,7 +17,7 @@ const ListingsTable = ({ data }: { data?: ResponseApartment }) => {
           </tr>
         </thead>
         <tbody className="bg-white">
-          {data?.apartments?.map((item) => (
+          {data?.results?.map((item) => (
             <tr key={item._id} className="hover:bg-base-300">
               <td>
                 <Link to={item._id}>
