@@ -8,7 +8,7 @@ const ListingPage = () => {
   console.log(error);
 
   return (
-    <section className="w-full mx-auto md:max-w-xl lg:max-w-4xl">
+    <section className="w-full mx-auto md:max-w-4xl">
       <div className="flex items-center justify-between">
         <h2>Your Listings</h2>
         <Link to="new" className="btn btn-warning rounded-3xl">
@@ -22,7 +22,7 @@ const ListingPage = () => {
             <thead className="bg-base-300">
               <tr>
                 <th>Property</th>
-                <th>Address</th>
+                <th className="hidden sm:table-cell">Address</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -38,7 +38,7 @@ const ListingPage = () => {
                       />
                     </Link>
                   </td>
-                  <td>
+                  <td className="hidden sm:table-cell">
                     <Link to={item._id}>{item.address}</Link>
                   </td>
                   <td>
