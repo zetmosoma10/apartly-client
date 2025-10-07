@@ -5,8 +5,7 @@ import ListingsTable from "./ListingsTable";
 import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 
 const ListingPage = () => {
-  const { data, isLoading, error } = useGetAllListings();
-  console.log(error);
+  const { data, isLoading } = useGetAllListings();
 
   return (
     <section className="w-full mx-auto md:max-w-4xl">
