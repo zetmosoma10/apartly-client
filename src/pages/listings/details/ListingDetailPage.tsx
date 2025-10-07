@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useGetApartment from "../../../hooks/useGetApartment";
 import Badge from "../../../components/Badge";
 
@@ -38,20 +38,31 @@ const ListingDetailPage = () => {
           />
         </div>
       </div>
-      <div className="grid sm:grid-cols-2 mt-5">
+      <div className="flex flex-cols sm:flex-row sm:justify-between mt-5">
         <div>
           <h3>Descriptions</h3>
           <p className="opacity-70 leading-tight">{apartment?.description}</p>
         </div>
-        <div></div>
+        <div className="border p-4 min-w-[300px] bg-white shadow-md rounded-lg">
+          <h4 className="text-base">R {apartment.price} / month</h4>
+          <p className="text-xs opacity-70 mb-2">
+            <span>{apartment.bedrooms} bedroom(s) . {apartment.bathrooms} bathroom(s)</span>
+          </p>
+          <Link
+            to="/landlord" 
+            className="btn btn-sm btn-outline btn-warning w-full rounded-2xl"
+          >
+          Contact Landlord
+          </Link>
+        </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-6">
         <h4>Amenites</h4>
         <ul className="flex items-center flex-wrap gap-3 mt-3">
           {apartment?.amenities.map((item, index) => (
             <li
               key={index}
-              className="p-2 px-3 border border-warning rounded-lg text-warning-content"
+              className="text-sm p-2 px-3 border border-warning rounded-lg text-warning-content"
             >
               {item}
             </li>
