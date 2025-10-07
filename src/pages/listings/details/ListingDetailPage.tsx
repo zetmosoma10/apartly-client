@@ -1,4 +1,6 @@
 import { useParams, Link } from "react-router-dom";
+import { RiEdit2Fill } from "react-icons/ri";
+import { RiDeleteBin4Fill } from "react-icons/ri";
 import useGetApartment from "../../../hooks/useGetApartment";
 import Badge from "../../../components/Badge";
 
@@ -12,14 +14,30 @@ const ListingDetailPage = () => {
 
   return (
     <section className="w-full mx-auto md:max-w-5xl">
-      <h2>{apartment?.title}</h2>
-      <p className="text-base md:text-lg opacity-70">
-        {apartment?.address}, {apartment?.city}
-      </p>
-      <Badge status={apartment!.status} />
-      <div className="grid grid-cols-3 grid-rows-2 gap-4 h-[500px] mt-8 mb-12">
+      <div className="flex justify-between">
+        <div>
+          <h2>{apartment?.title}</h2>
+          <p className="text-base md:text-lg opacity-70">
+            {apartment?.address}, {apartment?.city}
+          </p>
+          <Badge status={apartment!.status} />
+        </div>
+        <div className="grid">
+          <Link to="edit" className="btn btn-neutral rounded-3xl">
+            <RiEdit2Fill />
+            Edit Apartment
+          </Link>
+          <button className="btn btn-error rounded-3xl">
+            <RiDeleteBin4Fill />
+            Delete Apartment
+          </button>
+        </div>
+      </div>
+
+      {/* IMAGE GRID */}
+      <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">
         <div
-          className="col-span-2 row-span-2 overflow-hidden rounded-xl"
+          className="overflow-hidden sm:col-span-2 sm:row-span-2 rounded-xl"
           style={{
             backgroundImage: `url(${apartment?.images[0].url})`,
             backgroundSize: "cover",
@@ -27,7 +45,7 @@ const ListingDetailPage = () => {
           }}
         ></div>
         <div
-          className="col-span-1 row-span-1 overflow-hidden rounded-xl"
+          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl"
           style={{
             backgroundImage: `url(${apartment?.images[1].url})`,
             backgroundSize: "cover",
@@ -35,7 +53,7 @@ const ListingDetailPage = () => {
           }}
         ></div>
         <div
-          className="col-span-1 row-span-1 overflow-hidden rounded-xl"
+          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl"
           style={{
             backgroundImage: `url(${apartment?.images[2].url})`,
             backgroundSize: "cover",
@@ -43,12 +61,14 @@ const ListingDetailPage = () => {
           }}
         ></div>
       </div>
-      <div className="flex mt-5 flex-cols sm:flex-row sm:justify-between">
+
+      {/* DESCRIPTION */}
+      <div className="flex flex-col mt-5 gap-y-4 sm:flex-row sm:justify-between">
         <div>
           <h3>Descriptions</h3>
           <p className="leading-tight opacity-70">{apartment?.description}</p>
         </div>
-        <div className="border p-4 min-w-[300px] bg-white shadow-md rounded-lg">
+        <div className="border p-4 min-w-[300px] max-w-[400px] bg-white shadow-md rounded-lg">
           <h4 className="">R {apartment?.price} / month</h4>
           <p className="mb-3 text-xs opacity-70">
             <span>
@@ -64,13 +84,15 @@ const ListingDetailPage = () => {
           </Link>
         </div>
       </div>
+
+      {/* AMENITES */}
       <div className="mt-6">
         <h3>Amenites</h3>
         <ul className="flex flex-wrap items-center gap-3 mt-3">
           {apartment?.amenities.map((item, index) => (
             <li
               key={index}
-              className="p-2 px-3 text-sm border rounded-lg border-warning text-warning-content"
+              className="px-2 py-1 text-xs border rounded-lg border-warning text-warning-content"
             >
               {item}
             </li>
