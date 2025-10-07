@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { apartmentSchema } from "./validationSchemas";
@@ -10,11 +10,13 @@ import SelectInput from "./new/SelectInput";
 import UploadBox from "./new/UploadBox";
 import toast from "react-hot-toast";
 import useCreateApartment from "../../hooks/useCreateApartment";
+import useUpdateApartment from "../../hooks/useUpdateApartment";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
 const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
-  const { id } = useParams();
+  const { id: apartmentId } = useParams();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -22,7 +24,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(apartmentSchema),
-    defaultValues: id
+    defaultValues: apartmentId
       ? {
           title: apartment?.title ?? "",
           description: apartment?.description ?? "",
@@ -81,13 +83,17 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
     };
   }, [previews]);
 
-  // * Submit the form
-  const { mutate, isPending } = useCreateApartment();
+  // *  Mutation hooks
+  const { mutate: createApartment, isPending: isCreating } =
+    useCreateApartment();
+  const { mutate: updateApartment, isPending: isUpdating } =
+    useUpdateApartment(apartmentId);
 
+  // * Submit the form
   const onSubmit = (data: FormData) => {
     const formData = new FormData();
 
-    if (files.length === 0) {
+    if (!apartmentId && files.length === 0) {
       toast.error("Please upload one or more image(s)");
       return;
     }
@@ -97,17 +103,27 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
       formData.append(key, value as string);
     });
 
-    // * append files
-    files.forEach((file) => {
-      formData.append("images", file);
-    });
+    // * Check if we updating or creating
+    if (!apartmentId) {
+      // * append files
+      files.forEach((file) => {
+        formData.append("images", file);
+      });
 
-    mutate(formData, {
-      onError: (error) => {
-        toast.error(error.message);
-        console.log(error);
-      },
-    });
+      // * Mutation
+      createApartment(formData, {
+        onError: (error) => toast.error(error.message),
+        onSuccess: () => navigate("/listings"),
+      });
+    } else {
+      updateApartment(
+        { id: apartmentId, data },
+        {
+          onError: (error) => toast.error(error.message),
+          onSuccess: () => navigate(`/listings/${apartmentId}`),
+        }
+      );
+    }
   };
 
   return (
@@ -202,11 +218,11 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
           register={register("description")}
           error={errors.description?.message}
         />
-        {!id && <UploadBox onImageFileChange={onImageFileChange} />}
+        {!apartmentId && <UploadBox onImageFileChange={onImageFileChange} />}
       </div>
 
       {/* Image previews */}
-      {!id && (
+      {!apartmentId && previews.length > 0 && (
         <div>
           {previews.length > 0 && (
             <div className="grid grid-cols-2 gap-3 mt-4 sm:grid-cols-3">
@@ -227,9 +243,12 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         </div>
       )}
 
-      <button disabled={isPending} className="mt-5 btn btn-warning">
-        {id ? "Update Apartment" : "Submit New Apartment"}
-        {isPending && (
+      <button
+        disabled={isCreating || isUpdating}
+        className="mt-5 btn btn-warning disabled:bg-opacity-60"
+      >
+        {apartmentId ? "Update Apartment" : "Submit New Apartment"}
+        {(isCreating || isUpdating) && (
           <span className="loading loading-spinner loading-sm text-warning"></span>
         )}
       </button>

@@ -2,9 +2,9 @@ import ApartmentForm from "../ApartmentForm";
 
 const AddListingPage = () => {
   return (
-    <section className="w-full md:max-w-4xl mx-auto">
+    <section className="w-full mx-auto md:max-w-4xl">
       <h2>Create New Listing</h2>
-      <p className="text-sm sm:text-base mt-1 md:mt-2 opacity-70 ">
+      <p className="mt-1 text-sm sm:text-base md:mt-2 opacity-70 ">
         Fill in the details below to add new apartment to your listings
       </p>
       <ApartmentForm />
