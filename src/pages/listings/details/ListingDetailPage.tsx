@@ -14,7 +14,7 @@ const ListingDetailPage = () => {
 
   return (
     <section className="w-full mx-auto md:max-w-5xl">
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-8">
         <div>
           <h2>{apartment?.title}</h2>
           <p className="text-base md:text-lg opacity-70">
@@ -22,12 +22,15 @@ const ListingDetailPage = () => {
           </p>
           <Badge status={apartment!.status} />
         </div>
-        <div className="grid">
-          <Link to="edit" className="btn btn-neutral rounded-3xl">
+        <div className="flex flex-col gap-y-3">
+          <Link
+            to="edit"
+            className="btn btn-neutral btn-sm md:btn-md rounded-3xl text-nowrap"
+          >
             <RiEdit2Fill />
             Edit Apartment
           </Link>
-          <button className="btn btn-error rounded-3xl">
+          <button className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap">
             <RiDeleteBin4Fill />
             Delete Apartment
           </button>

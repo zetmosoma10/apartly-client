@@ -245,11 +245,11 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       <button
         disabled={isCreating || isUpdating}
-        className="mt-5 btn btn-warning disabled:bg-opacity-60"
+        className="mt-5 btn btn-warning "
       >
         {apartmentId ? "Update Apartment" : "Submit New Apartment"}
         {(isCreating || isUpdating) && (
-          <span className="loading loading-spinner loading-sm text-warning"></span>
+          <span className="loading loading-spinner loading-sm opacity-50 "></span>
         )}
       </button>
     </form>

@@ -1,5 +1,10 @@
 import { RiBuilding2Line } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+const navlinks = [
+  { label: "Listings", to: "listings" },
+  { label: "Apartments", to: "apartments" },
+];
 
 const NavBar = () => {
   return (
@@ -10,8 +15,17 @@ const NavBar = () => {
           Apartly
         </Link>
       </div>
-      <div>
-        <Link to="listings">Listings</Link>
+      <div className="space-x-3">
+        {navlinks.map((link) => (
+          <NavLink
+            to={link.to}
+            className={({ isActive }) =>
+              isActive ? "text-warning" : "text-black hover:text-warning"
+            }
+          >
+            {link.label}
+          </NavLink>
+        ))}
       </div>
       <div>profile</div>
     </nav>
