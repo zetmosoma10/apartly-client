@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import ListingPage from "./pages/listings/ListingPage";
 import AddListingPage from "./pages/listings/new/AddListingPage";
 import ListingDetailPage from "./pages/listings/details/ListingDetailPage";
+import ListingEditPage from "./pages/listings/edit/ListingEditPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "listings/:id",
         element: <ListingDetailPage />,
+      },
+      {
+        path: "listings/:id/edit",
+        element: <ListingEditPage />,
       },
     ],
   },
