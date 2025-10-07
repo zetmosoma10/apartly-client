@@ -15,7 +15,6 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
   return (
     <Link
       to={apartment._id}
-      key={apartment._id}
       className="w-full max-w-[250px] bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col"
     >
       <div className="relative w-full h-40 bg-gray-300  overflow-hidden">
