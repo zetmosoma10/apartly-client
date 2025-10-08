@@ -4,7 +4,7 @@ type Props = {
   id: string;
   label: string;
   placeholder: string;
-  type?: "text" | "textarea";
+  type?: "text" | "textarea" | "password";
   register: UseFormRegisterReturn;
   error?: string;
 };
@@ -22,7 +22,7 @@ const Input = ({
       <label className="block text-sm font-medium" htmlFor={id}>
         {label}
       </label>
-      {type === "text" ? (
+      {type !== "textarea" ? (
         <input
           id={id}
           type={type}

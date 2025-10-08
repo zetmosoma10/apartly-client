@@ -24,6 +24,12 @@ const AuthPage = () => {
             I'm a Landlord
           </Link>
         </div>
+        <p className="text-sm mt-4">
+          Already have an account?{" "}
+          <Link className="text-warning hover:underline" to="login">
+            Sign in here
+          </Link>
+        </p>
       </div>
     </section>
   );
