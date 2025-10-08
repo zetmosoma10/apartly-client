@@ -7,6 +7,8 @@ import ListingDetailPage from "./pages/listings/details/ListingDetailPage";
 import ListingEditPage from "./pages/listings/edit/ListingEditPage";
 import ApartmentsPage from "./pages/apartments/ApartmentsPage";
 import AuthPage from "./pages/auth/AuthPage";
+import LoginPage from "./pages/auth/login/LoginPage";
+import RegisterPage from "./pages/auth/register/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: "auth",
         element: <AuthPage />,
+      },
+      {
+        path: "auth/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "auth/register",
+        element: <RegisterPage />,
       },
     ],
   },
