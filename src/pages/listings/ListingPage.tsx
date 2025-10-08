@@ -11,7 +11,7 @@ const ListingPage = () => {
     <section className="w-full mx-auto md:max-w-4xl">
       <div className="flex items-center justify-between">
         <h2>Your Listings</h2>
-        <Link to="new" className="btn btn-warning rounded-3xl">
+        <Link to="new" className="btn-main">
           <IoAddSharp />
           Add New Listing
         </Link>

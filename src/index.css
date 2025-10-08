@@ -30,4 +30,8 @@ body {
   h4 {
     @apply text-base font-bold tracking-tight md:text-lg;
   }
+
+  .btn-main {
+    @apply btn bg-warning text-white border-warning hover:opacity-70 transition-all duration-200 rounded-3xl;
+  }
 }

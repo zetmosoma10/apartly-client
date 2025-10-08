@@ -32,7 +32,7 @@ const NavBar = () => {
         <button className="md:hidden">
           <GiHamburgerMenu />
         </button>
-        <Link to="/auth" className="btn btn-warning rounded-3xl">
+        <Link to="/auth" className="btn-main">
           Login / Register
         </Link>
       </div>
