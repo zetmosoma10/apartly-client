@@ -1,11 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { RiBuilding2Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
-
-const navlinks = [
-  { label: "Listings", to: "listings" },
-  { label: "Apartments", to: "apartments" },
-];
+import { navLinks } from "../constance";
 
 const NavBar = () => {
   return (
@@ -17,7 +13,7 @@ const NavBar = () => {
         </Link>
       </div>
       <div className="space-x-3">
-        {navlinks.map((link) => (
+        {navLinks.map((link) => (
           <NavLink
             to={link.to}
             className={({ isActive }) =>
