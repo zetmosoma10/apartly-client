@@ -5,7 +5,7 @@ import { navLinks } from "../constance";
 
 const NavBar = () => {
   return (
-    <nav className="navbar bg-base-100 justify-between ">
+    <nav className="navbar  bg-base-100 justify-between ">
       <div className="flex items-center space-x-3">
         <RiBuilding2Line size="20px" className="text-warning" />
         <Link to="/" className="logo-font font-extrabold text-xl">
@@ -15,6 +15,7 @@ const NavBar = () => {
       <div className="space-x-3">
         {navLinks.map((link) => (
           <NavLink
+            key={link.to}
             to={link.to}
             className={({ isActive }) =>
               isActive ? "text-warning" : "text-black hover:text-warning"

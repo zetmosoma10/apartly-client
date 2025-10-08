@@ -5,7 +5,7 @@ import { navLinks } from "../constance";
 const Footer = () => {
   return (
     <footer className=" py-8 bg-gray-800">
-      <div className="flex flex-col gap-y-4 items-center justify-between sm:flex-row">
+      <div className="max-container flex flex-col gap-y-4 items-center justify-between sm:flex-row">
         <div className="flex items-center space-x-3">
           <RiBuilding2Line size="20px" className="text-warning" />
           <Link to="/" className="logo-font font-extrabold text-xl text-white">
@@ -15,6 +15,7 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center sm:flex-row  sm:space-x-3 ">
           {navLinks.map((link) => (
             <NavLink
+              key={link.to}
               to={link.to}
               className={({ isActive }) =>
                 isActive ? "text-warning" : "text-white hover:text-warning"

@@ -13,7 +13,7 @@ const ListingDetailPage = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <section className="w-full mx-auto md:max-w-5xl">
+    <section className="max-container">
       <div className="flex justify-between gap-8">
         <div>
           <h2>{apartment?.title}</h2>

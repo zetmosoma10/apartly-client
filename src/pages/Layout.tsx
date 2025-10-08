@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 function Layout() {
   return (
     <section>
-      <header>
+      <header className="max-container">
         <NavBar />
       </header>
       <Toaster />

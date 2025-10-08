@@ -14,7 +14,7 @@ const ListingEditPage = () => {
 
   const apartment = query?.results;
   return (
-    <section className="w-full mx-auto md:max-w-5xl">
+    <section className="max-container">
       <h2>Edit Apartment: {apartment?.title}</h2>
       <div>
         <ApartmentForm apartment={apartment} />

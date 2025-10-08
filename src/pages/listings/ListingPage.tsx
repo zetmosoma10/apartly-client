@@ -8,7 +8,7 @@ const ListingPage = () => {
   const { data, isLoading } = useGetAllListings();
 
   return (
-    <section className="w-full mx-auto md:max-w-4xl">
+    <section className="max-container">
       <div className="flex items-center justify-between">
         <h2>Your Listings</h2>
         <Link to="new" className="btn-main">

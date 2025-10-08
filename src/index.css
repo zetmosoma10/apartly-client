@@ -31,6 +31,10 @@ body {
     @apply text-base font-bold tracking-tight md:text-lg;
   }
 
+  .max-container {
+    @apply mx-auto max-w-[1220px] w-[90%];
+  }
+
   .btn-main {
     @apply btn bg-warning text-white border-warning hover:opacity-70 transition-all duration-200 rounded-3xl;
   }
