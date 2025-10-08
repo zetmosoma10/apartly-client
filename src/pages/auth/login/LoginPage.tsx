@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../../../components/Input";
+import loginSchema from "./loginSchema";
+
+type FormData = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>({ resolver: zodResolver(loginSchema) });
 
-  console.log(errors);
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormData) => {
     console.log(data);
   };
 
@@ -34,6 +38,7 @@ const LoginPage = () => {
               label="Email"
               placeholder="Enter email"
               register={register("email")}
+              error={errors.email?.message}
             />
             <Input
               id="password"
@@ -41,6 +46,7 @@ const LoginPage = () => {
               type="password"
               placeholder="Enter password"
               register={register("password")}
+              error={errors.password?.message}
             />
           </div>
           <div className="mt-2 mb-4 text-end">
