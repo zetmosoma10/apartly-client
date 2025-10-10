@@ -1,9 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../../../components/Input";
 import loginSchema from "./loginSchema";
+import useLogin from "../../../hooks/useLogin";
+import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import ErrorMessage from "../ErrorMessage";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -14,13 +20,34 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(loginSchema) });
 
+  const [expectedError, setExpectedError] = useState("");
+  const navigate = useNavigate();
+  const { mutate, isPending } = useLogin();
+
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => {
+        navigate("/", { replace: true });
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status < 500
+          ) {
+            setExpectedError(error.response.data.message);
+          } else if (error.response && error.response.status >= 500) {
+            toast.error(error.response.data.message);
+          }
+        }
+      },
+    });
   };
 
   return (
     <div className="h-screen pt-20">
-      <div className="w-11/12 p-8 mx-auto rounded-lg shadow-lg border bg-white sm:w-3/4 md:w-1/2 lg:w-1/3 ">
+      <div className="w-11/12 p-8 mx-auto bg-white border rounded-lg shadow-lg sm:w-3/4 md:w-1/2 lg:w-1/3 ">
         <div className="mb-4 space-y-2 text-center">
           <h2 className="text-xl font-bold">Sign in</h2>
           <p className="text-base">
@@ -30,6 +57,8 @@ const LoginPage = () => {
             </Link>
           </p>
         </div>
+
+        {expectedError && <ErrorMessage errorMessage={expectedError} />}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4">
@@ -57,7 +86,13 @@ const LoginPage = () => {
               Forgot password?
             </Link>
           </div>
-          <button className="btn-main w-full">Sign in</button>
+          <button
+            disabled={isPending}
+            className="w-full btn-main disabled:border-none"
+          >
+            Sign in
+            {isPending && <LoadingSpinner />}
+          </button>
         </form>
       </div>
     </div>

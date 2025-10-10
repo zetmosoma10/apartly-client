@@ -11,6 +11,7 @@ import UploadBox from "./new/UploadBox";
 import toast from "react-hot-toast";
 import useCreateApartment from "../../hooks/useCreateApartment";
 import useUpdateApartment from "../../hooks/useUpdateApartment";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -245,9 +246,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       <button disabled={isCreating || isUpdating} className="mt-5 btn-main">
         {apartmentId ? "Update Apartment" : "Submit New Apartment"}
-        {(isCreating || isUpdating) && (
-          <span className="loading loading-spinner loading-sm opacity-50"></span>
-        )}
+        {(isCreating || isUpdating) && <LoadingSpinner />}
       </button>
     </form>
   );
