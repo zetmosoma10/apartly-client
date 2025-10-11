@@ -1,11 +1,12 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RiBuilding2Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { navLinks } from "../constance";
 import useAuthStore from "../store";
 
 const NavBar = () => {
-  const { user } = useAuthStore();
+  const navigate = useNavigate();
+  const { user, clearAuth } = useAuthStore();
 
   return (
     <nav className="justify-between navbar bg-base-100 ">
@@ -32,14 +33,24 @@ const NavBar = () => {
         <button className="md:hidden">
           <GiHamburgerMenu />
         </button>
-        {!user && (
+        {!user ? (
           <Link to="/auth" className="btn-main">
             Login / Register
           </Link>
+        ) : (
+          <button
+            className="text-sm hover:underline"
+            onClick={() => {
+              clearAuth();
+              navigate("/");
+            }}
+          >
+            Logout
+          </button>
         )}
         {user && (
           <div className="flex items-center justify-center p-2 rounded-full bg-neutral text-neutral-content">
-            <span className="text-sm">
+            <span className="text-xs">
               {user?.firstName[0]}
               {user?.lastName[0]}
             </span>
