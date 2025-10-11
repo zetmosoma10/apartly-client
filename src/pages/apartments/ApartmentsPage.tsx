@@ -1,4 +1,5 @@
 import ApartmentCard from "../../components/ApartmentCard";
+import BackButton from "../../components/BackButton";
 import useGetAllListings from "./../../hooks/useGetAllListings";
 
 const ApartmentsPage = () => {
@@ -9,6 +10,7 @@ const ApartmentsPage = () => {
 
   return (
     <section className="max-container">
+      <BackButton />
       <div className="grid grid-cols-3">
         {apartments?.map((apartment) => (
           <ApartmentCard apartment={apartment} key={apartment._id} />

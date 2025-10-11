@@ -3,6 +3,7 @@ import { RiEdit2Fill } from "react-icons/ri";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import useGetApartment from "../../../hooks/useGetApartment";
 import Badge from "../../../components/Badge";
+import BackButton from "../../../components/BackButton";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const ListingDetailPage = () => {
 
   return (
     <section className="max-container">
+      <BackButton />
       <div className="flex justify-between gap-8">
         <div>
           <h2>{apartment?.title}</h2>
