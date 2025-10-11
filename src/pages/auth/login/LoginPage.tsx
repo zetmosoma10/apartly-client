@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import Input from "../../../components/Input";
 import loginSchema from "./loginSchema";
 import useLogin from "../../../hooks/useLogin";
@@ -22,9 +22,14 @@ const LoginPage = () => {
 
   const [expectedError, setExpectedError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { mutate, isPending } = useLogin();
 
   const onSubmit = (data: FormData) => {
+    if (location.state) {
+      location.state = "";
+    }
+
     mutate(data, {
       onSuccess: () => {
         navigate("/", { replace: true });
@@ -58,7 +63,13 @@ const LoginPage = () => {
           </p>
         </div>
 
+        {/* Erver error */}
         {expectedError && <ErrorMessage errorMessage={expectedError} />}
+
+        {/* REDIRECT ERROR MESSAGE */}
+        {location.state && (
+          <ErrorMessage errorMessage={decodeURIComponent(location.state)} />
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4">

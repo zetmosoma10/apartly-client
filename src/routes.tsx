@@ -9,6 +9,8 @@ import ApartmentsPage from "./pages/apartments/ApartmentsPage";
 import AuthPage from "./pages/auth/AuthPage";
 import LoginPage from "./pages/auth/login/LoginPage";
 import RegisterPage from "./pages/auth/register/RegisterPage";
+import ProtectRoute from "./components/ProtectRoute";
+import UnauthorizePage from "./pages/auth/UnauthorizePage";
 
 const router = createBrowserRouter([
   {
@@ -28,20 +30,25 @@ const router = createBrowserRouter([
         element: <ListingDetailPage />,
       },
       {
-        path: "listings",
-        element: <ListingPage />,
-      },
-      {
-        path: "listings/new",
-        element: <AddListingPage />,
-      },
-      {
-        path: "listings/:id",
-        element: <ListingDetailPage />,
-      },
-      {
-        path: "listings/:id/edit",
-        element: <ListingEditPage />,
+        element: <ProtectRoute allowedRoles={["landlord", "admin"]} />,
+        children: [
+          {
+            path: "listings",
+            element: <ListingPage />,
+          },
+          {
+            path: "listings/new",
+            element: <AddListingPage />,
+          },
+          {
+            path: "listings/:id",
+            element: <ListingDetailPage />,
+          },
+          {
+            path: "listings/:id/edit",
+            element: <ListingEditPage />,
+          },
+        ],
       },
       {
         path: "auth",
@@ -54,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "auth/register",
         element: <RegisterPage />,
+      },
+      {
+        path: "auth/unauthorize",
+        element: <UnauthorizePage />,
       },
     ],
   },

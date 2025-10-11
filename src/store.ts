@@ -16,6 +16,7 @@ type AuthState = {
   user: DecodedToken | null;
   setToken: (token: string) => void;
   clearAuth: () => void;
+  _hasHydrated: boolean;
 };
 
 const useAuthStore = create<AuthState>()(
@@ -23,6 +24,7 @@ const useAuthStore = create<AuthState>()(
     (set) => ({
       token: null,
       user: null,
+      _hasHydrated: false,
 
       setToken: (token) => {
         try {
@@ -44,6 +46,9 @@ const useAuthStore = create<AuthState>()(
     }),
     {
       name: "apartly-storage",
+      onRehydrateStorage: () => (state) => {
+        state!._hasHydrated = true;
+      },
     }
   )
 );
