@@ -54,7 +54,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* DELETE MODAL */}
-      <Modal ref={ref} onClose={onClose} />
+      <Modal ref={ref} onClose={onClose} apartment={apartment} />
 
       {/* IMAGE GRID */}
       <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">

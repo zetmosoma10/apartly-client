@@ -26,3 +26,8 @@ export const updateApartment = async ({
   const results = await api.patch(`/apartments/${id}`, data);
   return results.data;
 };
+
+export const deleteApartment = async (id?: string) => {
+  const { data } = await api.delete(`/apartments/${id}`);
+  return data;
+};
