@@ -2,13 +2,16 @@ import { Link, NavLink } from "react-router-dom";
 import { RiBuilding2Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { navLinks } from "../constance";
+import useAuthStore from "../store";
 
 const NavBar = () => {
+  const { user } = useAuthStore();
+
   return (
-    <nav className="navbar  bg-base-100 justify-between ">
+    <nav className="justify-between navbar bg-base-100 ">
       <div className="flex items-center space-x-3">
         <RiBuilding2Line size="20px" className="text-warning" />
-        <Link to="/" className="logo-font font-extrabold text-xl">
+        <Link to="/" className="text-xl font-extrabold logo-font">
           Apartly
         </Link>
       </div>
@@ -29,9 +32,19 @@ const NavBar = () => {
         <button className="md:hidden">
           <GiHamburgerMenu />
         </button>
-        <Link to="/auth" className="btn-main">
-          Login / Register
-        </Link>
+        {!user && (
+          <Link to="/auth" className="btn-main">
+            Login / Register
+          </Link>
+        )}
+        {user && (
+          <div className="flex items-center justify-center p-2 rounded-full bg-neutral text-neutral-content">
+            <span className="text-sm">
+              {user?.firstName[0]}
+              {user?.lastName[0]}
+            </span>
+          </div>
+        )}
       </div>
     </nav>
   );
