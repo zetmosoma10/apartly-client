@@ -1,12 +1,23 @@
+import { useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { RiEdit2Fill } from "react-icons/ri";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import useGetApartment from "../../../hooks/useGetApartment";
 import Badge from "../../../components/Badge";
 import BackButton from "../../../components/BackButton";
+import Modal from "./Modal";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
+  const ref = useRef<HTMLDialogElement>(null);
+
+  const onOpen = () => {
+    ref.current?.showModal();
+  };
+
+  const onClose = () => {
+    ref.current?.close();
+  };
 
   const { data, isLoading } = useGetApartment(id);
   const apartment = data?.results;
@@ -32,12 +43,18 @@ const ListingDetailPage = () => {
             <RiEdit2Fill />
             Edit Apartment
           </Link>
-          <button className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap">
+          <button
+            className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
+            onClick={onOpen}
+          >
             <RiDeleteBin4Fill />
             Delete Apartment
           </button>
         </div>
       </div>
+
+      {/* DELETE MODAL */}
+      <Modal ref={ref} onClose={onClose} />
 
       {/* IMAGE GRID */}
       <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">

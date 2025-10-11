@@ -10,7 +10,7 @@ function Layout() {
         <NavBar />
       </header>
       <Toaster />
-      <main className="bg-base-200 min-h-screen">
+      <main className="min-h-screen pb-20 bg-base-200">
         <Outlet />
       </main>
       <Footer />
