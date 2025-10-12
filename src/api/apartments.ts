@@ -6,7 +6,7 @@ export const createApartment = async (formData: FormData) => {
   return data;
 };
 
-export const getAllListings = async () => {
+export const getAllApartments = async () => {
   const { data } = await api.get("/apartments");
   return data;
 };

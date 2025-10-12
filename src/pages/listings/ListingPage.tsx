@@ -3,7 +3,7 @@ import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
 import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 import BackButton from "../../components/BackButton";
-import useGetAllUserApartments from "../../hooks/useGetUserListings";
+import useGetAllUserApartments from "../../hooks/useGetAllUserApartments";
 
 const ListingPage = () => {
   const { data, isLoading } = useGetAllUserApartments();

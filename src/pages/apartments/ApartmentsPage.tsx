@@ -1,9 +1,9 @@
 import ApartmentCard from "../../components/ApartmentCard";
 import BackButton from "../../components/BackButton";
-import useGetAllListings from "./../../hooks/useGetAllListings";
+import useGetAllApartments from "../../hooks/useGetAllApartments";
 
 const ApartmentsPage = () => {
-  const { data, isLoading } = useGetAllListings();
+  const { data, isLoading } = useGetAllApartments();
   const apartments = data?.results;
 
   if (isLoading) return <p>Loading...</p>;

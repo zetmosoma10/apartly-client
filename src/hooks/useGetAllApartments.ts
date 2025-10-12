@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllListings } from "../api/apartments";
+import { getAllApartments } from "../api/apartments";
 import type { Apartment } from "../entities/Apartment";
 import type { Response } from "../entities/Response";
 
-const useGetAllListings = () => {
+const useGetAllApartments = () => {
   return useQuery<Response<Apartment[]>>({
-    queryKey: ["listings"],
-    queryFn: () => getAllListings(),
+    queryKey: ["apartments"],
+    queryFn: () => getAllApartments(),
   });
 };
 
-export default useGetAllListings;
+export default useGetAllApartments;
