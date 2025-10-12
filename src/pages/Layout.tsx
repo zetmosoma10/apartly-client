@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
 function Layout() {
   return (
@@ -14,6 +15,7 @@ function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTop />
     </section>
   );
 }
