@@ -14,12 +14,14 @@ const AuthPage = () => {
           <Link
             to="register"
             className="btn btn-outline hover:bg-warning hover:text-white rounded-3xl"
+            state={{ role: "tenant" }}
           >
             I'm a Tenant
           </Link>
           <Link
             to="register"
             className="btn btn-outline hover:bg-warning hover:text-white rounded-3xl"
+            state={{ role: "landlord" }}
           >
             I'm a Landlord
           </Link>

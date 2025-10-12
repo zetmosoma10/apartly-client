@@ -57,7 +57,7 @@ const LoginPage = () => {
           <h2 className="text-xl font-bold">Sign in</h2>
           <p className="text-base">
             Don't have account yet?{" "}
-            <Link className="text-warning hover:underline" to="/register">
+            <Link className="text-warning hover:underline" to="/auth">
               Sign up here
             </Link>
           </p>
