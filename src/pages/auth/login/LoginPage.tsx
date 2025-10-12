@@ -76,6 +76,7 @@ const LoginPage = () => {
             <Input
               id="email"
               label="Email"
+              autoFocus={true}
               placeholder="Enter email"
               register={register("email")}
               error={errors.email?.message}

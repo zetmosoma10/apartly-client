@@ -75,6 +75,7 @@ const RegisterPage = () => {
               register={register("firstName")}
               error={errors.firstName?.message}
               id="firstName"
+              autoFocus={true}
               label="First Name"
               placeholder="Enter First Name"
             />

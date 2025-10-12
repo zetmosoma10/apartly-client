@@ -4,6 +4,7 @@ type Props = {
   id: string;
   label: string;
   placeholder: string;
+  autoFocus?: boolean;
   type?: "text" | "textarea" | "password";
   register: UseFormRegisterReturn;
   error?: string;
@@ -13,6 +14,7 @@ const Input = ({
   id,
   label,
   type = "text",
+  autoFocus = false,
   placeholder,
   register,
   error,
@@ -26,6 +28,7 @@ const Input = ({
         <input
           id={id}
           type={type}
+          autoFocus={autoFocus}
           placeholder={placeholder}
           {...register}
           className={`input w-full focus:outline-none bg-base-200 rounded-lg ${

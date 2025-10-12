@@ -136,6 +136,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         <Input
           id="title"
           label="Title"
+          autoFocus={true}
           placeholder="e.g 2-bedrooms apartment with mountain view"
           register={register("title")}
           error={errors.title?.message}
