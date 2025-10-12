@@ -6,10 +6,13 @@ import useGetApartment from "../../../hooks/useGetApartment";
 import Badge from "../../../components/Badge";
 import BackButton from "../../../components/BackButton";
 import Modal from "./Modal";
+import useAuthStore from "../../../store";
+import ApartmentDetailsSkeleton from "../../../skeletons/ApartmentDetailsSkeleton";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
   const ref = useRef<HTMLDialogElement>(null);
+  const { user } = useAuthStore();
 
   const onOpen = () => {
     ref.current?.showModal();
@@ -22,7 +25,7 @@ const ListingDetailPage = () => {
   const { data, isLoading } = useGetApartment(id);
   const apartment = data?.results;
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <ApartmentDetailsSkeleton />;
 
   return (
     <section className="max-container">
@@ -35,22 +38,25 @@ const ListingDetailPage = () => {
           </p>
           <Badge status={apartment!.status} />
         </div>
-        <div className="flex flex-col gap-y-3">
-          <Link
-            to="edit"
-            className="btn btn-neutral btn-sm md:btn-md rounded-3xl text-nowrap"
-          >
-            <RiEdit2Fill />
-            Edit Apartment
-          </Link>
-          <button
-            className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
-            onClick={onOpen}
-          >
-            <RiDeleteBin4Fill />
-            Delete Apartment
-          </button>
-        </div>
+
+        {user && user.role !== "tenant" && (
+          <div className="flex flex-col gap-y-3">
+            <Link
+              to="edit"
+              className="btn btn-neutral btn-sm md:btn-md rounded-3xl text-nowrap"
+            >
+              <RiEdit2Fill />
+              Edit Apartment
+            </Link>
+            <button
+              className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
+              onClick={onOpen}
+            >
+              <RiDeleteBin4Fill />
+              Delete Apartment
+            </button>
+          </div>
+        )}
       </div>
 
       {/* DELETE MODAL */}
