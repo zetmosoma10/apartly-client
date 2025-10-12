@@ -1,6 +1,6 @@
 export type Response<T> = {
   success: boolean;
-  count?: number;
+  count: number;
   results: T;
 };
 

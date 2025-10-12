@@ -16,33 +16,39 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
             <th>Date Added</th>
           </tr>
         </thead>
-        <tbody className="bg-white">
-          {data?.results?.map((item) => (
-            <tr key={item._id} className="hover:bg-base-300">
-              <td>
-                <Link to={item._id}>
-                  <img
-                    src={item.images[0].url}
-                    className="object-cover h-20 w-36 rounded-xl"
-                  />
-                </Link>
-              </td>
-              <td className="hidden sm:table-cell">
-                <Link to={item._id}>{item.address}</Link>
-              </td>
-              <td>
-                <Link to={item._id}>
-                  <Badge status={item.status} />
-                </Link>
-              </td>
-              <td>
-                <Link to={item._id}>
-                  {dayjs(item.createdAt).format("DD MMM YYYY")}
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        {data?.count && data.count > 0 ? (
+          <tbody className="bg-white">
+            {data?.results?.map((item) => (
+              <tr key={item._id} className="hover:bg-base-300">
+                <td>
+                  <Link to={item._id}>
+                    <img
+                      src={item.images[0].url}
+                      className="object-cover h-20 w-36 rounded-xl"
+                    />
+                  </Link>
+                </td>
+                <td className="hidden sm:table-cell">
+                  <Link to={item._id}>{item.address}</Link>
+                </td>
+                <td>
+                  <Link to={item._id}>
+                    <Badge status={item.status} />
+                  </Link>
+                </td>
+                <td>
+                  <Link to={item._id}>
+                    {dayjs(item.createdAt).format("DD MMM YYYY")}
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        ) : (
+          <p className="font-semibold text-center py-3">
+            No Apartments in database
+          </p>
+        )}
       </table>
     </div>
   );

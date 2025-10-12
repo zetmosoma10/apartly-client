@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
-import useGetAllListings from "../../hooks/useGetAllListings";
 import ListingsTable from "./ListingsTable";
 import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 import BackButton from "../../components/BackButton";
+import useGetAllUserApartments from "../../hooks/useGetUserListings";
 
 const ListingPage = () => {
-  const { data, isLoading } = useGetAllListings();
+  const { data, isLoading } = useGetAllUserApartments();
 
   return (
     <section className="max-container">

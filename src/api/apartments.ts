@@ -11,6 +11,11 @@ export const getAllListings = async () => {
   return data;
 };
 
+export const getAllUserApartments = async () => {
+  const { data } = await api.get("/apartments/me");
+  return data;
+};
+
 export const getApartment = async (id?: string) => {
   const { data } = await api.get(`/apartments/${id}`);
   return data;
