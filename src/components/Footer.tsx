@@ -1,6 +1,6 @@
 import { RiBuilding2Line } from "react-icons/ri";
-import { Link, NavLink } from "react-router-dom";
-import { navLinks } from "../constance";
+import { Link } from "react-router-dom";
+import Navlinks from "./Navlinks";
 
 const Footer = () => {
   return (
@@ -12,19 +12,7 @@ const Footer = () => {
             Apartly
           </Link>
         </div>
-        <div className="flex flex-col items-center text-center sm:flex-row  sm:space-x-3 ">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                isActive ? "text-warning" : "text-white hover:text-warning"
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
+        <Navlinks className="text-white" />
         <p className="text-sm text-white opacity-70">
           &copy; Apartly. All rights reserved
         </p>

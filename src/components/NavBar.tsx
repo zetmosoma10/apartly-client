@@ -1,8 +1,8 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiBuilding2Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { navLinks } from "../constance";
 import useAuthStore from "../store";
+import Navlinks from "./Navlinks";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -16,19 +16,7 @@ const NavBar = () => {
           Apartly
         </Link>
       </div>
-      <div className="space-x-3">
-        {navLinks.map((link) => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            className={({ isActive }) =>
-              isActive ? "text-warning" : "text-black hover:text-warning"
-            }
-          >
-            {link.label}
-          </NavLink>
-        ))}
-      </div>
+      <Navlinks />
       <div className="flex items-center space-x-2">
         <button className="md:hidden">
           <GiHamburgerMenu />
