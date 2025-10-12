@@ -8,14 +8,13 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
   const imageUrl = apartment.images[0]?.url;
 
   useEffect(() => {
-    // Reset loading state when the image URL changes
     setIsImageLoaded(false);
   }, [imageUrl]);
 
   return (
     <Link
       to={apartment._id}
-      className="w-full max-w-[250px] bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col"
+      className="w-full max-w-[250px] bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col border"
     >
       <div className="relative w-full h-40 bg-gray-300  overflow-hidden">
         {!isImageLoaded && (
