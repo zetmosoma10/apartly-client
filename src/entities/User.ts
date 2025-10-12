@@ -11,3 +11,12 @@ export type loginCredentials = {
   email: string;
   password: string;
 };
+
+export type registerCredentials = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  role?: string;
+  password: string;
+};

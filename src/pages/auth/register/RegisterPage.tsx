@@ -1,14 +1,22 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Input from "../../../components/Input";
 import registerSchema from "./registerSchema";
+import axios from "axios";
+import { useState } from "react";
+import useRegister from "../../../hooks/useRegister";
+import toast from "react-hot-toast";
+import ErrorMessage from "../ErrorMessage";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 type FormData = z.infer<typeof registerSchema>;
 
 const RegisterPage = () => {
+  const [expectedError, setExpectedError] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,12 +25,32 @@ const RegisterPage = () => {
     resolver: zodResolver(registerSchema),
   });
 
+  const { mutate, isPending } = useRegister();
+
   const onSubmit = (data: FormData) => {
     const formData = data;
     if (location.state.role === "landlord") formData.role = "landlord";
     if (location.state.role === "tenant") formData.role = "tenant";
 
-    console.log(formData);
+    mutate(formData, {
+      onSuccess: () => {
+        // * REDIRECT USER TO HOME
+        navigate("/", { replace: true });
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status < 500
+          ) {
+            setExpectedError(error.response.data.message);
+          } else if (error.response && error.response.status >= 500) {
+            toast.error(error.response.data.message);
+          }
+        }
+      },
+    });
   };
 
   return (
@@ -37,6 +65,9 @@ const RegisterPage = () => {
             </Link>
           </p>
         </div>
+
+        {/* Error Message */}
+        {expectedError && <ErrorMessage errorMessage={expectedError} />}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid w-full mb-3 space-y-3 sm:space-y-0 sm:space-x-2 sm:grid-cols-2">
@@ -88,8 +119,12 @@ const RegisterPage = () => {
             />
           </div>
 
-          <button className="w-full btn-main disabled:border-none">
+          <button
+            disabled={isPending}
+            className="w-full btn-main disabled:border-none"
+          >
             Sign up
+            {isPending && <LoadingSpinner />}
           </button>
         </form>
       </div>

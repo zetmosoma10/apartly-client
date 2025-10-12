@@ -19,7 +19,7 @@ const Hero = () => {
         <h1 className="text-white font-extrabold text-5xl sm:text-6xl max-w-[500px]">
           Find Your <span className="text-warning">Perfect</span> Home
         </h1>
-        <p className="shadow-md mt-3 text-white">
+        <p className="mt-3 text-white">
           Explore a wide range of apartments for rent in your desired location
         </p>
         <div className="input input-bordered flex items-center gap-2 w-full rounded-3xl mt-5 focus:outline-none pr-0 ring-green-400">
