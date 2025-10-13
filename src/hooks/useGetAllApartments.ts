@@ -7,6 +7,7 @@ const useGetAllApartments = () => {
   return useQuery<Response<Apartment[]>>({
     queryKey: ["apartments"],
     queryFn: () => getAllApartments(),
+    staleTime: 1000 * 60 * 60,
   });
 };
 

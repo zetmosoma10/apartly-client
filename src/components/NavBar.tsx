@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { RiBuilding2Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useAuthStore from "../store";
@@ -7,6 +8,7 @@ import Navlinks from "./Navlinks";
 const NavBar = () => {
   const navigate = useNavigate();
   const { user, clearAuth } = useAuthStore();
+  const queryClient = useQueryClient();
 
   return (
     <nav className="justify-between navbar bg-base-100 ">
@@ -31,6 +33,7 @@ const NavBar = () => {
             onClick={() => {
               clearAuth();
               navigate("/");
+              queryClient.clear();
             }}
           >
             Logout

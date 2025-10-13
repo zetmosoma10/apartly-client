@@ -122,7 +122,7 @@ const RegisterPage = () => {
 
           <button
             disabled={isPending}
-            className="w-full btn-main disabled:border-none"
+            className="w-full btn-main "
           >
             Sign up
             {isPending && <LoadingSpinner />}

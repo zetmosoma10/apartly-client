@@ -100,7 +100,7 @@ const LoginPage = () => {
           </div>
           <button
             disabled={isPending}
-            className="w-full btn-main disabled:border-none"
+            className="w-full btn-main"
           >
             Sign in
             {isPending && <LoadingSpinner />}

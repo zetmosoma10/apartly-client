@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { Apartment } from "../../../entities/Apartment";
 import useDeleteApartment from "../../../hooks/useDeleteApartment";
-import { useQueryClient } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -14,7 +13,6 @@ type Props = {
 
 const Modal = ({ ref, onClose, apartment }: Props) => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { mutate, isPending } = useDeleteApartment();
 
   const handleDelete = () => {
@@ -33,9 +31,8 @@ const Modal = ({ ref, onClose, apartment }: Props) => {
       },
       onSuccess: () => {
         onClose();
-        queryClient.invalidateQueries({ queryKey: ["listings"] });
-        navigate("/listings", { replace: true });
         toast.success("Apartment deleted successfully");
+        navigate("/listings", { replace: true });
       },
     });
   };
@@ -54,7 +51,7 @@ const Modal = ({ ref, onClose, apartment }: Props) => {
           action cannot be reversed
         </p>
         <div className="modal-action">
-          <button className="btn" onClick={onClose}>
+          <button className="btn" disabled={isPending} onClick={onClose}>
             Close
           </button>
           <button
