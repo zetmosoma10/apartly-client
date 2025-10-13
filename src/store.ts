@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import { jwtDecode } from "jwt-decode";
 
 type DecodedToken = {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;

@@ -47,7 +47,7 @@ const ListingDetailPage = () => {
           <Badge status={apartment!.status} />
         </div>
 
-        {user && user.role !== "tenant" && (
+        {user?._id === apartment?.landlord && (
           <div className="flex flex-col gap-y-3">
             <Link
               to="edit"

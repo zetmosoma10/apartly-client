@@ -5,6 +5,7 @@ export type Apartment = {
   price: string;
   status: Status;
   address: string;
+  landlord: string;
   createdAt: Date;
   bedrooms: string;
   bathrooms: string;
