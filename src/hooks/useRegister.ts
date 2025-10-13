@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { register } from "../api/auth";
 import type { registerCredentials } from "../entities/User";
 import useAuthStore from "../store";
+import toast from "react-hot-toast";
 
 const useRegister = () => {
   const { setToken } = useAuthStore();
@@ -11,6 +12,7 @@ const useRegister = () => {
     onSuccess: (data) => {
       if (data.success) {
         setToken(data.token);
+        toast.success('Account created successfully')
       }
     },
   });
