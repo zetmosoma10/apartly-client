@@ -45,9 +45,13 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
             ))}
           </tbody>
         ) : (
-          <p className="font-semibold text-center py-3">
-            No Apartments in database
-          </p>
+          <tbody>
+            <tr>
+              <td colSpan={4} className="py-4 text-center font-semibold">
+                No Data Available
+              </td>
+            </tr>
+          </tbody>
         )}
       </table>
     </div>
