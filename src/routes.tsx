@@ -11,6 +11,7 @@ import LoginPage from "./pages/auth/login/LoginPage";
 import RegisterPage from "./pages/auth/register/RegisterPage";
 import ProtectRoute from "./components/ProtectRoute";
 import UnauthorizePage from "./pages/auth/UnauthorizePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "auth/unauthorize",
         element: <UnauthorizePage />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },

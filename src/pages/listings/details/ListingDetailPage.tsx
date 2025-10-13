@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { RiEdit2Fill } from "react-icons/ri";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import useGetApartment from "../../../hooks/useGetApartment";
@@ -8,9 +8,11 @@ import BackButton from "../../../components/BackButton";
 import Modal from "./Modal";
 import useAuthStore from "../../../store";
 import ApartmentDetailsSkeleton from "../../../skeletons/ApartmentDetailsSkeleton";
+import axios from "axios";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const ref = useRef<HTMLDialogElement>(null);
   const { user } = useAuthStore();
 
@@ -22,8 +24,14 @@ const ListingDetailPage = () => {
     ref.current?.close();
   };
 
-  const { data, isLoading } = useGetApartment(id);
+  const { data, isLoading, error } = useGetApartment(id);
   const apartment = data?.results;
+
+  if (axios.isAxiosError(error)) {
+    if (error.response?.status === 404) {
+      return navigate("/not-found", { replace: true });
+    }
+  }
 
   if (isLoading) return <ApartmentDetailsSkeleton />;
 
