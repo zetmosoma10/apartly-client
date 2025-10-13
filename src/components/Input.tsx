@@ -64,7 +64,7 @@ const Input = ({
           id={id}
           placeholder={placeholder}
           {...register}
-          className={`input w-full h-32 resize-none focus:outline-none  bg-base-200 rounded-lg p-2 ${
+          className={`textarea w-full h-32 resize-none focus:outline-none  bg-base-200 rounded-lg p-2 ${
             error ? "border-error focus:border-error" : "focus:border-warning"
           }`}
         />
