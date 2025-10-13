@@ -49,7 +49,7 @@ const ListingDetailPage = () => {
               Edit Apartment
             </Link>
             <button
-              className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
+              className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap text-white"
               onClick={onOpen}
             >
               <RiDeleteBin4Fill />
@@ -91,7 +91,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* DESCRIPTION */}
-      <div className="flex flex-col mt-5 gap-y-4 sm:flex-row sm:justify-between">
+      <div className="flex flex-col mt-5 gap-y-4 gap-x-3 sm:flex-row sm:justify-between">
         <div>
           <h3>Descriptions</h3>
           <p className="leading-tight opacity-70">{apartment?.description}</p>

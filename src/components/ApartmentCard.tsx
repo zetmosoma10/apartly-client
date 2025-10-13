@@ -14,7 +14,7 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
   return (
     <Link
       to={apartment._id}
-      className="w-full max-w-[250px] bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col border"
+      className="w-full  bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col border"
     >
       <div className="relative w-full h-40 bg-gray-300  overflow-hidden">
         {!isImageLoaded && (
@@ -30,7 +30,9 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
       </div>
       <div className="flex-1 flex flex-col justify-between py-2 px-3">
         <div>
-          <h5 className="font-bold text-base">{apartment.title}</h5>
+          <h5 className="font-bold text-base leading-none">
+            {apartment.title}
+          </h5>
           <p className="font-medium text-sm opacity-70">
             R {apartment.price} / month
           </p>

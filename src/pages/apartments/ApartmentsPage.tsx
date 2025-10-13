@@ -13,7 +13,7 @@ const ApartmentsPage = () => {
       {isLoading ? (
         <ApartmentsGridSkeletons />
       ) : (
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
           {apartments?.map((apartment) => (
             <ApartmentCard apartment={apartment} key={apartment._id} />
           ))}
