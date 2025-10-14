@@ -2,6 +2,14 @@ export type Response<T> = {
   success: boolean;
   count: number;
   results: T;
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    currentCountPerPage: number;
+    totalPerPage: number;
+    totalDocuments: number;
+    hasNextPage: boolean;
+  };
 };
 
 export type AuthResponse = {

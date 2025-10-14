@@ -16,7 +16,8 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
             <th>Date Added</th>
           </tr>
         </thead>
-        {data?.count && data.count > 0 ? (
+        {data?.pagination.currentCountPerPage &&
+        data.pagination.currentCountPerPage > 0 ? (
           <tbody className="bg-white">
             {data?.results?.map((item) => (
               <tr key={item._id} className="hover:bg-base-300">

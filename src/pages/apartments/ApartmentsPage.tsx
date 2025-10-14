@@ -1,5 +1,6 @@
 import ApartmentCard from "../../components/ApartmentCard";
 import BackButton from "../../components/BackButton";
+import Pagination from "../../components/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
 import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
 
@@ -19,6 +20,9 @@ const ApartmentsPage = () => {
           ))}
         </div>
       )}
+      <div className="mt-11 flex items-center justify-center">
+        <Pagination />
+      </div>
     </section>
   );
 };
