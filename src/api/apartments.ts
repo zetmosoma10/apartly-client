@@ -25,6 +25,11 @@ export const getApartment = async (id?: string) => {
   return data;
 };
 
+export const getFeatureApartments = async () => {
+  const { data } = await api.get("/apartments/feature");
+  return data;
+};
+
 export const updateApartment = async ({
   id,
   data,
