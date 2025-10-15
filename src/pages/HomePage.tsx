@@ -5,9 +5,7 @@ const HomePage = () => {
   return (
     <section>
       <Hero />
-      <div className="mt-10">
-        <Features />
-      </div>
+      {/* <Features /> */}
     </section>
   );
 };
