@@ -13,8 +13,10 @@ export const getAllApartments = async (searchParams: URLSearchParams) => {
   return data;
 };
 
-export const getAllUserApartments = async () => {
-  const { data } = await api.get("/apartments/me");
+export const getAllUserApartments = async (searchParams: URLSearchParams) => {
+  const params = Object.fromEntries(searchParams.entries());
+
+  const { data } = await api.get("/apartments/me", { params });
   return data;
 };
 

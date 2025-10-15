@@ -1,12 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
 import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 import BackButton from "../../components/BackButton";
 import useGetAllUserApartments from "../../hooks/useGetAllUserApartments";
+import Pagination from "../../components/Pagination";
 
 const ListingPage = () => {
-  const { data, isLoading } = useGetAllUserApartments();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { data, isLoading } = useGetAllUserApartments(searchParams);
+
+  const page = parseInt(searchParams.get("page") as string) || 1;
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    setSearchParams(params);
+  };
 
   return (
     <section className="max-container">
@@ -19,6 +29,13 @@ const ListingPage = () => {
         </Link>
       </div>
       {!isLoading ? <ListingsTable data={data} /> : <ListingsTableSkeleton />}
+      <div className="mt-11 flex items-center justify-center">
+        <Pagination
+          data={data}
+          page={page}
+          handlePageChange={handlePageChange}
+        />
+      </div>
     </section>
   );
 };
