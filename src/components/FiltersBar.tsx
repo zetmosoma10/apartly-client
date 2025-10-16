@@ -36,7 +36,7 @@ const FiltersBar = () => {
   };
 
   return (
-    <div className="bg-white backdrop-blur-md rounded-2xl shadow p-4 mb-8 border border-base-300">
+    <div className="bg-white backdrop-blur-md rounded-2xl shadow p-4 mb-9 border md:max-w-[500px]">
       <div className="space-y-3">
         {/* Search Input */}
         <div className="relative bg-white">

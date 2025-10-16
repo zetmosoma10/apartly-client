@@ -5,6 +5,7 @@ import Pagination from "../../components/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
 import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
 import FiltersBar from "../../components/FiltersBar";
+import Heading from "./Heading";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +23,7 @@ const ApartmentsPage = () => {
   return (
     <section className="max-container">
       <BackButton />
+      <Heading />
       <FiltersBar />
       {isLoading ? (
         <ApartmentsGridSkeletons />
