@@ -1,11 +1,12 @@
 import { useSearchParams } from "react-router-dom";
+import { IoSearchOutline } from "react-icons/io5";
+import { debounce } from "lodash";
 import ApartmentCard from "../../components/ApartmentCard";
 import BackButton from "../../components/BackButton";
 import Pagination from "../../components/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
 import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
-import { IoSearchOutline } from "react-icons/io5";
-import { debounce } from "lodash";
+import FiltersBar from "../../components/FiltersBar";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,17 +41,7 @@ const ApartmentsPage = () => {
   return (
     <section className="max-container">
       <BackButton />
-      <div className="mt-5">
-        <div className="relative bg-white rounded-3xl shadow-md">
-          <IoSearchOutline className="absolute top-3 left-2 text-zinc-400 z-20" />
-          <input
-            placeholder="Enter City, address"
-            defaultValue={searchParams.get("search") || ""}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="input border-zinc-300 w-full rounded-3xl indent-4 caret-warning focus:outline-none focus:border-warning "
-          />
-        </div>
-      </div>
+      <FiltersBar />
     </section>
   );
 };
