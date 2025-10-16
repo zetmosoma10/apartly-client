@@ -17,6 +17,7 @@ const FiltersBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const params = Object.fromEntries(searchParams.entries());
+  const prices = [2000, 5000, 8000, 10_000, 15_000, 20_000];
 
   // * Generic filter handler
   const handleFilterChange = (key: string, value: string) => {
@@ -79,25 +80,34 @@ const FiltersBar = () => {
           </select>
         </div>
 
-        {/* Price Filters */}
+        {/* Price Filter */}
         <div className="grid gap-3 sm:grid-cols-2">
-          {/* Min Price */}
-          <input
-            type="number"
-            placeholder="Min Price"
-            className="input w-full  bg-base-200 rounded-lg  indent-4 caret-warning focus:border-warning focus:outline-none"
+          <select
+            className="select focus:select-warning w-full bg-base-200"
             value={searchParams.get("minPrice") || ""}
             onChange={(e) => handleFilterChange("minPrice", e.target.value)}
-          />
+          >
+            <option value="">minPrice</option>
+            {prices.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
 
-          {/* Max Price */}
-          <input
-            type="number"
-            placeholder="Max Price"
-            className="input w-full  bg-base-200 rounded-lg indent-4 caret-warning focus:border-warning focus:outline-none"
+          {/* Status Filter */}
+          <select
+            className="select focus:select-warning w-full bg-base-200"
             value={searchParams.get("maxPrice") || ""}
             onChange={(e) => handleFilterChange("maxPrice", e.target.value)}
-          />
+          >
+            <option value="">maxPrice</option>
+            {prices.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Clear Button */}

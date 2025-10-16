@@ -5,7 +5,10 @@ const BackButton = () => {
   const navigate = useNavigate();
 
   return (
-    <button onClick={() => navigate(-1)} className="mt-8 mb-5 btn btn-xs">
+    <button
+      onClick={() => navigate(-1)}
+      className="mt-8 mb-5 btn btn-xs bg-white"
+    >
       <IoIosArrowRoundBack />
       back
     </button>
