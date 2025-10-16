@@ -13,6 +13,7 @@ const ApartmentsPage = () => {
   const apartments = data?.results;
 
   const page = parseInt(searchParams.get("page") as string) || 1;
+  const totalPages = data?.pagination.totalPages as number;
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
@@ -34,13 +35,15 @@ const ApartmentsPage = () => {
           ))}
         </div>
       )}
-      <div className="mt-11 flex items-center justify-center">
-        <Pagination
-          data={data}
-          page={page}
-          handlePageChange={handlePageChange}
-        />
-      </div>
+      {totalPages > 1 && (
+        <div className="mt-11 flex items-center justify-center">
+          <Pagination
+            data={data}
+            page={page}
+            handlePageChange={handlePageChange}
+          />
+        </div>
+      )}
     </section>
   );
 };

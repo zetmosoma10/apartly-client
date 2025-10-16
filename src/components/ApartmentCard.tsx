@@ -30,10 +30,10 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
       </div>
       <div className="flex-1 flex flex-col justify-between py-2 px-3">
         <div>
-          <h5 className="font-bold text-base leading-none">
+          <h5 className="font-bold text-base leading-tight">
             {apartment.title}
           </h5>
-          <p className="font-medium text-sm opacity-70">
+          <p className="font-medium text-sm opacity-70 mt-1">
             R {apartment.price} / month
           </p>
         </div>

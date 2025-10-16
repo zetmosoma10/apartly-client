@@ -11,6 +11,7 @@ const ListingPage = () => {
   const { data, isLoading } = useGetAllUserApartments(searchParams);
 
   const page = parseInt(searchParams.get("page") as string) || 1;
+  const totalPages = data?.pagination.totalPages as number;
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
@@ -29,13 +30,15 @@ const ListingPage = () => {
         </Link>
       </div>
       {!isLoading ? <ListingsTable data={data} /> : <ListingsTableSkeleton />}
-      <div className="mt-11 flex items-center justify-center">
-        <Pagination
-          data={data}
-          page={page}
-          handlePageChange={handlePageChange}
-        />
-      </div>
+      {totalPages > 1 && (
+        <div className="mt-11 flex items-center justify-center">
+          <Pagination
+            data={data}
+            page={page}
+            handlePageChange={handlePageChange}
+          />
+        </div>
+      )}
     </section>
   );
 };
