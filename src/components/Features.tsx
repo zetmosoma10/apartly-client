@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useGetFeatureApartments from "../hooks/useGetFeatureApartments";
 import FeatureSkeleton from "../skeletons/FeatureSkeleton";
 import ApartmentCard from "./ApartmentCard";
@@ -8,7 +9,7 @@ const Features = () => {
 
   return (
     <section className="max-container mt-16">
-      <h2 className="text-2xl">Featured Apartments</h2>
+      <h2 className="text-2xl mb-6">Featured Apartments</h2>
       {isLoading ? (
         <FeatureSkeleton />
       ) : (
@@ -20,7 +21,7 @@ const Features = () => {
       )}
       <Link
         to="apartments"
-        className="text-center hover:underline hover:text-warning"
+        className="flex items-center justify-center mt-5 hover:underline hover:text-warning"
       >
         View More
       </Link>

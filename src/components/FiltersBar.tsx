@@ -36,14 +36,14 @@ const FiltersBar = () => {
   };
 
   return (
-    <div className="bg-white backdrop-blur-md rounded-2xl shadow p-4 mb-6 border border-base-300">
+    <div className="bg-white backdrop-blur-md rounded-2xl shadow p-4 mb-8 border border-base-300">
       <div className="space-y-3">
         {/* Search Input */}
         <div className="relative bg-white">
           <IoSearchOutline className="absolute top-3 left-2 text-zinc-400 z-20" />
           <input
             placeholder="Search apartments..."
-            defaultValue={searchParams.get("search") || ""}
+            value={searchParams.get("search") || ""}
             onChange={(e) => debouncedSearch(e.target.value)}
             className="input w-full  bg-base-200 rounded-lg  indent-4 caret-warning focus:border-warning focus:outline-none"
           />
@@ -86,7 +86,7 @@ const FiltersBar = () => {
             type="number"
             placeholder="Min Price"
             className="input w-full  bg-base-200 rounded-lg  indent-4 caret-warning focus:border-warning focus:outline-none"
-            defaultValue={searchParams.get("minPrice") || ""}
+            value={searchParams.get("minPrice") || ""}
             onChange={(e) => handleFilterChange("minPrice", e.target.value)}
           />
 
@@ -95,7 +95,7 @@ const FiltersBar = () => {
             type="number"
             placeholder="Max Price"
             className="input w-full  bg-base-200 rounded-lg indent-4 caret-warning focus:border-warning focus:outline-none"
-            defaultValue={searchParams.get("maxPrice") || ""}
+            value={searchParams.get("maxPrice") || ""}
             onChange={(e) => handleFilterChange("maxPrice", e.target.value)}
           />
         </div>
