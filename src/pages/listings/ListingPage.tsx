@@ -1,17 +1,32 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
 import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 import BackButton from "../../components/BackButton";
 import useGetAllUserApartments from "../../hooks/useGetAllUserApartments";
 import Pagination from "../../components/Pagination";
+import axios from "axios";
+import useAuthStore from "../../store";
 
 const ListingPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isLoading } = useGetAllUserApartments(searchParams);
+  const { data, isLoading, error } = useGetAllUserApartments(searchParams);
+  const { clearAuth } = useAuthStore();
 
   const page = parseInt(searchParams.get("page") as string) || 1;
   const totalPages = data?.pagination.totalPages as number;
+
+  // ! 401 UNAUTHORIZE ERROR
+  if (axios.isAxiosError(error) && error.response?.status === 401) {
+    clearAuth();
+
+    return (
+      <Navigate
+        to="/auth/login"
+        state={encodeURIComponent(error.response.data.message)}
+      />
+    );
+  }
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);

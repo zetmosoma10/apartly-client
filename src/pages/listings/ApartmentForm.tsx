@@ -12,12 +12,15 @@ import toast from "react-hot-toast";
 import useCreateApartment from "../../hooks/useCreateApartment";
 import useUpdateApartment from "../../hooks/useUpdateApartment";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import axios from "axios";
+import useAuthStore from "../../store";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
 const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const { id: apartmentId } = useParams();
   const navigate = useNavigate();
+  const { clearAuth } = useAuthStore();
 
   const {
     register,
@@ -113,14 +116,34 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       // * Mutation
       createApartment(formData, {
-        onError: (error) => toast.error(error.message),
+        onError: (error) => {
+          toast.error(error.message);
+
+          // ! 401 UNAUTHORIZE ERROR
+          if (axios.isAxiosError(error) && error.response?.status === 401) {
+            clearAuth();
+            navigate("/auth/login", {
+              state: encodeURIComponent(error.response.data.message),
+            });
+          }
+        },
         onSuccess: () => navigate("/apartments/listings"),
       });
     } else {
       updateApartment(
         { id: apartmentId, data },
         {
-          onError: (error) => toast.error(error.message),
+          onError: (error) => {
+            toast.error(error.message);
+
+            // ! 401 UNAUTHORIZE ERROR
+            if (axios.isAxiosError(error) && error.response?.status === 401) {
+              clearAuth();
+              navigate("/auth/login", {
+                state: encodeURIComponent(error.response.data.message),
+              });
+            }
+          },
           onSuccess: () => navigate(`/apartments/listings/${apartmentId}`),
         }
       );

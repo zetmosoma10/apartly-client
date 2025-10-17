@@ -4,6 +4,7 @@ import useDeleteApartment from "../../../hooks/useDeleteApartment";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useAuthStore from "../../../store";
 
 type Props = {
   apartment?: Apartment;
@@ -13,20 +14,25 @@ type Props = {
 
 const Modal = ({ ref, onClose, apartment }: Props) => {
   const navigate = useNavigate();
+  const { clearAuth } = useAuthStore();
   const { mutate, isPending } = useDeleteApartment();
 
   const handleDelete = () => {
     mutate(apartment?._id, {
       onError: (error) => {
-        if (axios.isAxiosError(error)) {
-          if (
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status < 500
-          ) {
-            onClose();
-            toast.error(error.response.data?.message);
-          }
+        // ! 401 UNAUTHORIZE ERROR
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          clearAuth();
+          onClose();
+          navigate("/auth/login", {
+            state: encodeURIComponent(error.response.data.message),
+          });
+        }
+
+        // ! 404 NOT FOUND ERROR
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          onClose();
+          toast.error(error.response.data.message);
         }
       },
       onSuccess: () => {
