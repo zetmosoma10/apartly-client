@@ -114,14 +114,14 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
       // * Mutation
       createApartment(formData, {
         onError: (error) => toast.error(error.message),
-        onSuccess: () => navigate("/listings"),
+        onSuccess: () => navigate("/apartments/listings"),
       });
     } else {
       updateApartment(
         { id: apartmentId, data },
         {
           onError: (error) => toast.error(error.message),
-          onSuccess: () => navigate(`/listings/${apartmentId}`),
+          onSuccess: () => navigate(`/apartments/listings/${apartmentId}`),
         }
       );
     }

@@ -23,48 +23,48 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "apartments",
+        path: "/apartments",
         element: <ApartmentsPage />,
       },
       {
-        path: "apartments/:id",
+        path: "/apartments/:id",
         element: <ListingDetailPage />,
       },
       {
         element: <ProtectRoute allowedRoles={["landlord", "admin"]} />,
         children: [
           {
-            path: "listings",
+            path: "/apartments/listings",
             element: <ListingPage />,
           },
           {
-            path: "listings/new",
+            path: "/apartments/listings/new",
             element: <AddListingPage />,
           },
           {
-            path: "listings/:id",
+            path: "/apartments/listings/:id",
             element: <ListingDetailPage />,
           },
           {
-            path: "listings/:id/edit",
+            path: "/apartments/listings/:id/edit",
             element: <ListingEditPage />,
           },
         ],
       },
       {
-        path: "auth",
+        path: "/auth",
         element: <AuthPage />,
       },
       {
-        path: "auth/login",
+        path: "/auth/login",
         element: <LoginPage />,
       },
       {
-        path: "auth/register",
+        path: "/auth/register",
         element: <RegisterPage />,
       },
       {
-        path: "auth/unauthorize",
+        path: "/auth/unauthorize",
         element: <UnauthorizePage />,
       },
       {

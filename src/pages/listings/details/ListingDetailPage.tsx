@@ -29,7 +29,7 @@ const ListingDetailPage = () => {
 
   if (axios.isAxiosError(error)) {
     if (error.response?.status === 404) {
-      return navigate("/not-found", { replace: true });
+      navigate("/not-found", { replace: true });
     }
   }
 
@@ -50,7 +50,7 @@ const ListingDetailPage = () => {
         {user?._id === apartment?.landlord && (
           <div className="flex flex-col gap-y-3">
             <Link
-              to="edit"
+              to={`/apartments/listings/${apartment?._id}/edit`}
               className="btn btn-neutral btn-sm md:btn-md rounded-3xl text-nowrap"
             >
               <RiEdit2Fill />
@@ -113,7 +113,7 @@ const ListingDetailPage = () => {
             </span>
           </p>
           <Link
-            to="/landlord"
+            to="/"
             className="w-full btn btn-sm btn-outline btn-warning rounded-2xl"
           >
             Contact Landlord

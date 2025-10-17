@@ -24,7 +24,7 @@ const ListingPage = () => {
       <BackButton />
       <div className="flex items-center justify-between">
         <h2>Your Listings</h2>
-        <Link to="new" className="btn-main">
+        <Link to="/apartments/listings/new" className="btn-main">
           <IoAddSharp />
           Add New Listing
         </Link>

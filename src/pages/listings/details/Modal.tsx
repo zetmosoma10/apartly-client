@@ -32,7 +32,7 @@ const Modal = ({ ref, onClose, apartment }: Props) => {
       onSuccess: () => {
         onClose();
         toast.success("Apartment deleted successfully");
-        navigate("/listings", { replace: true });
+        navigate("/apartments/listings", { replace: true });
       },
     });
   };

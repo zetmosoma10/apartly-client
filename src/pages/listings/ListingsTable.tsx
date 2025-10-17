@@ -22,7 +22,7 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
             {data?.results?.map((item) => (
               <tr key={item._id} className="hover:bg-base-300">
                 <td>
-                  <Link to={item._id}>
+                  <Link to={`/apartments/listings${item._id}`}>
                     <img
                       src={item.images[0].url}
                       className="object-cover h-20 w-36 rounded-xl"
@@ -30,15 +30,17 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
                   </Link>
                 </td>
                 <td className="hidden sm:table-cell">
-                  <Link to={item._id}>{item.address}</Link>
+                  <Link to={`/apartments/listings${item._id}`}>
+                    {item.address}
+                  </Link>
                 </td>
                 <td>
-                  <Link to={item._id}>
+                  <Link to={`/apartments/listings${item._id}`}>
                     <Badge status={item.status} />
                   </Link>
                 </td>
                 <td>
-                  <Link to={item._id}>
+                  <Link to={`/apartments/listings${item._id}`}>
                     {dayjs(item.createdAt).format("DD MMM YYYY")}
                   </Link>
                 </td>

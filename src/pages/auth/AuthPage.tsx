@@ -12,14 +12,14 @@ const AuthPage = () => {
         </p>
         <div className="flex flex-col gap-3 mt-4">
           <Link
-            to="register"
+            to="/auth/register"
             className="btn btn-outline hover:bg-warning hover:text-white rounded-3xl"
             state={{ role: "tenant" }}
           >
             I'm a Tenant
           </Link>
           <Link
-            to="register"
+            to="/auth/register"
             className="btn btn-outline hover:bg-warning hover:text-white rounded-3xl"
             state={{ role: "landlord" }}
           >
@@ -28,7 +28,7 @@ const AuthPage = () => {
         </div>
         <p className="text-sm mt-4">
           Already have an account?{" "}
-          <Link className="text-warning hover:underline" to="login">
+          <Link className="text-warning hover:underline" to="/auth/login">
             Sign in here
           </Link>
         </p>

@@ -18,7 +18,7 @@ const Navlinks = ({ className }: { className?: string }) => {
       </NavLink>
       {user && user.role !== "tenant" && (
         <NavLink
-          to="listings"
+          to="/apartments/listings"
           className={({ isActive }) =>
             isActive
               ? "text-warning"
@@ -29,7 +29,7 @@ const Navlinks = ({ className }: { className?: string }) => {
         </NavLink>
       )}
       <NavLink
-        to="apartments"
+        to="/apartments"
         className={({ isActive }) =>
           isActive
             ? "text-warning"
