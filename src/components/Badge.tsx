@@ -6,9 +6,17 @@ const statusStyles: Record<Status, string> = {
   maintenance: "bg-amber-100 text-amber-700 border border-amber-300",
 };
 
-const Badge = ({ status }: { status: Status }) => {
+const Badge = ({
+  status,
+  className,
+}: {
+  status: Status;
+  className?: string;
+}) => {
   return (
-    <div className={`badge font-medium capitalize ${statusStyles[status]}`}>
+    <div
+      className={`badge font-medium capitalize ${statusStyles[status]} ${className}`}
+    >
       {status}
     </div>
   );

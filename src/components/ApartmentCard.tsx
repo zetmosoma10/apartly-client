@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Apartment } from "../entities/Apartment";
 import { useEffect, useState } from "react";
 import { MdLocationOn } from "react-icons/md";
+import Badge from "./Badge";
 
 const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -20,6 +21,10 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
         {!isImageLoaded && (
           <div className="absolute inset-0 bg-gray-300 animate-pulse" />
         )}
+        <Badge
+          status={apartment.status}
+          className="absolute top-2 left-2 text-xs py-1 px-1"
+        />
         <img
           src={imageUrl}
           alt="apartment preview"
