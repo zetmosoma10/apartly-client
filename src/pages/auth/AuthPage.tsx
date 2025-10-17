@@ -13,14 +13,14 @@ const AuthPage = () => {
         <div className="flex flex-col gap-3 mt-4">
           <Link
             to="/auth/register"
-            className="btn btn-outline hover:bg-warning hover:text-white rounded-3xl"
+            className="btn btn-outline bg-white  hover:bg-warning hover:text-white rounded-3xl"
             state={{ role: "tenant" }}
           >
             I'm a Tenant
           </Link>
           <Link
             to="/auth/register"
-            className="btn btn-outline hover:bg-warning hover:text-white rounded-3xl"
+            className="btn btn-outline bg-white  hover:bg-warning hover:text-white rounded-3xl"
             state={{ role: "landlord" }}
           >
             I'm a Landlord

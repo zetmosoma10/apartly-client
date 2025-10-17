@@ -12,6 +12,7 @@ import RegisterPage from "./pages/auth/register/RegisterPage";
 import ProtectRoute from "./components/ProtectRoute";
 import UnauthorizePage from "./pages/auth/UnauthorizePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import AccountPage from "./pages/account/AccountPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         element: <ProtectRoute allowedRoles={["landlord", "admin"]} />,
         children: [
+          {
+            path: "/account",
+            element: <AccountPage />,
+          },
           {
             path: "/apartments/listings",
             element: <ListingPage />,
