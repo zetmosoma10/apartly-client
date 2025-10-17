@@ -14,6 +14,7 @@ const ApartmentsPage = () => {
 
   const page = parseInt(searchParams.get("page") as string) || 1;
   const totalPages = data?.pagination.totalPages as number;
+  const totalDocuments = data?.pagination.totalDocuments as number;
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
@@ -24,16 +25,23 @@ const ApartmentsPage = () => {
   return (
     <section className="max-container">
       <BackButton />
-      <Heading />
-      <FiltersBar />
+      <div className="lg:flex lg:justify-between lg:min-w-[500px]">
+        <Heading />
+        <FiltersBar />
+      </div>
       {isLoading ? (
         <ApartmentsGridSkeletons />
       ) : (
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-          {apartments?.map((apartment) => (
-            <ApartmentCard apartment={apartment} key={apartment._id} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+            {apartments?.map((apartment) => (
+              <ApartmentCard apartment={apartment} key={apartment._id} />
+            ))}
+          </div>
+          {totalDocuments === 0 && (
+            <p>No Data for that query in the database</p>
+          )}
+        </>
       )}
       {totalPages > 1 && (
         <div className="mt-11 flex items-center justify-center">
