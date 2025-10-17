@@ -21,6 +21,9 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const { id: apartmentId } = useParams();
   const navigate = useNavigate();
   const { clearAuth } = useAuthStore();
+  const [files, setFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
+  console.log(previews);
 
   const {
     register,
@@ -47,10 +50,6 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         }
       : undefined,
   });
-
-  // * file + image preview state
-  const [files, setFiles] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
 
   // * handle upload image-file
   const onImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -258,6 +257,14 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
                     alt={`preview-${i}`}
                     className="object-cover w-full h-32 rounded-lg"
                   />
+                  <button
+                    className="absolute px-1 text-xs text-white bg-warning bg-opacity-50 rounded top-1 left-1"
+                    onClick={() =>
+                      setPreviews(previews.filter((p) => p !== src))
+                    }
+                  >
+                    X
+                  </button>
                   <span className="absolute px-1 text-xs text-white bg-black bg-opacity-50 rounded top-1 right-1">
                     {i + 1}
                   </span>

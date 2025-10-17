@@ -36,6 +36,6 @@ body {
   }
 
   .btn-main {
-    @apply btn bg-warning text-white border-warning hover:opacity-70 transition-all duration-200 rounded-3xl disabled:border-none;
+    @apply btn bg-warning text-white border-warning hover:opacity-70 transition-all duration-200 rounded-3xl disabled:border-none  disabled:text-black;
   }
 }
