@@ -4,7 +4,7 @@ import BackButton from "../../components/BackButton";
 import Pagination from "../../components/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
 import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
-import FiltersBar from "../../components/FiltersBar";
+import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
 
 const ApartmentsPage = () => {
