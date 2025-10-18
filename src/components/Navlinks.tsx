@@ -29,6 +29,7 @@ const Navlinks = ({ className }: { className?: string }) => {
         </NavLink>
       )}
       <NavLink
+        end
         to="/apartments"
         className={({ isActive }) =>
           isActive

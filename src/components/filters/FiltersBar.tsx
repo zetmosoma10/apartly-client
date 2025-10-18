@@ -1,7 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import SelectFilter from "./SelectFilter";
 import ClearButton from "./ClearButton";
-import SearchInput from "./SearchInput";
 
 const statuses = ["available", "rented", "maintenance"];
 const prices = [2000, 5000, 8000, 10_000, 15_000, 20_000];
@@ -34,9 +33,6 @@ const FiltersBar = () => {
   return (
     <div className="bg-white backdrop-blur-md rounded-2xl shadow p-4 mb-9 border md:max-w-[500px]">
       <div className="space-y-3">
-        {/* Search Input */}
-        <SearchInput handleFilterChange={handleFilterChange} />
-
         <div className="grid gap-3 sm:grid-cols-2">
           {/* Type Filter */}
           <SelectFilter

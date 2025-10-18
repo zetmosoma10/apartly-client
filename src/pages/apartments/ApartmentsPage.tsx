@@ -6,6 +6,7 @@ import useGetAllApartments from "../../hooks/useGetAllApartments";
 import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
 import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
+import Search from "../../components/Search";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,6 +26,9 @@ const ApartmentsPage = () => {
   return (
     <section className="max-container">
       <BackButton />
+      <div>
+        <Search />
+      </div>
       <div className="lg:flex lg:justify-between lg:min-w-[500px]">
         <Heading />
         <FiltersBar />
