@@ -6,7 +6,7 @@ const ClearButton = ({
   return (
     <button
       onClick={handleClearFilters}
-      className="btn btn-sm btn-outline btn-neutral w-full md:w-auto"
+      className="btn btn-xs md:btn-sm btn-outline btn-neutral"
     >
       Clear Filters
     </button>

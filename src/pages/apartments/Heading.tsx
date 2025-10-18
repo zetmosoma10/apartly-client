@@ -6,7 +6,7 @@ const Heading = () => {
   const params = Object.fromEntries(searchParams.entries());
 
   return (
-    <h2 className="mb-4">
+    <h2 className="mb-7">
       {params.type || ""} {_.capitalize(params.status) || ""} Apartments
     </h2>
   );

@@ -22,7 +22,7 @@ const Search = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="relative bg-white w-full md:max-w-[70%] mx-auto shadow-lg mt-4 mb-7 rounded-lg"
+      className="relative bg-white w-full md:max-w-[70%] mx-auto  backdrop-blur-md shadow mt-4 mb-7 rounded-lg"
     >
       <IoSearchOutline className="absolute top-3 left-2 text-zinc-400 z-20" />
       <input

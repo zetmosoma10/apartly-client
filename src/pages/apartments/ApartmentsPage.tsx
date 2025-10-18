@@ -28,11 +28,9 @@ const ApartmentsPage = () => {
       <BackButton />
       <div>
         <Search />
-      </div>
-      <div className="lg:flex lg:justify-between lg:min-w-[500px]">
-        <Heading />
         <FiltersBar />
       </div>
+      <Heading />
       {isLoading ? (
         <ApartmentsGridSkeletons />
       ) : (

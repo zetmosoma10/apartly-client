@@ -15,7 +15,7 @@ const SelectFilter = ({
 }: Props) => {
   return (
     <select
-      className="select focus:select-warning w-full bg-base-200"
+      className="select select-xs md:select-sm focus:select-warning  bg-base-200 text-nowrap"
       value={value}
       onChange={(e) => handleFilterChange(paramKey, e.target.value)}
     >
