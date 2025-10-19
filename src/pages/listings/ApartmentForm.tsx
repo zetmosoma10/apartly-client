@@ -14,6 +14,7 @@ import useUpdateApartment from "../../hooks/useUpdateApartment";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import axios from "axios";
 import useAuthStore from "../../store";
+import MapPicker from "./MapPicker";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -23,7 +24,10 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const { clearAuth } = useAuthStore();
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
-  console.log(previews);
+  const [coordinates, setCoordinates] = useState<{
+    latitude: number | null;
+    longitude: number | null;
+  }>({ latitude: null, longitude: null });
 
   const {
     register,
@@ -92,10 +96,10 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const { mutate: updateApartment, isPending: isUpdating } =
     useUpdateApartment(apartmentId);
 
+  console.log(coordinates);
   // * Submit the form
   const onSubmit = (data: FormData) => {
     const formData = new FormData();
-
     if (!apartmentId && files.length === 0) {
       toast.error("Please upload one or more image(s)");
       return;
@@ -274,6 +278,12 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
           )}
         </div>
       )}
+
+      {/* Map */}
+      <div className="mt-5">
+        <p className="block text-sm font-medium mb-2">Location</p>
+        <MapPicker setCoordinates={setCoordinates} />
+      </div>
 
       <button disabled={isCreating || isUpdating} className="mt-5 btn-main">
         {apartmentId ? "Update Apartment" : "Submit New Apartment"}
