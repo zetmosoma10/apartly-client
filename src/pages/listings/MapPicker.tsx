@@ -12,8 +12,8 @@ const markerIcon = new L.Icon({
 type Props = {
   setCoordinates: React.Dispatch<
     React.SetStateAction<{
-      latitude: number | null;
-      longitude: number | null;
+      lat: number | null;
+      lng: number | null;
     }>
   >;
 };
@@ -25,7 +25,7 @@ function LocationMarker({ setCoordinates }: Props) {
     click(e) {
       const { lat, lng } = e.latlng;
       setPosition([lat, lng]);
-      setCoordinates({ latitude: lat, longitude: lng });
+      setCoordinates({ lat, lng });
     },
   });
 

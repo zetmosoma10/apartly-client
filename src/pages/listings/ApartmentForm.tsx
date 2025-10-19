@@ -25,9 +25,9 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const [coordinates, setCoordinates] = useState<{
-    latitude: number | null;
-    longitude: number | null;
-  }>({ latitude: null, longitude: null });
+    lat: number | null;
+    lng: number | null;
+  }>({ lat: null, lng: null });
 
   const {
     register,
@@ -96,12 +96,17 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const { mutate: updateApartment, isPending: isUpdating } =
     useUpdateApartment(apartmentId);
 
-  console.log(coordinates);
   // * Submit the form
   const onSubmit = (data: FormData) => {
+    //
     const formData = new FormData();
     if (!apartmentId && files.length === 0) {
       toast.error("Please upload one or more image(s)");
+      return;
+    }
+
+    if (!apartmentId && coordinates.lat === null) {
+      toast.error("Please pick apartment location on the map below");
       return;
     }
 
@@ -116,6 +121,9 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
       files.forEach((file) => {
         formData.append("images", file);
       });
+
+      // * append coordinates
+      formData.append("coordinates", JSON.stringify(coordinates));
 
       // * Mutation
       createApartment(formData, {
