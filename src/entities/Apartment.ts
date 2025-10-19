@@ -16,6 +16,10 @@ export type Apartment = {
     _id: string;
     url: string;
   }[];
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
 };
 
 export type ApartmentUpdatePayload = {

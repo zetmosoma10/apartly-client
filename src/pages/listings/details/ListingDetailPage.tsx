@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import useAuthStore from "../../../store";
 import ApartmentDetailsSkeleton from "../../../skeletons/ApartmentDetailsSkeleton";
 import axios from "axios";
+import ApartmentMap from "../ApartmentMap";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -134,6 +135,12 @@ const ListingDetailPage = () => {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* APARTMENT MAP */}
+      <div className="space-y-3 mt-6">
+        <h3>Location</h3>
+        <ApartmentMap coordinates={apartment?.coordinates} />
       </div>
     </section>
   );
