@@ -13,6 +13,7 @@ import ProtectRoute from "./components/ProtectRoute";
 import UnauthorizePage from "./pages/auth/UnauthorizePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AccountPage from "./pages/account/AccountPage";
+import RedirectIfAuthenticated from "./components/RedirectIfAuthenticated";
 
 const router = createBrowserRouter([
   {
@@ -57,16 +58,21 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/auth",
-        element: <AuthPage />,
-      },
-      {
-        path: "/auth/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/auth/register",
-        element: <RegisterPage />,
+        element: <RedirectIfAuthenticated />,
+        children: [
+          {
+            path: "/auth",
+            element: <AuthPage />,
+          },
+          {
+            path: "/auth/login",
+            element: <LoginPage />,
+          },
+          {
+            path: "/auth/register",
+            element: <RegisterPage />,
+          },
+        ],
       },
       {
         path: "/auth/unauthorize",
