@@ -10,6 +10,7 @@ const markerIcon = new L.Icon({
 });
 
 type Props = {
+  coordinates?: { lat: number; lng: number } | null;
   setCoordinates: React.Dispatch<
     React.SetStateAction<{
       lat: number | null;
@@ -18,27 +19,32 @@ type Props = {
   >;
 };
 
-function LocationMarker({ setCoordinates }: Props) {
-  const [position, setPosition] = useState<[number, number]>();
+const MapPicker = ({ setCoordinates, coordinates }: Props) => {
+  const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
+    coordinates || null
+  );
 
-  useMapEvents({
-    click(e) {
-      const { lat, lng } = e.latlng;
-      setPosition([lat, lng]);
-      setCoordinates({ lat, lng });
-    },
-  });
+  // *  handle map click
+  const MapClickHandler = () => {
+    useMapEvents({
+      click(e) {
+        const { lat, lng } = e.latlng;
+        setPosition({ lat, lng });
+        setCoordinates({ lat, lng });
+      },
+    });
+    return position ? (
+      <Marker position={[position.lat, position.lng]} icon={markerIcon} />
+    ) : null;
+  };
 
-  return position ? (
-    <Marker position={position} icon={markerIcon}></Marker>
-  ) : null;
-}
+  // * check
+  const center = position ? [position.lat, position.lng] : [-26.2041, 28.0473];
 
-const MapPicker = ({ setCoordinates }: Props) => {
   return (
     <div className="h-[400px] w-full rounded-lg overflow-hidden ">
       <MapContainer
-        center={[-26.2041, 28.0473]}
+        center={center as [number, number]}
         zoom={13}
         className="h-full w-full"
       >
@@ -46,7 +52,7 @@ const MapPicker = ({ setCoordinates }: Props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
-        <LocationMarker setCoordinates={setCoordinates} />
+        <MapClickHandler />
       </MapContainer>
     </div>
   );

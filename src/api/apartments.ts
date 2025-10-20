@@ -1,4 +1,3 @@
-import type { ApartmentUpdatePayload } from "../entities/Apartment";
 import api from "./axiosInstance";
 
 export const createApartment = async (formData: FormData) => {
@@ -35,7 +34,7 @@ export const updateApartment = async ({
   data,
 }: {
   id?: string;
-  data: ApartmentUpdatePayload;
+  data: FormData;
 }) => {
   const results = await api.patch(`/apartments/${id}`, data);
   return results.data;

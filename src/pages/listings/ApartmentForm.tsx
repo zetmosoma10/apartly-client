@@ -100,15 +100,6 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const onSubmit = (data: FormData) => {
     //
     const formData = new FormData();
-    if (!apartmentId && files.length === 0) {
-      toast.error("Please upload one or more image(s)");
-      return;
-    }
-
-    if (!apartmentId && coordinates.lat === null) {
-      toast.error("Please pick apartment location on the map below");
-      return;
-    }
 
     // * append normal text fields
     Object.entries(data).forEach(([key, value]) => {
@@ -117,6 +108,16 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
     // * Check if we updating or creating
     if (!apartmentId) {
+      if (files.length === 0) {
+        toast.error("Please upload one or more image(s)");
+        return;
+      }
+
+      if (!coordinates.lat && !coordinates.lng) {
+        toast.error("Please pick apartment location on the map below");
+        return;
+      }
+
       // * append files
       files.forEach((file) => {
         formData.append("images", file);
@@ -138,11 +139,17 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
             });
           }
         },
-        onSuccess: () => navigate("/apartments/listings"),
+        onSuccess: () => navigate("/apartments/listings", { replace: true }),
       });
+      //
     } else {
+      //
+      if (coordinates.lat && coordinates.lng) {
+        formData.append("coordinates", JSON.stringify(coordinates));
+      }
+
       updateApartment(
-        { id: apartmentId, data },
+        { id: apartmentId, data: formData },
         {
           onError: (error) => {
             toast.error(error.message);
@@ -155,10 +162,11 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
               });
             }
           },
-          onSuccess: () => navigate(`/apartments/listings/${apartmentId}`),
+          onSuccess: () => navigate(`/apartments/listings/${apartmentId}`, { replace: true }),
         }
       );
     }
+    //
   };
 
   return (
@@ -290,7 +298,10 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
       {/* Map */}
       <div className="mt-5">
         <p className="block text-sm font-medium mb-2">Location</p>
-        <MapPicker setCoordinates={setCoordinates} />
+        <MapPicker
+          setCoordinates={setCoordinates}
+          coordinates={apartment?.coordinates ? apartment.coordinates : null}
+        />
       </div>
 
       <button disabled={isCreating || isUpdating} className="mt-5 btn-main">

@@ -22,19 +22,6 @@ export type Apartment = {
   };
 };
 
-export type ApartmentUpdatePayload = {
-  city?: string;
-  title?: string;
-  price?: number;
-  status?: Status;
-  address?: string;
-  bedrooms?: number;
-  bathrooms?: number;
-  description?: string;
-  type?: ApartmentType;
-  amenities?: string;
-};
-
 export type ApartmentType =
   | "1-bedroom"
   | "2-bedrooms"
