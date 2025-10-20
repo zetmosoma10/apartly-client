@@ -1,9 +1,9 @@
-import { GiHamburgerMenu } from "react-icons/gi";
 import { RiBuilding2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import useAuthStore from "../store";
 import Navlinks from "./Navlinks";
 import ProfileLink from "./ProfileLink";
+import MobileNav from "./MobileNav";
 
 const NavBar = () => {
   const { user } = useAuthStore();
@@ -16,18 +16,20 @@ const NavBar = () => {
           Apartly
         </Link>
       </div>
-      <Navlinks />
-      <div className="flex items-center space-x-2">
-        <button className="md:hidden">
-          <GiHamburgerMenu />
-        </button>
+      <div className="hidden md:block">
+        <Navlinks />
+      </div>
+      <div className="hidden md:block">
         {!user && (
-          <Link to="/auth" className="btn-main">
+          <Link to="/auth" className=" btn-main">
             Login / Register
           </Link>
         )}
         {user && <ProfileLink />}
       </div>
+
+      {/* Mobile Navbar */}
+      <MobileNav />
     </nav>
   );
 };
