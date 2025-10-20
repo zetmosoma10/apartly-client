@@ -10,6 +10,7 @@ import useAuthStore from "../../../store";
 import ApartmentDetailsSkeleton from "../../../skeletons/ApartmentDetailsSkeleton";
 import axios from "axios";
 import ApartmentMap from "../ApartmentMap";
+import ExpandableText from "../../../components/ExpandableText";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -100,10 +101,10 @@ const ListingDetailPage = () => {
       </div>
 
       {/* DESCRIPTION */}
-      <div className="flex flex-col mt-5 gap-y-4 gap-x-3 sm:flex-row sm:justify-between">
+      <div className="flex flex-col mt-5 gap-y-4 gap-x-6 md:flex-row md:items-start md:justify-between">
         <div>
           <h3>Descriptions</h3>
-          <p className="leading-tight opacity-70">{apartment?.description}</p>
+          <ExpandableText>{apartment?.description as string}</ExpandableText>
         </div>
         <div className="border p-4 min-w-[300px] max-w-[400px] bg-white shadow-md rounded-lg">
           <h4 className="">R {apartment?.price} / month</h4>
@@ -138,10 +139,10 @@ const ListingDetailPage = () => {
       </div>
 
       {/* APARTMENT MAP */}
-      <div className="space-y-3 mt-6">
+      {/* <div className="space-y-3 mt-6">
         <h3>Location</h3>
         <ApartmentMap coordinates={apartment?.coordinates} />
-      </div>
+      </div> */}
     </section>
   );
 };
