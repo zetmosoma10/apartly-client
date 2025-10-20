@@ -23,6 +23,9 @@ const FiltersBar = () => {
     const params = new URLSearchParams(searchParams);
     if (value) params.set(key, value);
     else params.delete(key);
+
+    params.set("page", "1");
+
     setSearchParams(params);
   };
 
