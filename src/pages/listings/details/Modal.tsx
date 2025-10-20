@@ -15,7 +15,7 @@ type Props = {
 const Modal = ({ ref, onClose, apartment }: Props) => {
   const navigate = useNavigate();
   const { clearAuth } = useAuthStore();
-  const { mutate, isPending } = useDeleteApartment();
+  const { mutate, isPending } = useDeleteApartment(apartment?._id);
 
   const handleDelete = () => {
     mutate(apartment?._id, {

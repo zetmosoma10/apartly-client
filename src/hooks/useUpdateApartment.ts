@@ -12,6 +12,8 @@ const useUpdateApartment = (apartmentId?: string) => {
       toast.success("Apartment updated successfully");
       queryClient.invalidateQueries({ queryKey: ["apartment", apartmentId] });
       queryClient.invalidateQueries({ queryKey: ["user-apartments"] });
+      queryClient.invalidateQueries({ queryKey: ["feature-apartments"] });
+      queryClient.invalidateQueries({ queryKey: ["apartments"] });
     },
   });
 };

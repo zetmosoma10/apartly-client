@@ -1,14 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteApartment } from "../api/apartments";
 
-const useDeleteApartment = () => {
+const useDeleteApartment = (apartmentId?: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (id?: string) => deleteApartment(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["apartments"] });
+      queryClient.invalidateQueries({ queryKey: ["apartment", apartmentId] });
       queryClient.invalidateQueries({ queryKey: ["user-apartments"] });
+      queryClient.invalidateQueries({ queryKey: ["feature-apartments"] });
+      queryClient.invalidateQueries({ queryKey: ["apartments"] });
     },
   });
 };
