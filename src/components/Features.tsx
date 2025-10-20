@@ -19,12 +19,11 @@ const Features = () => {
           ))}
         </div>
       )}
-      <Link
-        to="/apartments"
-        className="flex items-center justify-center mt-5 hover:underline hover:text-warning"
-      >
-        View More
-      </Link>
+      <div className="text-center mt-5">
+        <Link to="/apartments" className="hover:underline hover:text-warning">
+          View More
+        </Link>
+      </div>
     </section>
   );
 };
