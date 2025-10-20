@@ -7,6 +7,7 @@ import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
 import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
 import Search from "../../components/Search";
+import { useEffect } from "react";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +23,14 @@ const ApartmentsPage = () => {
     params.set("page", page.toString());
     setSearchParams(params);
   };
+
+  // * Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   return (
     <section className="max-container">
