@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import useAuthStore from "../store";
+import useAuthStore from "../../store";
 import ProfileLink from "./ProfileLink";
 
 export default function MobileNav() {

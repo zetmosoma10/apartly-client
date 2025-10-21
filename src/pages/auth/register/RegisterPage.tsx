@@ -9,7 +9,7 @@ import { useState } from "react";
 import useRegister from "../../../hooks/useRegister";
 import toast from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage";
-import LoadingSpinner from "../../../components/LoadingSpinner";
+import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
 
 type FormData = z.infer<typeof registerSchema>;
 
@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen py-20">
-      <div className="w-11/12 p-8 mx-auto rounded-md shadow-lg border bg-white sm:w-3/4 md:w-1/2 ">
+      <div className="w-11/12 p-8 mx-auto bg-white border rounded-md shadow-lg sm:w-3/4 md:w-1/2 ">
         <div className="mb-4 space-y-2 text-center ">
           <h2 className="text-xl font-bold text-black md:text-2xl">Sign up</h2>
           <p className="text-base text-black dark:text-WHITE">
@@ -120,10 +120,7 @@ const RegisterPage = () => {
             />
           </div>
 
-          <button
-            disabled={isPending}
-            className="w-full btn-main "
-          >
+          <button disabled={isPending} className="w-full btn-main ">
             Sign up
             {isPending && <LoadingSpinner />}
           </button>

@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import useAuthStore from "../store";
+import useAuthStore from "../../store";
 import { Link, useNavigate } from "react-router-dom";
 
 const ProfileLink = () => {

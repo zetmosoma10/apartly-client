@@ -7,10 +7,10 @@ import Badge from "../../../components/Badge";
 import BackButton from "../../../components/BackButton";
 import Modal from "./Modal";
 import useAuthStore from "../../../store";
-import ApartmentDetailsSkeleton from "../../../skeletons/ApartmentDetailsSkeleton";
 import axios from "axios";
 import ApartmentMap from "../ApartmentMap";
 import ExpandableText from "../../../components/ExpandableText";
+import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -59,7 +59,7 @@ const ListingDetailPage = () => {
               Edit Apartment
             </Link>
             <button
-              className="btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap text-white"
+              className="text-white btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
               onClick={onOpen}
             >
               <RiDeleteBin4Fill />
@@ -139,7 +139,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* APARTMENT MAP */}
-      {/* <div className="space-y-3 mt-6">
+      {/* <div className="mt-6 space-y-3">
         <h3>Location</h3>
         <ApartmentMap coordinates={apartment?.coordinates} />
       </div> */}

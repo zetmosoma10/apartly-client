@@ -1,6 +1,6 @@
 import { RiBuilding2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import Navlinks from "./Navlinks";
+import Navlinks from "./navigation/Navlinks";
 
 const Footer = () => {
   return (

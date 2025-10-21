@@ -1,13 +1,13 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ApartmentCard from "../../components/ApartmentCard";
 import BackButton from "../../components/BackButton";
 import Pagination from "../../components/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
-import ApartmentsGridSkeletons from "../../skeletons/ApartmentsGridSkeletons";
 import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
-import Search from "../../components/Search";
-import { useEffect } from "react";
+import Search from "../../components/filters/Search";
+import ApartmentsGridSkeletons from "../../components/loadingIndicators/ApartmentsGridSkeletons";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -55,7 +55,7 @@ const ApartmentsPage = () => {
         </>
       )}
       {totalPages > 1 && (
-        <div className="mt-11 flex items-center justify-center">
+        <div className="flex items-center justify-center mt-11">
           <Pagination
             data={data}
             page={page}

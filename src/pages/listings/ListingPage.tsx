@@ -1,12 +1,12 @@
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
-import ListingsTableSkeleton from "../../skeletons/ListingsTableSkeleton";
 import BackButton from "../../components/BackButton";
 import useGetAllUserApartments from "../../hooks/useGetAllUserApartments";
 import Pagination from "../../components/Pagination";
 import axios from "axios";
 import useAuthStore from "../../store";
+import ListingsTableSkeleton from "../../components/loadingIndicators/ListingsTableSkeleton";
 
 const ListingPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,7 +46,7 @@ const ListingPage = () => {
       </div>
       {!isLoading ? <ListingsTable data={data} /> : <ListingsTableSkeleton />}
       {totalPages > 1 && (
-        <div className="mt-11 flex items-center justify-center">
+        <div className="flex items-center justify-center mt-11">
           <Pagination
             data={data}
             page={page}

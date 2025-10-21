@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import type { Apartment } from "../../../entities/Apartment";
 import useDeleteApartment from "../../../hooks/useDeleteApartment";
-import LoadingSpinner from "../../../components/LoadingSpinner";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAuthStore from "../../../store";
+import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
 
 type Props = {
   apartment?: Apartment;

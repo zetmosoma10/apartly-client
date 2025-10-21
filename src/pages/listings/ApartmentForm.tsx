@@ -11,10 +11,10 @@ import UploadBox from "./new/UploadBox";
 import toast from "react-hot-toast";
 import useCreateApartment from "../../hooks/useCreateApartment";
 import useUpdateApartment from "../../hooks/useUpdateApartment";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import axios from "axios";
 import useAuthStore from "../../store";
 import MapPicker from "./MapPicker";
+import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -162,7 +162,8 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
               });
             }
           },
-          onSuccess: () => navigate(`/apartments/listings/${apartmentId}`, { replace: true }),
+          onSuccess: () =>
+            navigate(`/apartments/listings/${apartmentId}`, { replace: true }),
         }
       );
     }
@@ -278,7 +279,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
                     className="object-cover w-full h-32 rounded-lg"
                   />
                   <button
-                    className="absolute px-1 text-xs text-white bg-warning bg-opacity-50 rounded top-1 left-1"
+                    className="absolute px-1 text-xs text-white bg-opacity-50 rounded bg-warning top-1 left-1"
                     onClick={() =>
                       setPreviews(previews.filter((p) => p !== src))
                     }
@@ -297,7 +298,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       {/* Map */}
       <div className="mt-5">
-        <p className="block text-sm font-medium mb-2">Location</p>
+        <p className="block mb-2 text-sm font-medium">Location</p>
         <MapPicker
           setCoordinates={setCoordinates}
           coordinates={apartment?.coordinates ? apartment.coordinates : null}

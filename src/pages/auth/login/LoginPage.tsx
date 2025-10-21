@@ -9,7 +9,7 @@ import useLogin from "../../../hooks/useLogin";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage";
-import LoadingSpinner from "../../../components/LoadingSpinner";
+import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -98,10 +98,7 @@ const LoginPage = () => {
               Forgot password?
             </Link>
           </div>
-          <button
-            disabled={isPending}
-            className="w-full btn-main"
-          >
+          <button disabled={isPending} className="w-full btn-main">
             Sign in
             {isPending && <LoadingSpinner />}
           </button>

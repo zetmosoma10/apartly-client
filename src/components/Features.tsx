@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import useGetFeatureApartments from "../hooks/useGetFeatureApartments";
-import FeatureSkeleton from "../skeletons/FeatureSkeleton";
 import ApartmentCard from "./ApartmentCard";
+import FeatureSkeleton from "./loadingIndicators/FeatureSkeleton";
 
 const Features = () => {
   const { data, isLoading } = useGetFeatureApartments();
   const apartments = data?.results;
 
   return (
-    <section className="max-container mt-16">
-      <h2 className="text-2xl mb-6">Featured Apartments</h2>
+    <section className="mt-16 max-container">
+      <h2 className="mb-6 text-2xl">Featured Apartments</h2>
       {isLoading ? (
         <FeatureSkeleton />
       ) : (
@@ -19,7 +19,7 @@ const Features = () => {
           ))}
         </div>
       )}
-      <div className="text-center mt-5">
+      <div className="mt-5 text-center">
         <Link to="/apartments" className="hover:underline hover:text-warning">
           View More
         </Link>

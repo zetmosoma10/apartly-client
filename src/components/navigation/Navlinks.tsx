@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import useAuthStore from "../store";
+import useAuthStore from "../../store";
 
 const Navlinks = ({ className }: { className?: string }) => {
   const { user } = useAuthStore();

@@ -1,6 +1,6 @@
 import { RiBuilding2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import useAuthStore from "../store";
+import useAuthStore from "../../store";
 import Navlinks from "./Navlinks";
 import ProfileLink from "./ProfileLink";
 import MobileNav from "./MobileNav";
