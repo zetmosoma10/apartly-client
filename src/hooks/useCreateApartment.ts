@@ -9,8 +9,9 @@ const useCreateApartment = () => {
     mutationFn: (formData: FormData) => createApartment(formData),
     onSuccess: () => {
       toast.success("Apartment created successfully");
+
       queryClient.invalidateQueries({ queryKey: ["apartments"] });
-      queryClient.invalidateQueries({ queryKey: ["user-apartments"] });
+      queryClient.invalidateQueries({ queryKey: ["apartments", "user"] });
     },
   });
 };

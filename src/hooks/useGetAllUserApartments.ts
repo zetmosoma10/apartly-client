@@ -5,7 +5,7 @@ import { getAllUserApartments } from "../api/apartments";
 
 const useGetAllUserApartments = (searchParams: URLSearchParams) => {
   return useQuery<Response<Apartment[]>>({
-    queryKey: ["user-apartments", searchParams.toString()],
+    queryKey: ["apartments", "user", searchParams.toString()],
     queryFn: () => getAllUserApartments(searchParams),
     staleTime: 1000 * 60 * 60,
   });

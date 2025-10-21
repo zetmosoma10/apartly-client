@@ -5,7 +5,7 @@ import { getFeatureApartments } from "../api/apartments";
 
 const useGetFeatureApartments = () => {
   return useQuery<Response<Apartment[]>>({
-    queryKey: ["feature-apartments"],
+    queryKey: ["apartments", "features"],
     queryFn: () => getFeatureApartments(),
     staleTime: 1000 * 60 * 60 * 60,
     gcTime: 1000 * 60 * 60 * 60,

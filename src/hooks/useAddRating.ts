@@ -18,8 +18,11 @@ const useAddRating = () => {
     },
 
     onError: (error) => {
-      // ! 404 NOT FOUND ERROR
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      // ! 404 & 400 ERROR
+      if (
+        axios.isAxiosError(error) &&
+        (error.response?.status === 404 || error.response?.status === 400)
+      ) {
         toast.error(error.response.data.message);
       }
     },

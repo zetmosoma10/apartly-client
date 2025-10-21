@@ -5,7 +5,7 @@ import type { Apartment } from "../entities/Apartment";
 
 const useGetApartment = (id?: string) => {
   return useQuery<Response<Apartment>>({
-    queryKey: ["apartment", id],
+    queryKey: ["apartments", id],
     queryFn: () => getApartment(id),
     staleTime: 1000 * 60 * 60,
   });
