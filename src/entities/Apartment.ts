@@ -10,6 +10,9 @@ export type Apartment = {
   bedrooms: string;
   bathrooms: string;
   description: string;
+  totalRatings: number;
+  averageRatings: number;
+  rating: Rating[];
   type: ApartmentType;
   amenities: string[];
   images: {
@@ -31,3 +34,11 @@ export type ApartmentType =
   | "other";
 
 export type Status = "available" | "rented" | "maintenance";
+
+type Rating = {
+  _id: string;
+  tenant: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+};

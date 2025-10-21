@@ -11,6 +11,7 @@ import axios from "axios";
 import ApartmentMap from "../ApartmentMap";
 import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
+import Rating from "../../apartments/Rating";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -40,12 +41,13 @@ const ListingDetailPage = () => {
   return (
     <section className="max-container">
       <BackButton />
-      <div className="flex flex-col gap-8 sm:justify-between">
+      <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
         <div>
           <h2>{apartment?.title}</h2>
           <p className="text-base md:text-lg opacity-70">
             {apartment?.address}, {apartment?.city}
           </p>
+          <Rating apartment={apartment} />
           <Badge status={apartment!.status} />
         </div>
 
