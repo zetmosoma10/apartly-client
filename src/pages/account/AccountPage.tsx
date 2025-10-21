@@ -1,19 +1,44 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import BackButton from "../../components/BackButton";
 import Input from "../../components/Input";
-import { useForm } from "react-hook-form";
+import useGetUser from "../../hooks/useGetUser";
+import accountSchema from "./accountSchema";
+import dayjs from "dayjs";
+
+type FormData = z.infer<typeof accountSchema>;
 
 const AccountPage = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
 
-  const { register } = useForm();
+  const { data } = useGetUser();
+  const user = data?.results;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    defaultValues: {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      phone: user?.phone,
+      email: user?.email,
+      joined: dayjs(user?.createdAt).format("DD MMM YYYY") || undefined,
+    },
+  });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = URL.createObjectURL(file);
     setPreview(url);
+  };
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
   };
 
   return (
@@ -49,12 +74,14 @@ const AccountPage = () => {
             </label>
           </div>
 
-          <h2 className="mt-4 text-2xl font-bold">John Doe</h2>
-          <p className="text-sm opacity-70">Landlord</p>
+          <h2 className="mt-4 text-2xl font-bold">
+            {user?.firstName} {user?.lastName}
+          </h2>
+          <p className="text-sm opacity-70">{user?.role}</p>
         </div>
 
         {/* Info Section */}
-        <div className="mt-8 space-y-3">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-3">
           <div className="grid gap-x-5 gap-y-3 sm:grid-cols-2">
             <Input
               id="firstName"
@@ -62,6 +89,7 @@ const AccountPage = () => {
               placeholder="e.g John"
               disabled={!editing}
               register={register("firstName")}
+              error={errors.firstName?.message}
             />
             <Input
               id="lastName"
@@ -69,6 +97,7 @@ const AccountPage = () => {
               placeholder="e.g Doe"
               disabled={!editing}
               register={register("lastName")}
+              error={errors.lastName?.message}
             />
           </div>
           <Input
@@ -77,6 +106,7 @@ const AccountPage = () => {
             placeholder="e.g johndoe@gmail.com"
             disabled={!editing}
             register={register("email")}
+            error={errors.email?.message}
           />
           <div className="grid gap-x-5 gap-y-3 sm:grid-cols-2">
             <Input
@@ -85,6 +115,7 @@ const AccountPage = () => {
               placeholder="e.g 0860010111"
               disabled={!editing}
               register={register("phone")}
+              error={errors.phone?.message}
             />
             <Input
               id="joined"
@@ -92,9 +123,10 @@ const AccountPage = () => {
               placeholder="e.g March 25"
               disabled={true}
               register={register("joined")}
+              error={errors.joined?.message}
             />
           </div>
-        </div>
+        </form>
 
         {/* Buttons Section */}
         <div className="flex flex-col justify-center gap-4 mt-10 sm:flex-row">

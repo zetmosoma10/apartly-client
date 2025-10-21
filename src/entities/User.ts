@@ -5,6 +5,7 @@ export type User = {
   phone: string;
   email: string;
   createdAt: Date;
+  role: "tenant" | "landlord" | "admin";
 };
 
 export type loginCredentials = {
