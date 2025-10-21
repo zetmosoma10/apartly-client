@@ -103,13 +103,15 @@ export default function MobileNav() {
           >
             Apartments
           </Link>
-          <Link
-            to="/account"
-            onClick={closeNav} // auto-close on navigation
-            className="block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
-          >
-            Account
-          </Link>
+          {user && (
+            <Link
+              to="/account"
+              onClick={closeNav} // auto-close on navigation
+              className="block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
+            >
+              Account
+            </Link>
+          )}
         </nav>
 
         {/* Optional footer actions */}

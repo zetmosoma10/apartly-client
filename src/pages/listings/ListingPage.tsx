@@ -37,7 +37,7 @@ const ListingPage = () => {
   return (
     <section className="max-container">
       <BackButton />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-y-3 sm:gap-y-0 sm:flex-row sm:items-center sm:justify-between">
         <h2>Your Listings</h2>
         <Link to="/apartments/listings/new" className="btn-main">
           <IoAddSharp />

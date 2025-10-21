@@ -29,7 +29,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gray-900/60" />
 
       <div className="z-20 mx-10 text-center">
-        <h1 className="text-white font-extrabold text-5xl sm:text-6xl max-w-[500px]">
+        <h1 className="text-white font-extrabold text-3xl sm:text-5xl md:text-6xl max-w-[500px]">
           Find Your <span className="text-warning">Perfect</span> Home
         </h1>
         <p className="mt-3 text-white">
@@ -37,7 +37,7 @@ const Hero = () => {
         </p>
         <form
           onSubmit={onSubmit}
-          className="flex items-center w-full gap-2 pr-0 mt-5 input input-warning input-bordered rounded-3xl "
+          className="flex items-center w-full gap-2 pr-0 mt-5 input input-sm sm:input-md input-warning input-bordered rounded-3xl "
         >
           <IoSearchOutline className="text-xl text-black text-opacity-70" />
           <input

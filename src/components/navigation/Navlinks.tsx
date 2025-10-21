@@ -39,6 +39,18 @@ const Navlinks = ({ className }: { className?: string }) => {
       >
         Apartments
       </NavLink>
+      {user && (
+        <NavLink
+          to="/account"
+          className={({ isActive }) =>
+            isActive
+              ? "text-warning"
+              : `text-black hover:text-warning ${className}`
+          }
+        >
+          Account
+        </NavLink>
+      )}
     </div>
   );
 };

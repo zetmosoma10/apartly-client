@@ -40,7 +40,7 @@ const ListingDetailPage = () => {
   return (
     <section className="max-container">
       <BackButton />
-      <div className="flex justify-between gap-8">
+      <div className="flex flex-col gap-8 sm:justify-between">
         <div>
           <h2>{apartment?.title}</h2>
           <p className="text-base md:text-lg opacity-70">

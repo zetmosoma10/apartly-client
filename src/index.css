@@ -20,7 +20,7 @@ body {
   }
 
   h2 {
-    @apply text-3xl font-bold tracking-tight md:text-4xl;
+    @apply text-2xl font-bold tracking-tight md:text-4xl;
   }
 
   h3 {
@@ -36,6 +36,6 @@ body {
   }
 
   .btn-main {
-    @apply btn bg-warning text-white border-warning hover:opacity-70 transition-all duration-200 rounded-3xl disabled:border-none  disabled:text-black;
+    @apply text-white transition-all duration-200 btn-sm sm:btn-md btn bg-warning border-warning hover:opacity-70 rounded-3xl disabled:border-none disabled:text-black;
   }
 }

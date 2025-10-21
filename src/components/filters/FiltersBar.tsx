@@ -35,45 +35,48 @@ const FiltersBar = () => {
 
   return (
     <div className="bg-white mx-auto backdrop-blur-md rounded-2xl shadow px-4 pb-4 pt-2 mb-9 border md:max-w-[500px]">
-      <p className="font-semibold  mb-1 ">Filters</p>
-      <div className="flex items-center space-x-3">
+      <p className="mb-1 font-semibold ">Filters</p>
+      <div className="space-y-3">
         {/* Type Filter */}
-        <SelectFilter
-          paramKey="type"
-          defaultOption="All Types"
-          value={searchParams.get("type") || ""}
-          handleFilterChange={handleFilterChange}
-          options={apartmentTypes}
-        />
+        <div className="flex items-center space-x-3">
+          <SelectFilter
+            paramKey="type"
+            defaultOption="All Types"
+            value={searchParams.get("type") || ""}
+            handleFilterChange={handleFilterChange}
+            options={apartmentTypes}
+          />
 
-        {/* Status Filter */}
-        <SelectFilter
-          paramKey="status"
-          defaultOption="All Status"
-          value={searchParams.get("status") || ""}
-          handleFilterChange={handleFilterChange}
-          options={statuses}
-        />
+          {/* Status Filter */}
+          <SelectFilter
+            paramKey="status"
+            defaultOption="All Status"
+            value={searchParams.get("status") || ""}
+            handleFilterChange={handleFilterChange}
+            options={statuses}
+          />
 
-        {/* Price Filter */}
-        <SelectFilter
-          paramKey="minPrice"
-          defaultOption="minPrice"
-          value={searchParams.get("minPrice") || ""}
-          handleFilterChange={handleFilterChange}
-          options={prices}
-        />
-        <SelectFilter
-          paramKey="maxPrice"
-          defaultOption="maxPrice"
-          value={searchParams.get("maxPrice") || ""}
-          handleFilterChange={handleFilterChange}
-          options={prices}
-        />
-
+          {/* Price Filter */}
+          <SelectFilter
+            paramKey="minPrice"
+            defaultOption="minPrice"
+            value={searchParams.get("minPrice") || ""}
+            handleFilterChange={handleFilterChange}
+            options={prices}
+          />
+          <SelectFilter
+            paramKey="maxPrice"
+            defaultOption="maxPrice"
+            value={searchParams.get("maxPrice") || ""}
+            handleFilterChange={handleFilterChange}
+            options={prices}
+          />
+        </div>
         {/* Clear Button */}
         {Object.values(params).length > 0 && (
-          <ClearButton handleClearFilters={handleClearFilters} />
+          <div className="flex justify-center">
+            <ClearButton handleClearFilters={handleClearFilters} />
+          </div>
         )}
       </div>
     </div>
