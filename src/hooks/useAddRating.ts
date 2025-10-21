@@ -12,7 +12,7 @@ const useAddRating = () => {
     onSuccess: async (responseData) => {
       toast.success("Rating added.");
       await queryClient.setQueryData(
-        ["apartment", responseData.results._id],
+        ["apartments", responseData.results._id],
         responseData
       );
     },

@@ -10,6 +10,9 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
   const { user } = useAuthStore();
   const { mutate } = useAddRating();
 
+  const totalRatings = apartment?.totalRatings as number;
+  const averageRatings = apartment?.averageRatings as number;
+
   const handleRating = (value: number) => {
     if (!user) return toast.error("You must be logged in to rate.");
     setRating(value);
@@ -23,26 +26,19 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
   };
 
   return (
-    <div className="flex items-center gap-3 my-2">
-      <div className="flex items-center gap-1 text-yellow-500">
-        {[...Array(5)].map((_, index) => (
-          <FaStar
-            key={index}
-            className={
-              index < Math.round(apartment?.averageRatings as number)
-                ? "text-yellow-400"
-                : "text-gray-300"
-            }
-          />
-        ))}
-        <span className="ml-1 text-sm text-gray-600">
-          {apartment?.averageRatings} ({apartment?.totalRatings} reviews)
-        </span>
-      </div>
+    <div className="flex items-center gap-3">
+      {totalRatings > 0 && (
+        <div className="flex items-center gap-1 my-2 text-yellow-500">
+          <FaStar className="text-yellow-400" />
+          <span className="ml-1 text-sm text-gray-600">
+            {averageRatings} ({totalRatings} reviews)
+          </span>
+        </div>
+      )}
 
       {/*  */}
       {user && (
-        <div className="flex items-center ml-4">
+        <div className="flex items-center my-2 ml-4">
           {[1, 2, 3, 4, 5].map((value) => (
             <FaStar
               key={value}
