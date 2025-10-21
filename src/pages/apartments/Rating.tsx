@@ -3,19 +3,28 @@ import type { Apartment } from "../../entities/Apartment";
 import { useState } from "react";
 import useAuthStore from "../../store";
 import toast from "react-hot-toast";
+import useAddRating from "../../hooks/useAddRating";
 
 const Rating = ({ apartment }: { apartment?: Apartment }) => {
   const [rating, setRating] = useState<number | null>(null);
   const { user } = useAuthStore();
+  const { mutate } = useAddRating();
 
   const handleRating = (value: number) => {
     if (!user) return toast.error("You must be logged in to rate.");
     setRating(value);
+
+    mutate(
+      { id: apartment?._id, rating: value },
+      {
+        onSuccess: () => setRating(null),
+      }
+    );
   };
 
   return (
     <div className="flex items-center gap-3 my-2">
-      <div className="flex items-center gap-2 text-yellow-500">
+      <div className="flex items-center gap-1 text-yellow-500">
         {[...Array(5)].map((_, index) => (
           <FaStar
             key={index}
@@ -27,7 +36,7 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
           />
         ))}
         <span className="ml-1 text-sm text-gray-600">
-          {apartment?.averageRatings} ({apartment?.totalRatings})
+          {apartment?.averageRatings} ({apartment?.totalRatings} reviews)
         </span>
       </div>
 

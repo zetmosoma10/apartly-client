@@ -1,3 +1,5 @@
+import type { Apartment } from "../entities/Apartment";
+import type { Response } from "../entities/Response";
 import api from "./axiosInstance";
 
 export const createApartment = async (formData: FormData) => {
@@ -42,5 +44,19 @@ export const updateApartment = async ({
 
 export const deleteApartment = async (id?: string) => {
   const { data } = await api.delete(`/apartments/${id}`);
+  return data;
+};
+
+export const addRating = async ({
+  id,
+  rating,
+}: {
+  id?: string;
+  rating: number | null;
+}) => {
+  const { data } = await api.patch<Response<Apartment>>(
+    `/apartments/${id}/rate`,
+    { rating }
+  );
   return data;
 };
