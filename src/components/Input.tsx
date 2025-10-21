@@ -10,16 +10,18 @@ type Props = {
   type?: "text" | "textarea" | "password";
   register: UseFormRegisterReturn;
   error?: string;
+  disabled?: boolean;
 };
 
 const Input = ({
   id,
   label,
-  type = "text",
-  autoFocus = false,
   placeholder,
   register,
   error,
+  type = "text",
+  disabled = false,
+  autoFocus = false,
 }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,6 +42,7 @@ const Input = ({
             id={id}
             type={typeOfTextInput}
             autoFocus={autoFocus}
+            disabled={disabled}
             placeholder={placeholder}
             {...register}
             className={`input w-full focus:outline-none bg-base-200 rounded-lg ${
@@ -49,7 +52,7 @@ const Input = ({
           {type === "password" && (
             <div
               onClick={togglePasswordVisibility}
-              className="absolute cursor-pointer right-3 top-2  text-black text-opacity-70 z-20 pl-4"
+              className="absolute z-20 pl-4 text-black cursor-pointer right-3 top-2 text-opacity-70"
             >
               {showPassword ? (
                 <MdVisibilityOff size={24} />
@@ -63,6 +66,7 @@ const Input = ({
         <textarea
           id={id}
           placeholder={placeholder}
+          disabled={disabled}
           {...register}
           className={`textarea w-full h-32 resize-none focus:outline-none  bg-base-200 rounded-lg p-2 ${
             error ? "border-error focus:border-error" : "focus:border-warning"
