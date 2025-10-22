@@ -78,11 +78,11 @@ const router = createBrowserRouter([
         path: "/auth/unauthorize",
         element: <UnauthorizePage />,
       },
-      {
-        path: "*",
-        element: <NotFoundPage />,
-      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
