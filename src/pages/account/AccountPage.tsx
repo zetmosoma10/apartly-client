@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import useUpdateMe from "../../hooks/useUpdateMe";
 import _ from "lodash";
 import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
+import AccountLoadingSkeleton from "../../components/loadingIndicators/AccountLoadingSkeleton";
 
 type FormData = z.infer<typeof accountSchema>;
 
@@ -59,7 +60,6 @@ const AccountPage = () => {
   };
 
   const onSubmit = (data: FormData) => {
-    console.log("errors", errors);
     const userData = _.pick(data, ["lastName", "firstName", "phone", "email"]);
 
     updateUser(userData, {
@@ -208,7 +208,7 @@ const AccountPage = () => {
           </form>
         </div>
       ) : (
-        <p>User Loading...</p>
+        <AccountLoadingSkeleton />
       )}
     </div>
   );

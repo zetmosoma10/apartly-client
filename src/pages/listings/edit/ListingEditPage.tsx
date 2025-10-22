@@ -9,7 +9,7 @@ const ListingEditPage = () => {
   const { id } = useParams();
   const queryClient = useQueryClient();
   const query = queryClient.getQueryData<Response<Apartment>>([
-    "apartment",
+    "apartments",
     id,
   ]);
 
