@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,18 +11,30 @@ import useUpdateMe from "../../hooks/useUpdateMe";
 import _ from "lodash";
 import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
 import AccountLoadingSkeleton from "../../components/loadingIndicators/AccountLoadingSkeleton";
+import Modal from "./Modal";
 
 type FormData = z.infer<typeof accountSchema>;
 
 const AccountPage = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
+  const ref = useRef<HTMLDialogElement>(null);
 
+  // * MODAL HANDLERS
+  const onOpen = () => {
+    ref.current?.showModal();
+  };
+
+  const onClose = () => {
+    ref.current?.close();
+  };
+
+  // * TANSTACK HOOKS
   const { data, isLoading } = useGetUser();
+  const { mutate: updateUser, isPending: isUpdating } = useUpdateMe();
   const user = data?.results;
 
-  const { mutate: updateUser, isPending: isUpdating } = useUpdateMe();
-
+  // * REACT-HOOK-FORM
   const {
     register,
     handleSubmit,
@@ -52,6 +64,7 @@ const AccountPage = () => {
     }
   }, [user, reset]);
 
+  // * HANDLE FILES (IMAGE)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -59,6 +72,7 @@ const AccountPage = () => {
     setPreview(url);
   };
 
+  // * FORM SUBMIT
   const onSubmit = (data: FormData) => {
     const userData = _.pick(data, ["lastName", "firstName", "phone", "email"]);
 
@@ -201,6 +215,7 @@ const AccountPage = () => {
                 type="button"
                 disabled={isUpdating}
                 className="px-6 text-white btn btn-error disabled:text-black"
+                onClick={onOpen}
               >
                 Delete Account
               </button>
@@ -210,6 +225,9 @@ const AccountPage = () => {
       ) : (
         <AccountLoadingSkeleton />
       )}
+
+      {/* DELETE ACCOUNT MODAL */}
+      <Modal ref={ref} onClose={onClose} />
     </div>
   );
 };
