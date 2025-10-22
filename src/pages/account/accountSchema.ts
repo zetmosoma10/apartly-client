@@ -15,7 +15,6 @@ const accountSchema = z.object({
     .nonempty("Phone required")
     .max(10, "phone number must be 10 digits"),
   joined: z.string(),
-  role: z.string(),
 });
 
 export default accountSchema;
