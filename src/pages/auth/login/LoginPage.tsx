@@ -77,7 +77,7 @@ const LoginPage = () => {
               id="email"
               label="Email"
               autoFocus={true}
-              placeholder="Enter email"
+              placeholder="e.g johndoe@gmail.com"
               register={register("email")}
               error={errors.email?.message}
             />

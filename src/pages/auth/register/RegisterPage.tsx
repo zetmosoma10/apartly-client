@@ -77,14 +77,14 @@ const RegisterPage = () => {
               id="firstName"
               autoFocus={true}
               label="First Name"
-              placeholder="Enter First Name"
+              placeholder="e.g John"
             />
             <Input
               register={register("lastName")}
               error={errors.lastName?.message}
               id="lastName"
               label="Last Name"
-              placeholder="Enter Last Name"
+              placeholder="e.g Doe"
             />
           </div>
           <div className="mb-5 space-y-3">
@@ -93,14 +93,14 @@ const RegisterPage = () => {
               error={errors.email?.message}
               id="email"
               label="Email"
-              placeholder="Enter email"
+              placeholder="e.g johndoe@gmail.com"
             />
             <Input
               register={register("phone")}
               error={errors.phone?.message}
               id="phone"
               label="Phone"
-              placeholder="Enter phone number"
+              placeholder="e.g 086001011"
             />
             <Input
               register={register("password")}
