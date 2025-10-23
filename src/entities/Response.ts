@@ -1,3 +1,5 @@
+import type { User } from "./User";
+
 export type Response<T> = {
   success: boolean;
   count: number;
@@ -15,4 +17,5 @@ export type Response<T> = {
 export type AuthResponse = {
   success: boolean;
   token: string;
+  results: User;
 };

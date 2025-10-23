@@ -6,7 +6,7 @@ import useAuthStore from "../../store";
 const Avatar = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const { mutate, isPending } = useUploadAvatar();
-  const { userDetail } = useAuthStore();
+  const { user } = useAuthStore();
 
   // * HANDLE FILES (IMAGE)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,15 +34,15 @@ const Avatar = () => {
     mutate(formData);
   };
 
-  console.log(userDetail?.avatar.url);
+  console.log(user?.avatar.url);
 
   const avatarUrl =
     preview ||
-    userDetail?.avatar?.url ||
+    user?.avatar?.url ||
     "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center">
       <div className="relative w-32 h-32">
         <img
           src={avatarUrl}
@@ -69,8 +69,13 @@ const Avatar = () => {
         </label>
       </div>
 
-      {userDetail?.avatar?.url && (
-        <button className="text-sm text-error hover:underline">
+      <h2 className="mt-4 text-2xl font-bold">
+        {user?.firstName} {user?.lastName}
+      </h2>
+      <p className="text-sm opacity-70">{user?.role}</p>
+
+      {user?.avatar?.url && (
+        <button className="text-sm text-error hover:underline mt-3">
           Remove Avatar
         </button>
       )}

@@ -5,14 +5,15 @@ import useAuthStore from "../store";
 import toast from "react-hot-toast";
 
 const useRegister = () => {
-  const { setToken } = useAuthStore();
+  const { setToken, setUser } = useAuthStore();
 
   return useMutation({
     mutationFn: (credentials: registerCredentials) => register(credentials),
     onSuccess: (data) => {
       if (data.success) {
         setToken(data.token);
-        toast.success('Account created successfully')
+        setUser(data.results);
+        toast.success("Account created successfully");
       }
     },
   });
