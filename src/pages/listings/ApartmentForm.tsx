@@ -14,7 +14,7 @@ import useUpdateApartment from "../../hooks/useUpdateApartment";
 import axios from "axios";
 import useAuthStore from "../../store";
 import MapPicker from "./MapPicker";
-import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
+import LoaderOverlay from "../../components/loadingIndicators/LoaderOverlay";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -304,9 +304,10 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         />
       </div>
 
+      {(isCreating || isUpdating) && <LoaderOverlay />}
+
       <button disabled={isCreating || isUpdating} className="mt-5 btn-main">
         {apartmentId ? "Update Apartment" : "Submit New Apartment"}
-        {(isCreating || isUpdating) && <LoadingSpinner />}
       </button>
     </form>
   );
