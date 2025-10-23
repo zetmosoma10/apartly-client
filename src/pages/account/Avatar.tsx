@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useUploadAvatar from "../../hooks/useUploadAvatar";
 import useAuthStore from "../../store";
+import useDeleteAvatar from "../../hooks/useDeleteAvatar";
 
 const Avatar = () => {
   const [preview, setPreview] = useState<string | null>(null);
@@ -34,7 +35,7 @@ const Avatar = () => {
     mutate(formData);
   };
 
-  console.log(user?.avatar.url);
+  const { mutate: deleteAvatar } = useDeleteAvatar();
 
   const avatarUrl =
     preview ||
@@ -75,7 +76,10 @@ const Avatar = () => {
       <p className="text-sm opacity-70">{user?.role}</p>
 
       {user?.avatar?.url && (
-        <button className="text-sm text-error hover:underline mt-3">
+        <button
+          onClick={() => deleteAvatar()}
+          className="text-sm text-error hover:underline mt-3"
+        >
           Remove Avatar
         </button>
       )}

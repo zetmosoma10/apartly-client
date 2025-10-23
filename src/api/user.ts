@@ -25,3 +25,8 @@ export const uploadAvatar = async (avatar: FormData) => {
   const { data } = await api.patch<Response<User>>("/users/me/avatar", avatar);
   return data;
 };
+
+export const deleteAvatar = async () => {
+  const { data } = await api.delete<Response<User>>("/users/me/avatar");
+  return data;
+};
