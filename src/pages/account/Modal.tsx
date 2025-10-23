@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import loginSchema from "../auth/login/loginSchema";
 import Input from "../../components/Input";
+import useDeleteAccount from "../../hooks/useDeleteAccount";
+import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
+import axios from "axios";
+import ErrorMessage from "../auth/ErrorMessage";
+import useAuthStore from "../../store";
 
 const passwordSchema = loginSchema.pick({ password: true });
 
@@ -15,6 +21,11 @@ type Props = {
 };
 
 const Modal = ({ onClose, ref }: Props) => {
+  const [errMessage, setErrMessage] = useState("");
+  const navigate = useNavigate();
+  const { mutate, isPending } = useDeleteAccount();
+  const { clearAuth } = useAuthStore();
+
   const {
     register,
     handleSubmit,
@@ -22,7 +33,21 @@ const Modal = ({ onClose, ref }: Props) => {
   } = useForm<FormData>({ resolver: zodResolver(passwordSchema) });
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    setErrMessage("");
+
+    mutate(data, {
+      onSuccess: () => {
+        navigate("/", { replace: true });
+        clearAuth();
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.status === 400) {
+            setErrMessage(error.response.data.message);
+          }
+        }
+      },
+    });
   };
 
   return (
@@ -38,6 +63,9 @@ const Modal = ({ onClose, ref }: Props) => {
           undone.
         </p>
 
+        {/* Expected error */}
+        {errMessage && <ErrorMessage errorMessage={errMessage} />}
+
         <Input
           id="password"
           label="Password"
@@ -49,11 +77,21 @@ const Modal = ({ onClose, ref }: Props) => {
         />
 
         <div className="modal-action">
-          <button type="button" className="btn" onClick={onClose}>
+          <button
+            disabled={isPending}
+            type="button"
+            className="btn"
+            onClick={onClose}
+          >
             Close
           </button>
-          <button type="submit" className="btn btn-neutral">
+          <button
+            disabled={isPending}
+            type="submit"
+            className="btn btn-neutral disabled:text-black"
+          >
             Delete
+            {isPending && <LoadingSpinner />}
           </button>
         </div>
       </form>

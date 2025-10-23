@@ -1,5 +1,5 @@
 import type { Response } from "../entities/Response";
-import type { User } from "../entities/User";
+import type { loginCredentials, User } from "../entities/User";
 import api from "./axiosInstance";
 
 export const getUser = async () => {
@@ -10,6 +10,13 @@ export const getUser = async () => {
 export const updateMe = async (
   user: Pick<User, "firstName" | "lastName" | "email" | "phone">
 ) => {
-  const { data } = await api.patch<Response<User>>("/users/me/edit", user);
+  const { data } = await api.patch<Response<User>>("/users/me", user);
   return data;
+};
+
+export const deleteAccount = async (
+  data: Pick<loginCredentials, "password">
+) => {
+  const res = await api.post("/users/me", data);
+  return res.data;
 };
