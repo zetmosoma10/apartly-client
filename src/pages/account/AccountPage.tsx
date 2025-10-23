@@ -12,6 +12,9 @@ import _ from "lodash";
 import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
 import AccountLoadingSkeleton from "../../components/loadingIndicators/AccountLoadingSkeleton";
 import Modal from "./Modal";
+import useUploadAvatar from "../../hooks/useUploadAvatar";
+import toast from "react-hot-toast";
+import useAuthStore from "../../store";
 
 type FormData = z.infer<typeof accountSchema>;
 
@@ -19,6 +22,7 @@ const AccountPage = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
   const ref = useRef<HTMLDialogElement>(null);
+  const { userDetail } = useAuthStore();
 
   // * MODAL HANDLERS
   const onOpen = () => {
@@ -31,8 +35,9 @@ const AccountPage = () => {
 
   // * TANSTACK HOOKS
   const { data, isLoading } = useGetUser();
-  const { mutate: updateUser, isPending: isUpdating } = useUpdateMe();
   const user = data?.results;
+  const { mutate: updateUser, isPending: isUpdating } = useUpdateMe();
+  const { mutate } = useUploadAvatar();
 
   // * REACT-HOOK-FORM
   const {
@@ -68,8 +73,26 @@ const AccountPage = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // * Validate File
+    if (!file.type.startsWith("image/")) {
+      toast.error("Only image file allowed");
+      return;
+    }
+
+    const MAX_SIZE = 10 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      toast.error(`Image too large. max size ${MAX_SIZE}mb`);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+
     const url = URL.createObjectURL(file);
     setPreview(url);
+
+    mutate(formData);
   };
 
   // * FORM SUBMIT
@@ -92,22 +115,23 @@ const AccountPage = () => {
               <img
                 src={
                   preview ||
+                  userDetail?.avatar.url ||
                   "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                 }
                 alt="profile"
                 className="object-cover w-full h-full border-4 rounded-full shadow-md border-warning"
               />
 
-              {/* Upload button (no external icon lib used) */}
+              {/* Upload button */}
               <label
-                htmlFor="profileImage"
+                htmlFor="avatar"
                 className="absolute p-2 text-white transition rounded-full shadow cursor-pointer bottom-1 right-1 bg-warning"
                 title="Upload profile picture"
               >
                 <span className="text-xs font-bold">📸</span>
                 <input
                   type="file"
-                  id="profileImage"
+                  id="avatar"
                   className="hidden"
                   accept="image/*"
                   onChange={handleImageChange}

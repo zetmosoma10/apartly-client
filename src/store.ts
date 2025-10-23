@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { jwtDecode } from "jwt-decode";
+import type { User } from "./entities/User";
 
 type DecodedToken = {
   _id: string;
   firstName: string;
   lastName: string;
-  email: string;
   role: "tenant" | "landlord" | "admin";
   exp: number;
 };
@@ -14,7 +14,9 @@ type DecodedToken = {
 type AuthState = {
   token: string | null;
   user: DecodedToken | null;
+  userDetail: User | null;
   setToken: (token: string) => void;
+  setUser: (user: User) => void;
   clearAuth: () => void;
   _hasHydrated: boolean;
 };
@@ -24,6 +26,7 @@ const useAuthStore = create<AuthState>()(
     (set) => ({
       token: null,
       user: null,
+      userDetail: null,
       _hasHydrated: false,
 
       setToken: (token) => {
@@ -42,7 +45,9 @@ const useAuthStore = create<AuthState>()(
         }
       },
 
-      clearAuth: () => set({ token: null, user: null }),
+      setUser: (user) => set(() => ({ userDetail: user })),
+
+      clearAuth: () => set({ token: null, user: null, userDetail: null }),
     }),
     {
       name: "apartly-storage",

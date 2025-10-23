@@ -67,12 +67,11 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         return false;
       }
 
-      const MAX_MB_SIZE = 10;
+      const MAX_MB_SIZE = 10 * 1024 * 1024;
       // * validate size
-      if (file.size > MAX_MB_SIZE * 1024 * 1024) {
-        console.log();
+      if (file.size > MAX_MB_SIZE) {
         toast.error(
-          `file: ${file}, too large (max : ${MAX_MB_SIZE}). It will be removed`
+          `file: ${file}, too large (max : ${MAX_MB_SIZE}mb). It will be removed`
         );
         return false;
       }

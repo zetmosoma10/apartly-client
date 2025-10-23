@@ -6,6 +6,9 @@ export type User = {
   email: string;
   createdAt: Date;
   role: "tenant" | "landlord" | "admin";
+  avatar: {
+    url: string;
+  };
 };
 
 export type loginCredentials = {

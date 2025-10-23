@@ -20,3 +20,8 @@ export const deleteAccount = async (
   const res = await api.post("/users/me", data);
   return res.data;
 };
+
+export const uploadAvatar = async (avatar: FormData) => {
+  const { data } = await api.patch<Response<User>>("/users/me/avatar", avatar);
+  return data;
+};
