@@ -17,12 +17,17 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
     if (!user) return toast.error("You must be logged in to rate.");
     setRating(value);
 
-    mutate(
-      { id: apartment?._id, rating: value },
-      {
-        onSuccess: () => setRating(null),
-      }
-    );
+    // * Attach id and rating
+    const payload = {
+      id: apartment?._id,
+      review: {
+        rating: value,
+      },
+    };
+
+    mutate(payload, {
+      onSuccess: () => setRating(null),
+    });
   };
 
   return (

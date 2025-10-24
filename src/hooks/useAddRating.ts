@@ -3,14 +3,21 @@ import { addRating } from "../api/apartments";
 import toast from "react-hot-toast";
 import axios from "axios";
 
+type args = {
+  id?: string;
+  review: {
+    rating?: number | null;
+    comment?: string | null;
+  };
+};
+
 const useAddRating = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, rating }: { id?: string; rating: number | null }) =>
-      addRating({ id, rating }),
+    mutationFn: (data: args) => addRating(data),
     onSuccess: async (responseData) => {
-      toast.success("Rating added.");
+      toast.success("Review added.");
       await queryClient.setQueryData(
         ["apartments", responseData.results._id],
         responseData

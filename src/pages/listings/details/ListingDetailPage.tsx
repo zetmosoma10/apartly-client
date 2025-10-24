@@ -171,7 +171,7 @@ const ListingDetailPage = () => {
       </div> */}
 
       {/* REVIEW SECTION */}
-      <Reviews ratings={apartment?.ratings} />
+      <Reviews apartment={apartment} />
     </section>
   );
 };

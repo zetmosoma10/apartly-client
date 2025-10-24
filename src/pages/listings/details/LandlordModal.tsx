@@ -26,7 +26,7 @@ const LandlordModal = ({ onClose, ref, landlord }: Props) => {
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           <img
-            src={avatar.url || "/default-avatar.png"}
+            src={avatar?.url || "/default-avatar.png"}
             alt={`${firstName} ${lastName}`}
             className="w-32 h-32 rounded-full object-cover border-2 border-warning"
           />
