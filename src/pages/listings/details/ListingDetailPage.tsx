@@ -5,7 +5,8 @@ import { RiDeleteBin4Fill } from "react-icons/ri";
 import useGetApartment from "../../../hooks/useGetApartment";
 import Badge from "../../../components/Badge";
 import BackButton from "../../../components/BackButton";
-import Modal from "./Modal";
+import DeleteModal from "./DeleteModal";
+import LandlordModal from "./LandlordModal";
 import useAuthStore from "../../../store";
 import axios from "axios";
 import ApartmentMap from "../ApartmentMap";
@@ -16,15 +17,25 @@ import Rating from "../../apartments/Rating";
 const ListingDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const ref = useRef<HTMLDialogElement>(null);
+  const deleteRef = useRef<HTMLDialogElement>(null);
+  const landlordRef = useRef<HTMLDialogElement>(null);
   const { user } = useAuthStore();
 
-  const onOpen = () => {
-    ref.current?.showModal();
+  // * MODAL HANDLERS
+  const onOpenDeleteModal = () => {
+    deleteRef.current?.showModal();
   };
 
-  const onClose = () => {
-    ref.current?.close();
+  const onCloseDeleteModal = () => {
+    deleteRef.current?.close();
+  };
+
+  const onOpenLandlordModal = () => {
+    landlordRef?.current?.showModal();
+  };
+
+  const onCloseLandlordModal = () => {
+    landlordRef?.current?.close();
   };
 
   const { data, isLoading, error } = useGetApartment(id);
@@ -51,7 +62,7 @@ const ListingDetailPage = () => {
           <Badge status={apartment!.status} />
         </div>
 
-        {user?._id === apartment?.landlord && (
+        {user?._id === apartment?.landlord._id && (
           <div className="flex flex-col gap-y-3">
             <Link
               to={`/apartments/listings/${apartment?._id}/edit`}
@@ -62,7 +73,7 @@ const ListingDetailPage = () => {
             </Link>
             <button
               className="text-white btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
-              onClick={onOpen}
+              onClick={onOpenDeleteModal}
             >
               <RiDeleteBin4Fill />
               Delete Apartment
@@ -72,7 +83,18 @@ const ListingDetailPage = () => {
       </div>
 
       {/* DELETE MODAL */}
-      <Modal ref={ref} onClose={onClose} apartment={apartment} />
+      <DeleteModal
+        ref={deleteRef}
+        onClose={onCloseDeleteModal}
+        apartment={apartment}
+      />
+
+      {/* LANDLORD MODAL */}
+      <LandlordModal
+        ref={landlordRef}
+        onClose={onCloseLandlordModal}
+        landlord={apartment?.landlord}
+      />
 
       {/* IMAGE GRID */}
       <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">
@@ -103,7 +125,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* DESCRIPTION */}
-      <div className="flex flex-col mt-5 gap-y-4 gap-x-6 md:flex-row md:items-start md:justify-between">
+      <div className="flex flex-col mt-5 gap-6 md:flex-row md:items-start md:justify-between">
         <div>
           <h3>Descriptions</h3>
           <ExpandableText>{apartment?.description as string}</ExpandableText>
@@ -116,12 +138,12 @@ const ListingDetailPage = () => {
               bathroom(s)
             </span>
           </p>
-          <Link
-            to="/"
+          <button
+            onClick={onOpenLandlordModal}
             className="w-full btn btn-sm btn-outline btn-warning rounded-2xl"
           >
             Contact Landlord
-          </Link>
+          </button>
         </div>
       </div>
 

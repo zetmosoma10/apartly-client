@@ -1,3 +1,5 @@
+import type { User } from "./User";
+
 export type Apartment = {
   _id: string;
   city: string;
@@ -5,7 +7,7 @@ export type Apartment = {
   price: string;
   status: Status;
   address: string;
-  landlord: string;
+  landlord: User;
   createdAt: Date;
   bedrooms: string;
   bathrooms: string;

@@ -12,7 +12,7 @@ type Props = {
   ref: React.RefObject<HTMLDialogElement | null>;
 };
 
-const Modal = ({ ref, onClose, apartment }: Props) => {
+const DeleteModal = ({ ref, onClose, apartment }: Props) => {
   const navigate = useNavigate();
   const { clearAuth } = useAuthStore();
   const { mutate, isPending } = useDeleteApartment(apartment?._id);
@@ -74,4 +74,4 @@ const Modal = ({ ref, onClose, apartment }: Props) => {
   );
 };
 
-export default Modal;
+export default DeleteModal;

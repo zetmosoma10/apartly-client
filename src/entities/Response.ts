@@ -2,9 +2,9 @@ import type { User } from "./User";
 
 export type Response<T> = {
   success: boolean;
-  count: number;
+  count?: number;
   results: T;
-  pagination: {
+  pagination?: {
     currentPage: number;
     totalPages: number;
     currentCountPerPage: number;
