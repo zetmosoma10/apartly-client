@@ -9,10 +9,11 @@ import DeleteModal from "./DeleteModal";
 import LandlordModal from "./LandlordModal";
 import useAuthStore from "../../../store";
 import axios from "axios";
-import ApartmentMap from "../ApartmentMap";
+// import ApartmentMap from "../ApartmentMap";
 import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
-import Rating from "../../apartments/Rating";
+import Rating from "./Rating";
+import Reviews from "./Reviews";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -37,6 +38,7 @@ const ListingDetailPage = () => {
   const onCloseLandlordModal = () => {
     landlordRef?.current?.close();
   };
+  // * END OF MODAL HANDLERS
 
   const { data, isLoading, error } = useGetApartment(id);
   const apartment = data?.results;
@@ -167,6 +169,9 @@ const ListingDetailPage = () => {
         <h3>Location</h3>
         <ApartmentMap coordinates={apartment?.coordinates} />
       </div> */}
+
+      {/* REVIEW SECTION */}
+      <Reviews ratings={apartment?.ratings} />
     </section>
   );
 };

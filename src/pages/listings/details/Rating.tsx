@@ -1,9 +1,9 @@
 import { FaStar } from "react-icons/fa";
-import type { Apartment } from "../../entities/Apartment";
+import type { Apartment } from "../../../entities/Apartment";
 import { useState } from "react";
-import useAuthStore from "../../store";
+import useAuthStore from "../../../store";
 import toast from "react-hot-toast";
-import useAddRating from "../../hooks/useAddRating";
+import useAddRating from "../../../hooks/useAddRating";
 
 const Rating = ({ apartment }: { apartment?: Apartment }) => {
   const [rating, setRating] = useState<number | null>(null);

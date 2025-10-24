@@ -1,4 +1,5 @@
 import type { User } from "./User";
+import type { Rating } from "./Rating";
 
 export type Apartment = {
   _id: string;
@@ -14,7 +15,7 @@ export type Apartment = {
   description: string;
   totalRatings: number;
   averageRatings: number;
-  rating: Rating[];
+  ratings: Rating[];
   type: ApartmentType;
   amenities: string[];
   images: {
@@ -37,10 +38,4 @@ export type ApartmentType =
 
 export type Status = "available" | "rented" | "maintenance";
 
-type Rating = {
-  _id: string;
-  tenant: string;
-  rating: number;
-  comment: string;
-  createdAt: Date;
-};
+

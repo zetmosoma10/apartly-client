@@ -15,8 +15,8 @@ const ApartmentsPage = () => {
   const apartments = data?.results;
 
   const page = parseInt(searchParams.get("page") as string) || 1;
-  const totalPages = data?.pagination.totalPages as number;
-  const totalDocuments = data?.pagination.totalDocuments as number;
+  const totalPages = data?.pagination?.totalPages as number;
+  const totalDocuments = data?.pagination?.totalDocuments as number;
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
