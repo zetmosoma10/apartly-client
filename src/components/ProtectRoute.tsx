@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import useAuthStore from "../store";
 
-const ProtectRoute = ({ allowedRoles }: { allowedRoles?: string[] }) => {
+const ProtectRoute = () => {
   const { user, _hasHydrated } = useAuthStore();
 
   if (!_hasHydrated) return null;
@@ -14,9 +14,9 @@ const ProtectRoute = ({ allowedRoles }: { allowedRoles?: string[] }) => {
       />
     );
 
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/auth/unauthorize" />;
-  }
+  // if (allowedRoles && !allowedRoles.includes(user.role)) {
+  //   return <Navigate to="/auth/unauthorize" />;
+  // }
 
   return <Outlet />;
 };

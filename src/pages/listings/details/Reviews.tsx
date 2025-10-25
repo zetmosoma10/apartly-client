@@ -80,7 +80,7 @@ const Reviews = ({ apartment }: Props) => {
               />
               <button
                 type="submit"
-                className="p-2 rounded-full text-indigo-600 hover:bg-indigo-50 transition"
+                className="p-2 rounded-full text-warnign hover:bg-warning/50 transition"
               >
                 <FiSend className="w-5 h-5" />
               </button>
