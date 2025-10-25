@@ -13,7 +13,7 @@ import ApartmentMap from "../ApartmentMap";
 import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import Rating from "./Rating";
-import Reviews from "./Reviews";
+import Comments from "./Comments";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
@@ -171,7 +171,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* REVIEW SECTION */}
-      <Reviews apartment={apartment} />
+      <Comments apartment={apartment} />
     </section>
   );
 };

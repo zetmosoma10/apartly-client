@@ -54,9 +54,23 @@ export const addRating = async ({
   id?: string;
   rating: number;
 }) => {
-  const results = await api.patch<Response<Apartment>>(
+  const { data } = await api.patch<Response<Apartment>>(
     `/apartments/${id}/rating`,
     { rating }
   );
-  return results.data;
+  return data;
+};
+
+export const addComment = async ({
+  id,
+  comment,
+}: {
+  id?: string;
+  comment: string;
+}) => {
+  const { data } = await api.patch<Response<Apartment>>(
+    `/apartments/${id}/comment`,
+    { comment }
+  );
+  return data;
 };

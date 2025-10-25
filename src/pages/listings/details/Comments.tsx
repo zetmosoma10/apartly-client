@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { Apartment } from "../../../entities/Apartment";
 import dayjs from "dayjs";
 import useAuthStore from "../../../store";
-import useAddRating from "../../../hooks/useAddRating";
+import useAddComment from "../../../hooks/useAddComment";
 
 const schema = z.object({
   comment: z.string().min(1, "review too short").max(255, "review too long"),
@@ -17,10 +17,10 @@ type Props = {
   apartment?: Apartment;
 };
 
-const Reviews = ({ apartment }: Props) => {
+const Comments = ({ apartment }: Props) => {
   const { user } = useAuthStore();
-  const { mutate } = useAddRating();
-  const length = apartment?.ratings?.length as number;
+  const { mutate } = useAddComment();
+  const length = apartment?.ratings?.filter((r) => r.comment).length as number;
   const ratings = apartment?.ratings;
 
   const {
@@ -34,12 +34,8 @@ const Reviews = ({ apartment }: Props) => {
 
   const onSubmit = (data: FormData) => {
     // * Attach id and comment
-    const payload = {
-      id: apartment?._id,
-      review: {
-        comment: data.comment,
-      },
-    };
+
+    const payload = { id: apartment?._id, comment: data.comment };
 
     mutate(payload, {
       onSuccess: () => reset(),
@@ -97,40 +93,42 @@ const Reviews = ({ apartment }: Props) => {
       {/* Reviews List */}
       <div className="space-y-5 max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-300 pr-2">
         {length > 0 ? (
-          ratings?.map((review) => (
-            <div
-              key={review?._id}
-              className="flex items-start gap-3 border-b border-neutral-200  pb-4"
-            >
-              {review?.tenant?.avatar?.url ? (
-                <img
-                  src={review?.tenant?.avatar?.url}
-                  alt={review?.tenant?.firstName}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              ) : (
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black">
-                  <span className="text-gray-100">
-                    {user?.firstName[0]}
-                    {user?.lastName[0]}
-                  </span>
-                </div>
-              )}
-              <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <p className="text-sm font-medium text-neutral-800 ">
-                    {review?.tenant?.firstName} {review?.tenant?.lastName}`
+          ratings
+            ?.filter((r) => r.comment)
+            .map((review) => (
+              <div
+                key={review?._id}
+                className="flex items-start gap-3 border-b border-neutral-200  pb-4"
+              >
+                {review?.tenant?.avatar?.url ? (
+                  <img
+                    src={review?.tenant?.avatar?.url}
+                    alt={review?.tenant?.firstName}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black">
+                    <span className="text-gray-100">
+                      {user?.firstName[0]}
+                      {user?.lastName[0]}
+                    </span>
+                  </div>
+                )}
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm font-medium text-neutral-800 ">
+                      {review?.tenant?.firstName} {review?.tenant?.lastName}`
+                    </p>
+                    <span className="text-xs text-neutral-500 ">
+                      {dayjs(review?.createdAt).format("DD MMM YYYY")}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm text-neutral-700  leading-snug">
+                    {review?.comment}
                   </p>
-                  <span className="text-xs text-neutral-500 ">
-                    {dayjs(review?.createdAt).format("DD MMM YYYY")}
-                  </span>
                 </div>
-                <p className="mt-1 text-sm text-neutral-700  leading-snug">
-                  {review?.comment}
-                </p>
               </div>
-            </div>
-          ))
+            ))
         ) : (
           <p className="text-sm text-neutral-500  text-center py-4">
             No reviews yet.{" "}
@@ -144,4 +142,4 @@ const Reviews = ({ apartment }: Props) => {
   );
 };
 
-export default Reviews;
+export default Comments;
