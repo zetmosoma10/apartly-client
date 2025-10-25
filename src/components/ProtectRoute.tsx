@@ -14,10 +14,6 @@ const ProtectRoute = () => {
       />
     );
 
-  // if (allowedRoles && !allowedRoles.includes(user.role)) {
-  //   return <Navigate to="/auth/unauthorize" />;
-  // }
-
   return <Outlet />;
 };
 

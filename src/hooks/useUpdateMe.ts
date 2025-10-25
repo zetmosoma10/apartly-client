@@ -3,17 +3,22 @@ import type { User } from "../entities/User";
 import { updateMe } from "../api/user";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useAuthStore from "../store";
 
 const useUpdateMe = () => {
   const queryClient = useQueryClient();
+  const { setUser } = useAuthStore();
 
   return useMutation({
     mutationFn: (
       user: Pick<User, "firstName" | "lastName" | "email" | "phone">
     ) => updateMe(user),
     onSuccess: (responseData) => {
-      queryClient.setQueryData(["user"], responseData);
-      toast.success("User updated.");
+      if (responseData.success) {
+        queryClient.setQueryData(["user"], responseData);
+        setUser(responseData.results);
+        toast.success("User updated.");
+      }
     },
 
     onError: (error) => {
