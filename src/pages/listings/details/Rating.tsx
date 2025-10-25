@@ -20,9 +20,7 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
     // * Attach id and rating
     const payload = {
       id: apartment?._id,
-      review: {
-        rating: value,
-      },
+      rating: value,
     };
 
     mutate(payload, {

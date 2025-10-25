@@ -47,18 +47,16 @@ export const deleteApartment = async (id?: string) => {
   return data;
 };
 
-type args = {
+export const addRating = async ({
+  id,
+  rating,
+}: {
   id?: string;
-  review: {
-    rating?: number | null;
-    comment?: string | null;
-  };
-};
-
-export const addRating = async (data: args) => {
+  rating: number;
+}) => {
   const results = await api.patch<Response<Apartment>>(
-    `/apartments/${data.id}/rate`,
-    data.review
+    `/apartments/${id}/rating`,
+    { rating }
   );
   return results.data;
 };

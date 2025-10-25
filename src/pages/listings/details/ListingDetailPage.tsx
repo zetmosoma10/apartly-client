@@ -9,7 +9,7 @@ import DeleteModal from "./DeleteModal";
 import LandlordModal from "./LandlordModal";
 import useAuthStore from "../../../store";
 import axios from "axios";
-// import ApartmentMap from "../ApartmentMap";
+import ApartmentMap from "../ApartmentMap";
 import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import Rating from "./Rating";
@@ -127,7 +127,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* DESCRIPTION */}
-      <div className="flex flex-col mt-5 gap-6 md:flex-row md:items-start md:justify-between">
+      <div className="flex flex-col gap-6 mt-5 md:flex-row md:items-start md:justify-between">
         <div>
           <h3>Descriptions</h3>
           <ExpandableText>{apartment?.description as string}</ExpandableText>
@@ -165,10 +165,10 @@ const ListingDetailPage = () => {
       </div>
 
       {/* APARTMENT MAP */}
-      {/* <div className="mt-6 space-y-3">
+      <div className="mt-6 space-y-3">
         <h3>Location</h3>
         <ApartmentMap coordinates={apartment?.coordinates} />
-      </div> */}
+      </div>
 
       {/* REVIEW SECTION */}
       <Reviews apartment={apartment} />
