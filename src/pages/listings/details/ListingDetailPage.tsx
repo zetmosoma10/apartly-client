@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { RiEdit2Fill } from "react-icons/ri";
 import { RiDeleteBin4Fill } from "react-icons/ri";
@@ -14,13 +14,17 @@ import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import Rating from "./Rating";
 import Comments from "./Comments";
+import ImageCarouselModal from "./ImageCarouselModal";
 
 const ListingDetailPage = () => {
+  const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const deleteRef = useRef<HTMLDialogElement>(null);
   const landlordRef = useRef<HTMLDialogElement>(null);
   const { user } = useAuthStore();
+  const { data, isLoading, error } = useGetApartment(id);
+  const apartment = data?.results;
 
   // * MODAL HANDLERS
   const onOpenDeleteModal = () => {
@@ -38,10 +42,8 @@ const ListingDetailPage = () => {
   const onCloseLandlordModal = () => {
     landlordRef?.current?.close();
   };
-  // * END OF MODAL HANDLERS
 
-  const { data, isLoading, error } = useGetApartment(id);
-  const apartment = data?.results;
+  // * END OF MODAL HANDLERS
 
   if (axios.isAxiosError(error)) {
     if (error.response?.status === 404) {
@@ -84,24 +86,11 @@ const ListingDetailPage = () => {
         )}
       </div>
 
-      {/* DELETE MODAL */}
-      <DeleteModal
-        ref={deleteRef}
-        onClose={onCloseDeleteModal}
-        apartment={apartment}
-      />
-
-      {/* LANDLORD MODAL */}
-      <LandlordModal
-        ref={landlordRef}
-        onClose={onCloseLandlordModal}
-        landlord={apartment?.landlord}
-      />
-
       {/* IMAGE GRID */}
       <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">
         <div
-          className="overflow-hidden sm:col-span-2 sm:row-span-2 rounded-xl"
+          className="overflow-hidden sm:col-span-2 sm:row-span-2 rounded-xl cursor-pointer"
+          onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[0].url})`,
             backgroundSize: "cover",
@@ -109,7 +98,8 @@ const ListingDetailPage = () => {
           }}
         ></div>
         <div
-          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl"
+          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl cursor-pointer"
+          onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[1].url})`,
             backgroundSize: "cover",
@@ -117,7 +107,8 @@ const ListingDetailPage = () => {
           }}
         ></div>
         <div
-          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl"
+          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl cursor-pointer"
+          onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[2].url})`,
             backgroundSize: "cover",
@@ -172,6 +163,27 @@ const ListingDetailPage = () => {
 
       {/* REVIEW SECTION */}
       <Comments apartment={apartment} />
+
+      {/* DELETE MODAL */}
+      <DeleteModal
+        ref={deleteRef}
+        onClose={onCloseDeleteModal}
+        apartment={apartment}
+      />
+
+      {/* LANDLORD MODAL */}
+      <LandlordModal
+        ref={landlordRef}
+        onClose={onCloseLandlordModal}
+        landlord={apartment?.landlord}
+      />
+
+      {/* IMAGE CAROUSEL MODAL */}
+      <ImageCarouselModal
+        isOpen={isCarouselOpen}
+        images={apartment?.images || []}
+        onClose={() => setIsCarouselOpen(false)}
+      />
     </section>
   );
 };
