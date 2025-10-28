@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ApartmentCard from "../../components/ApartmentCard";
 import BackButton from "../../components/BackButton";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/filters/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
 import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";

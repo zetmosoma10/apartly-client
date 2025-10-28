@@ -3,7 +3,7 @@ import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
 import BackButton from "../../components/BackButton";
 import useGetAllUserApartments from "../../hooks/useGetAllUserApartments";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/filters/Pagination";
 import axios from "axios";
 import useAuthStore from "../../store";
 import ListingsTableSkeleton from "../../components/loadingIndicators/ListingsTableSkeleton";

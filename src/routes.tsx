@@ -9,10 +9,10 @@ import ApartmentsPage from "./pages/apartments/ApartmentsPage";
 import AuthPage from "./pages/auth/AuthPage";
 import LoginPage from "./pages/auth/login/LoginPage";
 import RegisterPage from "./pages/auth/register/RegisterPage";
-import ProtectRoute from "./components/ProtectRoute";
+import ProtectRoute from "./components/middlewares/ProtectRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import AccountPage from "./pages/account/AccountPage";
-import RedirectIfAuthenticated from "./components/RedirectIfAuthenticated";
+import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
 
 const router = createBrowserRouter([
   {

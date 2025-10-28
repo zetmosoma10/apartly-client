@@ -1,5 +1,5 @@
-import type { Apartment } from "../entities/Apartment";
-import type { Response } from "../entities/Response";
+import type { Apartment } from "../../entities/Apartment";
+import type { Response } from "../../entities/Response";
 import _ from "lodash";
 
 type Props = {
