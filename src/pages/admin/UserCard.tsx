@@ -4,14 +4,16 @@ import type { User } from "../../entities/User";
 import dayjs from "dayjs";
 
 interface Props {
-  user: User;
+  user: User | null;
+  onSelectedUser: (user: User | null) => void;
+  onOpen: () => void;
 }
 
-export default function UserCard({ user }: Props) {
+export default function UserCard({ user, onSelectedUser, onOpen }: Props) {
   const navigate = useNavigate();
 
   const handleViewApartments = () => {
-    if (user.role === "landlord") {
+    if (user?.role === "landlord") {
       navigate(`/admin/users/${user._id}/apartments`, {
         state: `${user.firstName} ${user.lastName}`,
       });
@@ -24,10 +26,12 @@ export default function UserCard({ user }: Props) {
     admin: "badge-error",
   };
 
+  const roles = user?.role as "admin" | "landlord" | "tenant";
+
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all p-5 flex flex-col lg:flex-row items-center gap-4 border">
       {/* Avatar */}
-      {user.avatar ? (
+      {user?.avatar ? (
         <img
           src={user.avatar.url}
           alt={`${user.firstName} ${user.lastName}`}
@@ -40,17 +44,15 @@ export default function UserCard({ user }: Props) {
       {/* Content */}
       <div className="flex-1 text-center sm:text-left">
         <h3 className="text-lg font-semibold text-base-content">
-          {user.firstName} {user.lastName}
+          {user?.firstName} {user?.lastName}
         </h3>
-        <p className={`badge badge-soft ${roleColors[user.role]}`}>
-          {user.role}
-        </p>
+        <p className={`badge badge-soft ${roleColors[roles]}`}>{user?.role}</p>
 
         <div className="mt-2 space-y-1 text-sm text-gray-600">
           <p className="flex items-center justify-center sm:justify-start gap-2">
-            <FaEnvelope className="text-gray-500" /> {user.email}
+            <FaEnvelope className="text-gray-500" /> {user?.email}
           </p>
-          {user.phone && (
+          {user?.phone && (
             <p className="flex items-center justify-center sm:justify-start gap-2">
               <FaPhoneAlt className="text-gray-500" /> {user.phone}
             </p>
@@ -58,13 +60,13 @@ export default function UserCard({ user }: Props) {
         </div>
 
         <p className="text-xs text-black text-opacity-50 mt-3">
-          Joined {dayjs(user.createdAt).format("DD MMM YYYY")}
+          Joined {dayjs(user?.createdAt).format("DD MMM YYYY")}
         </p>
       </div>
 
       {/* Button */}
       <div className="grid gap-2 w-full lg:w-auto">
-        {user.role === "landlord" && (
+        {user?.role === "landlord" && (
           <button
             onClick={handleViewApartments}
             className="btn btn-sm btn-neutral"
@@ -72,7 +74,13 @@ export default function UserCard({ user }: Props) {
             View Apartments
           </button>
         )}
-        <button className="btn btn-sm bg-error text-white border-error">
+        <button
+          onClick={() => {
+            onSelectedUser(user);
+            onOpen();
+          }}
+          className="btn btn-sm bg-error text-white border-error"
+        >
           Delete User
         </button>
       </div>

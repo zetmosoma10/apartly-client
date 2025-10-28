@@ -3,6 +3,7 @@ import BackButton from "../../../components/BackButton";
 import useGetLandlordApartments from "../../../hooks/useGetLandlordApartments";
 import ApartmentGrid from "../../../components/ApartmentGrid";
 import type { Apartment } from "../../../entities/Apartment";
+import ApartmentsGridSkeletons from "../../../components/loadingIndicators/ApartmentsGridSkeletons";
 
 const AdminApartmensPage = () => {
   const params = useParams();
@@ -13,13 +14,18 @@ const AdminApartmensPage = () => {
   const apartments = data?.results as Apartment[];
   const totalDocuments = data?.pagination?.totalDocuments as number;
 
-  if (isLoading) return <h3>Loading...</h3>;
-
   return (
     <div className="max-container">
       <BackButton />
       <h2 className="mb-4">Admin - Apartments for {state}</h2>
-      <ApartmentGrid apartments={apartments} totalDocuments={totalDocuments} />
+      {isLoading ? (
+        <ApartmentsGridSkeletons />
+      ) : (
+        <ApartmentGrid
+          apartments={apartments}
+          totalDocuments={totalDocuments}
+        />
+      )}
     </div>
   );
 };
