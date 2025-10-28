@@ -1,7 +1,7 @@
 const AdminPage = () => {
   return (
-    <div>
-      <h2>Admin Page Here!</h2>
+    <div className="max-container space-y-5">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  lg:grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-4"></div>
     </div>
   );
 };
