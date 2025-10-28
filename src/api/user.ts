@@ -30,3 +30,8 @@ export const deleteAvatar = async () => {
   const { data } = await api.delete<Response<User>>("/users/me/avatar");
   return data;
 };
+
+export const getUsers = async() => {
+  const {data} = await api.get('/users/admin')
+  return data
+}
