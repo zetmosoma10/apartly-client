@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import BackButton from "../../../components/BackButton";
 import useGetLandlordApartments from "../../../hooks/useGetLandlordApartments";
 import ApartmentGrid from "../../../components/ApartmentGrid";
@@ -6,6 +6,7 @@ import type { Apartment } from "../../../entities/Apartment";
 
 const AdminApartmensPage = () => {
   const params = useParams();
+  const { state } = useLocation();
   const landlordId = params.landlordId as string;
 
   const { data, isLoading } = useGetLandlordApartments(landlordId);
@@ -17,7 +18,7 @@ const AdminApartmensPage = () => {
   return (
     <div className="max-container">
       <BackButton />
-      <h2 className="mb-4">Admin - Apartments</h2>
+      <h2 className="mb-4">Admin - Apartments for {state}</h2>
       <ApartmentGrid apartments={apartments} totalDocuments={totalDocuments} />
     </div>
   );

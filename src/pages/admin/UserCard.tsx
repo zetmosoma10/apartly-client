@@ -12,7 +12,9 @@ export default function UserCard({ user }: Props) {
 
   const handleViewApartments = () => {
     if (user.role === "landlord") {
-      navigate(`/admin/users/${user._id}/apartments`);
+      navigate(`/admin/users/${user._id}/apartments`, {
+        state: `${user.firstName} ${user.lastName}`,
+      });
     }
   };
 

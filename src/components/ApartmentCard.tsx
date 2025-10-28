@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import type { Apartment } from "../entities/Apartment";
 import { MdLocationOn } from "react-icons/md";
 import Badge from "./Badge";
 
 const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
+  const { pathname } = useLocation();
+  const pathnameArray = pathname.split("/");
+  const isAdmin = pathnameArray.includes("admin");
+
   const imageUrl = apartment.images[0]?.url;
 
   return (
     <Link
-      to={`/apartments/${apartment._id}`}
+      to={
+        isAdmin
+          ? `/admin/users/apartments/${apartment._id}`
+          : `/apartments/${apartment._id}`
+      }
       className="w-full  bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col border"
     >
       <div className="relative w-full h-40 bg-gray-300  overflow-hidden">

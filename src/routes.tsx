@@ -16,6 +16,7 @@ import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenti
 import AdminRoute from "./components/middlewares/AdminRoute";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminApartmensPage from "./pages/admin/apartments/AdminApartmensPage";
+import AdminApartmentDetailsPage from "./pages/admin/details/AdminApartmentDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
               {
                 path: "/admin/users/:landlordId/apartments",
                 element: <AdminApartmensPage />,
+              },
+              {
+                path: "/admin/users/apartments/:id",
+                element: <AdminApartmentDetailsPage />,
               },
             ],
           },
