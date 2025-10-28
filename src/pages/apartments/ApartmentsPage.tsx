@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import ApartmentCard from "../../components/ApartmentCard";
+import type { Apartment } from "../../entities/Apartment";
 import BackButton from "../../components/BackButton";
 import Pagination from "../../components/filters/Pagination";
 import useGetAllApartments from "../../hooks/useGetAllApartments";
@@ -8,11 +8,12 @@ import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
 import Search from "../../components/filters/Search";
 import ApartmentsGridSkeletons from "../../components/loadingIndicators/ApartmentsGridSkeletons";
+import ApartmentGrid from "../ApartmentGrid";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading } = useGetAllApartments(searchParams);
-  const apartments = data?.results;
+  const apartments = data?.results as Apartment[];
 
   const page = parseInt(searchParams.get("page") as string) || 1;
   const totalPages = data?.pagination?.totalPages as number;
@@ -43,16 +44,10 @@ const ApartmentsPage = () => {
       {isLoading ? (
         <ApartmentsGridSkeletons />
       ) : (
-        <>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-            {apartments?.map((apartment) => (
-              <ApartmentCard apartment={apartment} key={apartment._id} />
-            ))}
-          </div>
-          {totalDocuments === 0 && (
-            <p>No Data for that query in the database</p>
-          )}
-        </>
+        <ApartmentGrid
+          apartments={apartments}
+          totalDocuments={totalDocuments}
+        />
       )}
       {totalPages > 1 && (
         <div className="flex items-center justify-center mt-11">
