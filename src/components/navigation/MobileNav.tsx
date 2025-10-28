@@ -87,13 +87,22 @@ export default function MobileNav() {
           >
             Home
           </Link>
-          {user && user.role !== "tenant" && (
+          {user && user.role !== "landlord" && (
             <Link
               to="/apartments/listings"
               onClick={closeNav} // auto-close on navigation
               className="block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
             >
               Listings
+            </Link>
+          )}
+          {user && user.role === "admin" && (
+            <Link
+              to="/admin"
+              onClick={closeNav} // auto-close on navigation
+              className="block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
+            >
+              Admin
             </Link>
           )}
           <Link

@@ -13,6 +13,8 @@ import ProtectRoute from "./components/middlewares/ProtectRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import AccountPage from "./pages/account/AccountPage";
 import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
+import AdminRoute from "./components/middlewares/AdminRoute";
+import AdminPage from "./pages/admin/AdminPage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,15 @@ const router = createBrowserRouter([
           {
             path: "/apartments/listings/:id/edit",
             element: <ListingEditPage />,
+          },
+          {
+            element: <AdminRoute />,
+            children: [
+              {
+                path: "/admin",
+                element: <AdminPage />,
+              },
+            ],
           },
         ],
       },

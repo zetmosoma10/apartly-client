@@ -16,7 +16,7 @@ const Navlinks = ({ className }: { className?: string }) => {
       >
         Home
       </NavLink>
-      {user && user.role !== "tenant" && (
+      {user && user.role === "landlord" && (
         <NavLink
           to="/apartments/listings"
           className={({ isActive }) =>
@@ -26,6 +26,18 @@ const Navlinks = ({ className }: { className?: string }) => {
           }
         >
           Listings
+        </NavLink>
+      )}
+      {user && user.role === "admin" && (
+        <NavLink
+          to="/admin"
+          className={({ isActive }) =>
+            isActive
+              ? "text-warning"
+              : `text-black hover:text-warning ${className}`
+          }
+        >
+          Admin
         </NavLink>
       )}
       <NavLink
