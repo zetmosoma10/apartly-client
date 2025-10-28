@@ -8,7 +8,7 @@ import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
 import Search from "../../components/filters/Search";
 import ApartmentsGridSkeletons from "../../components/loadingIndicators/ApartmentsGridSkeletons";
-import ApartmentGrid from "../ApartmentGrid";
+import ApartmentGrid from "../../components/ApartmentGrid";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

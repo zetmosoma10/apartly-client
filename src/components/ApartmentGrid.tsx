@@ -1,4 +1,4 @@
-import ApartmentCard from "../components/ApartmentCard";
+import ApartmentCard from "./ApartmentCard";
 import type { Apartment } from "../entities/Apartment";
 
 type Props = {
