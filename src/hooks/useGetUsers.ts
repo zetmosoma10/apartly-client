@@ -5,7 +5,7 @@ import type { User } from "../entities/User";
 
 const useGetUsers = () => {
   return useQuery<Response<User[]>>({
-    queryKey: ["users"],
+    queryKey: ["admin", "users"],
     queryFn: () => getUsers(),
     staleTime: 1000 * 60 * 60,
   });

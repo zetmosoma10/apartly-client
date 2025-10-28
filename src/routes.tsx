@@ -65,7 +65,7 @@ const router = createBrowserRouter([
                 element: <AdminPage />,
               },
               {
-                path: "/admin/users/:id/apartments",
+                path: "/admin/users/:landlordId/apartments",
                 element: <AdminApartmensPage />,
               },
             ],

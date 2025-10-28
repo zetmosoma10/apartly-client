@@ -74,3 +74,9 @@ export const addComment = async ({
   );
   return data;
 };
+
+// ? ADMIN
+export const getAllLandlordApartments = async (landlordId: string) => {
+  const { data } = await api.get(`/apartments/${landlordId}/admin`);
+  return data;
+};
