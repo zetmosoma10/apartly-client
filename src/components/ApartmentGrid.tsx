@@ -14,7 +14,7 @@ const ApartmentGrid = ({ apartments, totalDocuments }: Props) => {
           <ApartmentCard apartment={apartment} key={apartment._id} />
         ))}
       </div>
-      {totalDocuments === 0 && <p>No Data for that query in the database</p>}
+      {totalDocuments === 0 && <p>No Apartments in the database</p>}
     </>
   );
 };

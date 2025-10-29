@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 const UserGridCardSkeleton = () => {
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  lg:grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-4 mt-5">
-      {[...Array(8)].map((i) => (
+      {[1, 2, 3, 4, 5, 6, 7].map((i) => (
         <div
           key={i}
           className="flex flex-col items-center gap-4 p-5 transition-all bg-white border shadow-md rounded-2xl lg:flex-row"

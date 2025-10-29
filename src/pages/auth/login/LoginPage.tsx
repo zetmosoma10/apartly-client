@@ -90,7 +90,7 @@ const LoginPage = () => {
               error={errors.password?.message}
             />
           </div>
-          <button disabled={isPending} className="w-full btn-main">
+          <button disabled={isPending} className="w-full mt-5 btn-main">
             Sign in
             {isPending && <LoadingSpinner />}
           </button>

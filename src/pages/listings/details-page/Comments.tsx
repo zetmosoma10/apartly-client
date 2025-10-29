@@ -116,8 +116,8 @@ const Comments = ({ apartment }: Props) => {
                 )}
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium text-neutral-800 ">
-                      {review?.tenant?.firstName} {review?.tenant?.lastName}`
+                    <p className="text-sm font-semibold text-neutral-800 ">
+                      {review?.tenant?.firstName} {review?.tenant?.lastName}
                     </p>
                     <span className="text-xs text-neutral-500 ">
                       {dayjs(review?.createdAt).format("DD MMM YYYY")}
