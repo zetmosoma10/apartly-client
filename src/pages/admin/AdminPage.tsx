@@ -20,10 +20,10 @@ const AdminPage = () => {
   if (error) console.log(error);
 
   return (
-    <div className="space-y-5 max-container">
+    <div className="max-container">
       <BackButton />
       <h2>All Users</h2>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  lg:grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]  lg:grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-4 mt-5">
         {users.map((user) => (
           <UserCard
             user={user}

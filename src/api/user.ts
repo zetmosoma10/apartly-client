@@ -31,7 +31,14 @@ export const deleteAvatar = async () => {
   return data;
 };
 
-export const getUsers = async() => {
-  const {data} = await api.get('/users/admin')
-  return data
-}
+// ? ADMIN
+
+export const getUsers = async () => {
+  const { data } = await api.get("/users/admin");
+  return data;
+};
+
+export const deleteUserAccount = async (userId: string) => {
+  const { data } = await api.delete(`/users/${userId}/admin`);
+  return data;
+};

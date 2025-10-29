@@ -1,4 +1,9 @@
+import axios from "axios";
+import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
 import type { User } from "../../entities/User";
+import useDeleteUserAccount from "../../hooks/useDeleteUserAccount";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store";
 
 type Props = {
   user: User | null;
@@ -7,6 +12,27 @@ type Props = {
 };
 
 const DeleteUserModal = ({ onClose, ref, user }: Props) => {
+  const navigate = useNavigate();
+  const { clearAuth } = useAuthStore();
+  const { mutate, isPending } = useDeleteUserAccount();
+  const userId = user?._id as string;
+
+  const onDeleteUser = () => {
+    mutate(userId, {
+      onSuccess: () => onClose(),
+      onError: (error) => {
+        // ! 401 UNAUTHORIZE ERROR
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          clearAuth();
+          onClose();
+          navigate("/auth/login", {
+            state: encodeURIComponent(error.response.data.message),
+          });
+        }
+      },
+    });
+  };
+
   return (
     <dialog
       ref={ref}
@@ -24,10 +50,17 @@ const DeleteUserModal = ({ onClose, ref, user }: Props) => {
           ’ ? This action cannot be reversed
         </p>
         <div className="modal-action">
-          <button className="btn" onClick={onClose}>
+          <button disabled={isPending} className="btn" onClick={onClose}>
             Close
           </button>
-          <button className="btn btn-neutral">Delete</button>
+          <button
+            disabled={isPending}
+            onClick={onDeleteUser}
+            className="btn btn-neutral disabled:text-black"
+          >
+            Delete
+            {isPending && <LoadingSpinner />}
+          </button>
         </div>
       </div>
     </dialog>

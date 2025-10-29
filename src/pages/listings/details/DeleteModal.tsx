@@ -61,7 +61,7 @@ const DeleteModal = ({ ref, onClose, apartment }: Props) => {
             Close
           </button>
           <button
-            className="btn btn-neutral"
+            className="btn btn-neutral disabled:text-black"
             disabled={isPending}
             onClick={handleDelete}
           >
