@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import dayjs from "dayjs";
-import Badge from "../../components/Badge";
 import type { Response } from "../../entities/Response";
 import type { Apartment } from "../../entities/Apartment";
+import dayjs from "dayjs";
+import Badge from "../../components/Badge";
 
 const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
   return (
@@ -16,7 +16,7 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
             <th>Date Added</th>
           </tr>
         </thead>
-        {data?.pagination.currentCountPerPage &&
+        {data?.pagination?.currentCountPerPage &&
         data.pagination.currentCountPerPage > 0 ? (
           <tbody className="bg-white">
             {data?.results?.map((item) => (
@@ -50,7 +50,7 @@ const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
         ) : (
           <tbody>
             <tr>
-              <td colSpan={4} className="py-4 text-center font-semibold">
+              <td colSpan={4} className="py-4 font-semibold text-center">
                 No Data Available
               </td>
             </tr>

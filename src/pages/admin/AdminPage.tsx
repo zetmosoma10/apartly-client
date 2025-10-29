@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import BackButton from "../../components/BackButton";
 import type { User } from "../../entities/User";
-import useGetUsers from "../../hooks/useGetUsers";
 import UserCard from "./UserCard";
 import DeleteUserModal from "./DeleteUserModal";
 import UserGridCardSkeleton from "../../components/loadingIndicators/UserCardSkeleton";
+import useGetUsers from "../../hooks/admin/useGetUsers";
 
 const AdminPage = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);

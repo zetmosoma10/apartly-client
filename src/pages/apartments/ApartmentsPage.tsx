@@ -3,12 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import type { Apartment } from "../../entities/Apartment";
 import BackButton from "../../components/BackButton";
 import Pagination from "../../components/filters/Pagination";
-import useGetAllApartments from "../../hooks/useGetAllApartments";
 import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
 import Search from "../../components/filters/Search";
 import ApartmentsGridSkeletons from "../../components/loadingIndicators/ApartmentsGridSkeletons";
 import ApartmentGrid from "../../components/ApartmentGrid";
+import useGetAllApartments from "../../hooks/apartments/useGetAllApartments";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

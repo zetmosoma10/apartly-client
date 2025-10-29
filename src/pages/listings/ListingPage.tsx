@@ -2,11 +2,11 @@ import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
 import BackButton from "../../components/BackButton";
-import useGetAllUserApartments from "../../hooks/useGetAllUserApartments";
 import Pagination from "../../components/filters/Pagination";
 import axios from "axios";
 import useAuthStore from "../../store";
 import ListingsTableSkeleton from "../../components/loadingIndicators/ListingsTableSkeleton";
+import useGetAllUserApartments from "../../hooks/apartments/useGetAllUserApartments";
 
 const ListingPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,7 +14,7 @@ const ListingPage = () => {
   const { clearAuth } = useAuthStore();
 
   const page = parseInt(searchParams.get("page") as string) || 1;
-  const totalPages = data?.pagination.totalPages as number;
+  const totalPages = data?.pagination?.totalPages as number;
 
   // ! 401 UNAUTHORIZE ERROR
   if (axios.isAxiosError(error) && error.response?.status === 401) {

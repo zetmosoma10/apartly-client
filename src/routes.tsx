@@ -2,9 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import ListingPage from "./pages/listings/ListingPage";
-import AddListingPage from "./pages/listings/new/AddListingPage";
-import ListingDetailPage from "./pages/listings/details/ListingDetailPage";
-import ListingEditPage from "./pages/listings/edit/ListingEditPage";
 import ApartmentsPage from "./pages/apartments/ApartmentsPage";
 import AuthPage from "./pages/auth/AuthPage";
 import LoginPage from "./pages/auth/login/LoginPage";
@@ -12,11 +9,14 @@ import RegisterPage from "./pages/auth/register/RegisterPage";
 import ProtectRoute from "./components/middlewares/ProtectRoute";
 import NotFoundPage from "./pages/NotFoundPage";
 import AccountPage from "./pages/account/AccountPage";
-import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
+import ListingDetailPage from "./pages/listings/details-page/ListingDetailPage";
+import ListingEditPage from "./pages/listings/edit-page/ListingEditPage";
+import AddListingPage from "./pages/listings/new-page/AddListingPage";
 import AdminRoute from "./components/middlewares/AdminRoute";
 import AdminPage from "./pages/admin/AdminPage";
-import AdminApartmensPage from "./pages/admin/apartments/AdminApartmensPage";
-import AdminApartmentDetailsPage from "./pages/admin/details/AdminApartmentDetailsPage";
+import AdminApartmensPage from "./pages/admin/apartments-page/AdminApartmensPage";
+import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
+import AdminApartmentDetailsPage from "./pages/admin/details-page/AdminApartmentDetailsPage";
 
 const router = createBrowserRouter([
   {

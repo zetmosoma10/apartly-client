@@ -1,8 +1,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import useUploadAvatar from "../../hooks/useUploadAvatar";
 import useAuthStore from "../../store";
-import useDeleteAvatar from "../../hooks/useDeleteAvatar";
+import useUploadAvatar from "../../hooks/user/useUploadAvatar";
+import useDeleteAvatar from "../../hooks/user/useDeleteAvatar";
 
 const Avatar = () => {
   const [preview, setPreview] = useState<string | null>(null);
@@ -48,11 +48,11 @@ const Avatar = () => {
         <img
           src={avatarUrl}
           alt="profile"
-          className="object-cover w-full h-full rounded-full border-4 border-warning shadow-md"
+          className="object-cover w-full h-full border-4 rounded-full shadow-md border-warning"
         />
         <label
           htmlFor="profileImage"
-          className="absolute bottom-1 right-1 bg-warning text-white p-2 rounded-full shadow cursor-pointer transition"
+          className="absolute p-2 text-white transition rounded-full shadow cursor-pointer bottom-1 right-1 bg-warning"
           title="Upload profile picture"
         >
           {isPending ? (
@@ -78,7 +78,7 @@ const Avatar = () => {
       {user?.avatar?.url && (
         <button
           onClick={() => deleteAvatar()}
-          className="text-sm text-error hover:underline mt-3"
+          className="mt-3 text-sm text-error hover:underline"
         >
           Remove Avatar
         </button>

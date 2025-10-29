@@ -5,11 +5,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../../../components/Input";
 import loginSchema from "./loginSchema";
-import useLogin from "../../../hooks/useLogin";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage";
 import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import useLogin from "../../../hooks/auth/useLogin";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -89,14 +89,6 @@ const LoginPage = () => {
               register={register("password")}
               error={errors.password?.message}
             />
-          </div>
-          <div className="mt-2 mb-4 text-end">
-            <Link
-              className="text-sm text-warning hover:underline"
-              to="/forgot-password"
-            >
-              Forgot password?
-            </Link>
           </div>
           <button disabled={isPending} className="w-full btn-main">
             Sign in

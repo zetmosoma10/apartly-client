@@ -4,30 +4,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import BackButton from "../../components/BackButton";
 import Input from "../../components/Input";
-import useGetUser from "../../hooks/useGetUser";
 import accountSchema from "./accountSchema";
 import dayjs from "dayjs";
-import useUpdateMe from "../../hooks/useUpdateMe";
 import _ from "lodash";
 import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
 import AccountLoadingSkeleton from "../../components/loadingIndicators/AccountLoadingSkeleton";
-import Modal from "./Modal";
 import Avatar from "./Avatar";
+import useGetUser from "../../hooks/user/useGetUser";
+import useUpdateMe from "../../hooks/user/useUpdateMe";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 type FormData = z.infer<typeof accountSchema>;
 
 const AccountPage = () => {
   const [editing, setEditing] = useState(false);
   const ref = useRef<HTMLDialogElement>(null);
-
-  // * MODAL HANDLERS
-  const onOpen = () => {
-    ref.current?.showModal();
-  };
-
-  const onClose = () => {
-    ref.current?.close();
-  };
 
   // * TANSTACK HOOKS
   const { data, isLoading } = useGetUser();
@@ -175,7 +166,7 @@ const AccountPage = () => {
                 type="button"
                 disabled={isUpdating}
                 className="px-6 text-white btn btn-error disabled:text-black"
-                onClick={onOpen}
+                onClick={() => ref.current?.showModal()}
               >
                 Delete Account
               </button>
@@ -187,7 +178,7 @@ const AccountPage = () => {
       )}
 
       {/* DELETE ACCOUNT MODAL */}
-      <Modal ref={ref} onClose={onClose} />
+      <DeleteAccountModal ref={ref} onClose={() => ref.current?.close()} />
     </div>
   );
 };

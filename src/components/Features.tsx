@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import useGetFeatureApartments from "../hooks/useGetFeatureApartments";
 import ApartmentCard from "./ApartmentCard";
 import FeatureSkeleton from "./loadingIndicators/FeatureSkeleton";
+import useGetFeatureApartments from "../hooks/apartments/useGetFeatureApartments";
 
 const Features = () => {
   const { data, isLoading } = useGetFeatureApartments();

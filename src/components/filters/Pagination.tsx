@@ -14,11 +14,11 @@ const Pagination = ({ page, data, handlePageChange }: Props) => {
     pagesArray = _.range(1, data?.pagination?.totalPages + 1);
 
   return (
-    <div className="join shadow-lg">
+    <div className="shadow-lg join">
       <button
         onClick={() => handlePageChange(page - 1)}
         disabled={page === 1}
-        className="join-item btn bg-white hover:text-white hover:bg-warning hover:border-warning"
+        className="bg-white join-item btn hover:text-white hover:bg-warning hover:border-warning"
       >
         «
       </button>
@@ -28,7 +28,7 @@ const Pagination = ({ page, data, handlePageChange }: Props) => {
           key={page}
           onClick={() => handlePageChange(page)}
           className={`join-item btn  hover:text-white hover:bg-warning hover:border-warning ${
-            page === data?.pagination.currentPage
+            page === data?.pagination?.currentPage
               ? "bg-warning  text-white"
               : "bg-white text-black"
           }`}
@@ -39,8 +39,8 @@ const Pagination = ({ page, data, handlePageChange }: Props) => {
 
       <button
         onClick={() => handlePageChange(page + 1)}
-        disabled={!data?.pagination.hasNextPage}
-        className="join-item btn bg-white hover:text-white hover:bg-warning hover:border-warning"
+        disabled={!data?.pagination?.hasNextPage}
+        className="bg-white join-item btn hover:text-white hover:bg-warning hover:border-warning"
       >
         »
       </button>

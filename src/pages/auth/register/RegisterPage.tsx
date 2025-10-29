@@ -6,10 +6,10 @@ import Input from "../../../components/Input";
 import registerSchema from "./registerSchema";
 import axios from "axios";
 import { useState } from "react";
-import useRegister from "../../../hooks/useRegister";
 import toast from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage";
 import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import useRegister from "../../../hooks/auth/useRegister";
 
 type FormData = z.infer<typeof registerSchema>;
 

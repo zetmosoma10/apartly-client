@@ -1,25 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import type { User } from "../../entities/User";
+import useAuthStore from "../../../store";
+import type { Apartment } from "../../../entities/Apartment";
 import axios from "axios";
-import LoadingSpinner from "../../components/loadingIndicators/LoadingSpinner";
-import useAuthStore from "../../store";
-import useDeleteUserAccount from "../../hooks/admin/useDeleteUserAccount";
+import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import toast from "react-hot-toast";
+import useDeleteLandlordApartment from "../../../hooks/admin/useDeleteLandlordApartment";
 
 type Props = {
-  user: User | null;
+  apartment?: Apartment;
   onClose: () => void;
   ref: React.RefObject<HTMLDialogElement | null>;
 };
 
-const DeleteUserModal = ({ onClose, ref, user }: Props) => {
+const DeleteApartmentModal = ({ ref, onClose, apartment }: Props) => {
   const navigate = useNavigate();
   const { clearAuth } = useAuthStore();
-  const { mutate, isPending } = useDeleteUserAccount();
-  const userId = user?._id as string;
+  const { mutate, isPending } = useDeleteLandlordApartment();
 
-  const onDeleteUser = () => {
-    mutate(userId, {
-      onSuccess: () => onClose(),
+  const handleDelete = () => {
+    mutate(apartment?._id, {
       onError: (error) => {
         // ! 401 UNAUTHORIZE ERROR
         if (axios.isAxiosError(error) && error.response?.status === 401) {
@@ -29,6 +28,11 @@ const DeleteUserModal = ({ onClose, ref, user }: Props) => {
             state: encodeURIComponent(error.response.data.message),
           });
         }
+      },
+      onSuccess: () => {
+        onClose();
+        toast.success("Apartment deleted successfully");
+        navigate(-1);
       },
     });
   };
@@ -43,20 +47,17 @@ const DeleteUserModal = ({ onClose, ref, user }: Props) => {
         <h3 className="text-lg font-bold">Confirm Deletion</h3>
         <p className="py-4">
           Are you sure you want to delete the ‘
-          <span className="font-medium">
-            {" "}
-            {user?.firstName} {user?.lastName}
-          </span>
-          ’ ? This action cannot be reversed
+          <span className="font-medium"> {apartment?.title}</span>’ ? This
+          action cannot be reversed
         </p>
         <div className="modal-action">
-          <button disabled={isPending} className="btn" onClick={onClose}>
+          <button className="btn" disabled={isPending} onClick={onClose}>
             Close
           </button>
           <button
-            disabled={isPending}
-            onClick={onDeleteUser}
             className="btn btn-neutral disabled:text-black"
+            disabled={isPending}
+            onClick={handleDelete}
           >
             Delete
             {isPending && <LoadingSpinner />}
@@ -67,4 +68,4 @@ const DeleteUserModal = ({ onClose, ref, user }: Props) => {
   );
 };
 
-export default DeleteUserModal;
+export default DeleteApartmentModal;
