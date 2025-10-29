@@ -33,10 +33,7 @@ api.interceptors.response.use(
       const { clearAuth } = useAuthStore.getState();
       clearAuth();
     }
-    // ! 404 not found
-    else if (error.response.status === 404) {
-      toast.error("Resource not found.");
-    }
+
     // ! 500 internal server
     else if (error.response.status >= 500) {
       toast.error("Server error. Please try again later.");

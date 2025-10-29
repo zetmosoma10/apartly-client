@@ -7,11 +7,11 @@ import Badge from "../../../components/Badge";
 import ExpandableText from "../../../components/ExpandableText";
 import ApartmentMap from "../../listings/ApartmentMap";
 import Comments from "../../listings/details/Comments";
-import DeleteModal from "../../listings/details/DeleteModal";
 import ImageCarouselModal from "../../listings/details/ImageCarouselModal";
 import Rating from "../../listings/details/Rating";
 import useGetApartment from "../../../hooks/useGetApartment";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
+import DeleteApartmentModal from "./DeleteApartmentModal";
 
 const AdminApartmentDetailsPage = () => {
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
@@ -61,7 +61,7 @@ const AdminApartmentDetailsPage = () => {
       {/* IMAGE GRID */}
       <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">
         <div
-          className="overflow-hidden sm:col-span-2 sm:row-span-2 rounded-xl cursor-pointer"
+          className="overflow-hidden cursor-pointer sm:col-span-2 sm:row-span-2 rounded-xl"
           onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[0].url})`,
@@ -70,7 +70,7 @@ const AdminApartmentDetailsPage = () => {
           }}
         ></div>
         <div
-          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl cursor-pointer"
+          className="overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
           onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[1].url})`,
@@ -79,7 +79,7 @@ const AdminApartmentDetailsPage = () => {
           }}
         ></div>
         <div
-          className="overflow-hidden sm:col-span-1 sm:row-span-1 rounded-xl cursor-pointer"
+          className="overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
           onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[2].url})`,
@@ -122,7 +122,7 @@ const AdminApartmentDetailsPage = () => {
       <Comments apartment={apartment} />
 
       {/* DELETE MODAL */}
-      <DeleteModal
+      <DeleteApartmentModal
         ref={deleteRef}
         onClose={onCloseDeleteModal}
         apartment={apartment}

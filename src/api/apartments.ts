@@ -80,3 +80,8 @@ export const getAllLandlordApartments = async (landlordId: string) => {
   const { data } = await api.get(`/apartments/${landlordId}/admin`);
   return data;
 };
+
+export const deleteLandlordApartment = async (id?: string) => {
+  const { data } = await api.delete(`/apartments/user/${id}/admin`);
+  return data;
+};
