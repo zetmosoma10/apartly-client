@@ -26,25 +26,6 @@ const ListingDetailPage = () => {
   const { data, isLoading, error } = useGetApartment(id);
   const apartment = data?.results;
 
-  // * MODAL HANDLERS
-  const onOpenDeleteModal = () => {
-    deleteRef.current?.showModal();
-  };
-
-  const onCloseDeleteModal = () => {
-    deleteRef.current?.close();
-  };
-
-  const onOpenLandlordModal = () => {
-    landlordRef?.current?.showModal();
-  };
-
-  const onCloseLandlordModal = () => {
-    landlordRef?.current?.close();
-  };
-
-  // * END OF MODAL HANDLERS
-
   if (axios.isAxiosError(error)) {
     if (error.response?.status === 404) {
       navigate("/not-found", { replace: true });
@@ -77,7 +58,7 @@ const ListingDetailPage = () => {
             </Link>
             <button
               className="text-white btn btn-error btn-sm md:btn-md rounded-3xl text-nowrap"
-              onClick={onOpenDeleteModal}
+              onClick={() => deleteRef.current?.showModal()}
             >
               <RiDeleteBin4Fill />
               Delete Apartment
@@ -132,7 +113,7 @@ const ListingDetailPage = () => {
             </span>
           </p>
           <button
-            onClick={onOpenLandlordModal}
+            onClick={() => landlordRef?.current?.showModal()}
             className="w-full btn btn-sm btn-outline btn-warning rounded-2xl"
           >
             Contact Landlord
@@ -167,14 +148,14 @@ const ListingDetailPage = () => {
       {/* DELETE MODAL */}
       <DeleteModal
         ref={deleteRef}
-        onClose={onCloseDeleteModal}
+        onClose={() => deleteRef.current?.close()}
         apartment={apartment}
       />
 
       {/* LANDLORD MODAL */}
       <LandlordModal
         ref={landlordRef}
-        onClose={onCloseLandlordModal}
+        onClose={() => landlordRef?.current?.close()}
         landlord={apartment?.landlord}
       />
 
