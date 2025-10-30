@@ -50,7 +50,7 @@ const Comments = ({ apartment }: Props) => {
       </h3>
 
       {/* Add New Review */}
-      {user && (
+      {user && user._id !== apartment?.landlord._id && (
         <form onSubmit={handleSubmit(onSubmit)} className="flex gap-3 mb-8">
           {user?.avatar?.url ? (
             <img

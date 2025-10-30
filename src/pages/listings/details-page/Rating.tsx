@@ -40,7 +40,7 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
       )}
 
       {/*  */}
-      {user && (
+      {user && user._id !== apartment?.landlord._id && (
         <div className="flex items-center my-2 ml-4">
           {[1, 2, 3, 4, 5].map((value) => (
             <FaStar
