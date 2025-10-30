@@ -6,4 +6,5 @@ export type Rating = {
   rating: number;
   comment: string;
   createdAt: Date;
-}
+  updatedAt: Date;
+};
