@@ -2,19 +2,19 @@ import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import ListingsTable from "./ListingsTable";
 import BackButton from "../../components/BackButton";
-import Pagination from "../../components/filters/Pagination";
 import axios from "axios";
 import useAuthStore from "../../store";
 import ListingsTableSkeleton from "../../components/loadingIndicators/ListingsTableSkeleton";
 import useGetAllUserApartments from "../../hooks/apartments/useGetAllUserApartments";
+import Pagination from "../../components/filters/Pagination";
 
 const ListingPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, isLoading, error } = useGetAllUserApartments(searchParams);
   const { clearAuth } = useAuthStore();
 
-  const page = parseInt(searchParams.get("page") as string) || 1;
-  const totalPages = data?.pagination?.totalPages as number;
+  const page = parseInt(searchParams.get("page") || "1");
+  const totalPages = data?.pagination?.totalPages;
 
   // ! 401 UNAUTHORIZE ERROR
   if (axios.isAxiosError(error) && error.response?.status === 401) {
@@ -45,11 +45,11 @@ const ListingPage = () => {
         </Link>
       </div>
       {!isLoading ? <ListingsTable data={data} /> : <ListingsTableSkeleton />}
-      {totalPages > 1 && (
+      {totalPages && totalPages > 1 && (
         <div className="flex items-center justify-center mt-11">
           <Pagination
-            data={data}
             page={page}
+            pagination={data.pagination}
             handlePageChange={handlePageChange}
           />
         </div>

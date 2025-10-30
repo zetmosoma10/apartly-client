@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import type { Apartment } from "../../entities/Apartment";
 import BackButton from "../../components/BackButton";
-import Pagination from "../../components/filters/Pagination";
+import PaginationType from "../../components/filters/Pagination";
 import FiltersBar from "../../components/filters/FiltersBar";
 import Heading from "./Heading";
 import Search from "../../components/filters/Search";
@@ -15,9 +15,9 @@ const ApartmentsPage = () => {
   const { data, isLoading } = useGetAllApartments(searchParams);
   const apartments = data?.results as Apartment[];
 
-  const page = parseInt(searchParams.get("page") as string) || 1;
-  const totalPages = data?.pagination?.totalPages as number;
-  const totalDocuments = data?.pagination?.totalDocuments as number;
+  const page = parseInt(searchParams.get("page") || "1");
+  const totalPages = data?.pagination?.totalPages;
+  const totalDocuments = data?.pagination?.totalDocuments;
 
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams);
@@ -49,11 +49,11 @@ const ApartmentsPage = () => {
           totalDocuments={totalDocuments}
         />
       )}
-      {totalPages > 1 && (
+      {totalPages && totalPages > 1 && (
         <div className="flex items-center justify-center mt-11">
-          <Pagination
-            data={data}
+          <PaginationType
             page={page}
+            pagination={data.pagination}
             handlePageChange={handlePageChange}
           />
         </div>

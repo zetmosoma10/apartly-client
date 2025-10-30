@@ -3,10 +3,10 @@ import type { Response } from "../../entities/Response";
 import type { User } from "../../entities/User";
 import { getUsers } from "../../api/user";
 
-const useGetUsers = () => {
+const useGetUsers = (searchParams: URLSearchParams) => {
   return useQuery<Response<User[]>>({
-    queryKey: ["admin", "users"],
-    queryFn: () => getUsers(),
+    queryKey: ["admin", "users", searchParams.toString()],
+    queryFn: () => getUsers(searchParams),
     staleTime: 1000 * 60 * 60,
   });
 };

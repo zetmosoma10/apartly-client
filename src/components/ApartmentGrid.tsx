@@ -3,7 +3,7 @@ import type { Apartment } from "../entities/Apartment";
 
 type Props = {
   apartments: Apartment[];
-  totalDocuments: number;
+  totalDocuments?: number;
 };
 
 const ApartmentGrid = ({ apartments, totalDocuments }: Props) => {

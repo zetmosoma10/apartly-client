@@ -1,17 +1,15 @@
-import type { Apartment } from "../../entities/Apartment";
-import type { Response } from "../../entities/Response";
 import _ from "lodash";
+import type { PaginationType } from "../../entities/Response";
 
 type Props = {
   page: number;
-  data?: Response<Apartment[]>;
+  pagination?: PaginationType;
   handlePageChange: (page: number) => void;
 };
 
-const Pagination = ({ page, data, handlePageChange }: Props) => {
+const Pagination = ({ page, pagination, handlePageChange }: Props) => {
   let pagesArray;
-  if (data?.pagination)
-    pagesArray = _.range(1, data?.pagination?.totalPages + 1);
+  if (pagination) pagesArray = _.range(1, pagination?.totalPages + 1);
 
   return (
     <div className="shadow-lg join">
@@ -28,7 +26,7 @@ const Pagination = ({ page, data, handlePageChange }: Props) => {
           key={page}
           onClick={() => handlePageChange(page)}
           className={`join-item btn  hover:text-white hover:bg-warning hover:border-warning ${
-            page === data?.pagination?.currentPage
+            page === pagination?.currentPage
               ? "bg-warning  text-white"
               : "bg-white text-black"
           }`}
@@ -39,7 +37,7 @@ const Pagination = ({ page, data, handlePageChange }: Props) => {
 
       <button
         onClick={() => handlePageChange(page + 1)}
-        disabled={!data?.pagination?.hasNextPage}
+        disabled={!pagination?.hasNextPage}
         className="bg-white join-item btn hover:text-white hover:bg-warning hover:border-warning"
       >
         »

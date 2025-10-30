@@ -33,8 +33,10 @@ export const deleteAvatar = async () => {
 
 // ? ADMIN
 
-export const getUsers = async () => {
-  const { data } = await api.get("/users/admin");
+export const getUsers = async (searchParams: URLSearchParams) => {
+  const params = Object.fromEntries(searchParams.entries());
+
+  const { data } = await api.get("/users/admin", { params });
   return data;
 };
 
