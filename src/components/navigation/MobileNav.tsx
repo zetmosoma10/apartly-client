@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import useAuthStore from "../../store";
 import ProfileLink from "./ProfileLink";
+import MobileNavLink from "./MobileNavLink";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -80,67 +81,26 @@ export default function MobileNav() {
 
         {/* Nav links */}
         <nav className="px-4 py-6 space-y-2">
-          <NavLink
-            to="/"
-            onClick={closeNav} // auto-close on navigation
-            className={({ isActive }) =>
-              !isActive
-                ? `block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white`
-                : "bg-warning text-white block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
-            }
-          >
+          <MobileNavLink to="/" onClick={closeNav}>
             Home
-          </NavLink>
+          </MobileNavLink>
+          <MobileNavLink end={true} to="/apartments" onClick={closeNav}>
+            Apartments
+          </MobileNavLink>
           {user && user.role !== "landlord" && (
-            <NavLink
-              to="/apartments/listings"
-              onClick={closeNav} // auto-close on navigation
-              className={({ isActive }) =>
-                !isActive
-                  ? `block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white`
-                  : "bg-warning text-white block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
-              }
-            >
+            <MobileNavLink to="/apartments/listings" onClick={closeNav}>
               Listings
-            </NavLink>
+            </MobileNavLink>
           )}
           {user && user.role === "admin" && (
-            <NavLink
-              to="/admin"
-              onClick={closeNav} // auto-close on navigation
-              className={({ isActive }) =>
-                !isActive
-                  ? `block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white`
-                  : "bg-warning text-white block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
-              }
-            >
+            <MobileNavLink to="/admin" onClick={closeNav}>
               Admin
-            </NavLink>
+            </MobileNavLink>
           )}
-          <NavLink
-            end
-            to="/apartments"
-            onClick={closeNav} // auto-close on navigation
-            className={({ isActive }) =>
-              !isActive
-                ? `block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white`
-                : "bg-warning text-white block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
-            }
-          >
-            Apartments
-          </NavLink>
           {user && (
-            <NavLink
-              to="/account"
-              onClick={closeNav} // auto-close on navigation
-              className={({ isActive }) =>
-                !isActive
-                  ? `block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white`
-                  : "bg-warning text-white block px-3 py-2 text-sm font-medium rounded-md text-base-content hover:bg-warning hover:text-white"
-              }
-            >
+            <MobileNavLink to="/account" onClick={closeNav}>
               Account
-            </NavLink>
+            </MobileNavLink>
           )}
         </nav>
 
