@@ -59,6 +59,15 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
   const onImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || []);
 
+    // * Check that images are 3
+    if (selectedFiles.length !== 3) {
+      toast.error(
+        `Please select exactly 3 images. You selected ${selectedFiles.length}`
+      );
+      e.target.value = "";
+      return;
+    }
+
     // * validate images
     const validFiles = selectedFiles.filter((file) => {
       // * file type should be image
@@ -78,6 +87,17 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       return true;
     });
+
+    // * Check that images are 3 -> After Validation
+    if (validFiles.length !== 3) {
+      toast.error(
+        `Please select exactly 3 valid images. ${
+          3 - validFiles.length
+        } images were invalid`
+      );
+      e.target.value = "";
+      return;
+    }
 
     setFiles(validFiles);
     setPreviews(validFiles.map((file) => URL.createObjectURL(file)));
