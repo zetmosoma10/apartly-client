@@ -70,7 +70,7 @@ const ListingDetailPage = () => {
       {/* IMAGE GRID */}
       <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">
         <div
-          className="overflow-hidden cursor-pointer sm:col-span-2 sm:row-span-2 rounded-xl"
+          className="image-hover-container overflow-hidden cursor-pointer sm:col-span-2 sm:row-span-2 rounded-xl"
           onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[0].url})`,
@@ -79,7 +79,7 @@ const ListingDetailPage = () => {
           }}
         ></div>
         <div
-          className="overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
+          className="image-hover-container overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
           onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[1].url})`,
@@ -88,7 +88,7 @@ const ListingDetailPage = () => {
           }}
         ></div>
         <div
-          className="overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
+          className="image-hover-container overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
           onClick={() => setIsCarouselOpen(true)}
           style={{
             backgroundImage: `url(${apartment?.images[2].url})`,

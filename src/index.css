@@ -39,3 +39,28 @@ body {
     @apply text-white transition-all duration-200 btn-sm sm:btn-md btn bg-warning border-warning hover:opacity-70 rounded-3xl disabled:border-none disabled:text-black;
   }
 }
+
+@layer components {
+  .image-hover-container {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .image-hover-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .image-hover-container:hover::before {
+    opacity: 1;
+  }
+}
