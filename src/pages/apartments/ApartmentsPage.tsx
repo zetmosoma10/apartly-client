@@ -41,6 +41,8 @@ const ApartmentsPage = () => {
         <FiltersBar />
       </div>
       <Heading />
+
+      {/* APARTMENT GRID */}
       {isLoading ? (
         <ApartmentsGridSkeletons />
       ) : (
@@ -49,6 +51,8 @@ const ApartmentsPage = () => {
           totalDocuments={totalDocuments}
         />
       )}
+
+      {/* PAGINATION */}
       {totalPages && totalPages > 1 && (
         <div className="flex items-center justify-center mt-11">
           <PaginationType
