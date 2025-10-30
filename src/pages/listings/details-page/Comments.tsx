@@ -6,6 +6,7 @@ import type { Apartment } from "../../../entities/Apartment";
 import dayjs from "dayjs";
 import useAuthStore from "../../../store";
 import useAddComment from "../../../hooks/apartments/useAddComment";
+import { FaStar } from "react-icons/fa";
 
 const schema = z.object({
   comment: z.string().min(1, "review too short").max(255, "review too long"),
@@ -115,15 +116,31 @@ const Comments = ({ apartment }: Props) => {
                   </div>
                 )}
                 <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold text-neutral-800 ">
-                      {review?.tenant?.firstName} {review?.tenant?.lastName}
-                    </p>
-                    <span className="text-xs text-neutral-500 ">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-semibold text-neutral-800">
+                        {review?.tenant?.firstName} {review?.tenant?.lastName}
+                      </p>
+
+                      {/* Rating */}
+                      {review.rating && (
+                        <div className="flex items-center gap-1 text-yellow-500">
+                          <FaStar className="text-yellow-400" />
+                          <span className="text-sm text-gray-600">
+                            {review.rating}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Date */}
+                    <span className="text-xs text-black text-opacity-70">
                       {dayjs(review?.createdAt).format("DD MMM YYYY")}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm leading-snug text-neutral-700">
+
+                  {/* Comment */}
+                  <p className="text-sm leading-snug text-neutral-700">
                     {review?.comment}
                   </p>
                 </div>
