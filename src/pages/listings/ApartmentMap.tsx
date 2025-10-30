@@ -12,7 +12,7 @@ const ApartmentMap = ({ coordinates }: Props) => {
   const lng = coordinates?.lng as number;
 
   return (
-    <div className="h-[400px] w-full rounded-lg overflow-hidden ">
+    <div className="h-[400px] w-full rounded-lg overflow-hidden">
       <MapContainer center={[lat, lng]} zoom={15} className="h-full w-full">
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
