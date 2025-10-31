@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { ApartmentImage } from "../../../entities/Apartment";
-import ImageCarouselModal from "./ImageCarouselModal";
+import type { ApartmentImage } from "../../../../entities/Apartment";
+import ImageCarouselModal from "../ImageCarouselModal";
 
 type Props = {
   images?: ApartmentImage[];

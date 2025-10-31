@@ -1,5 +1,5 @@
-import type { Apartment } from "../../../entities/Apartment";
-import ApartmentMap from "../ApartmentMap";
+import type { Apartment } from "../../../../entities/Apartment";
+import ApartmentMap from "../../ApartmentMap";
 
 const MapSection = ({ apartment }: { apartment?: Apartment }) => {
   return (

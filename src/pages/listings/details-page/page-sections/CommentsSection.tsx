@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 import { FiSend } from "react-icons/fi";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Apartment } from "../../../entities/Apartment";
+import type { Apartment } from "../../../../entities/Apartment";
 import dayjs from "dayjs";
-import useAuthStore from "../../../store";
-import useAddComment from "../../../hooks/apartments/useAddComment";
+import useAuthStore from "../../../../store";
+import useAddComment from "../../../../hooks/apartments/useAddComment";
 import { FaStar } from "react-icons/fa";
-import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import LoadingSpinner from "../../../../components/loadingIndicators/LoadingSpinner";
 
 const schema = z.object({
   comment: z.string().min(1, "review too short").max(255, "review too long"),

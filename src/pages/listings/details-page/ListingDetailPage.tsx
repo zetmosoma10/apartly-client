@@ -3,12 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../../components/BackButton";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import useGetApartment from "../../../hooks/apartments/useGetApartment";
-import AmenitiesSection from "./AmenitiesSection";
-import CommentsSection from "./CommentsSection";
-import DescriptionSection from "./DescriptionSection";
-import ImageGridSection from "./ImageGridSection";
-import HeaderSection from "./HeaderSection";
-import MapSection from "./MapSection";
+import AmenitiesSection from "./page-sections/AmenitiesSection";
+import CommentsSection from "./page-sections/CommentsSection";
+import DescriptionSection from "./page-sections/DescriptionSection";
+import ImageGridSection from "./page-sections/ImageGridSection";
+import HeaderSection from "./page-sections/HeaderSection";
+import MapSection from "./page-sections/MapSection";
 
 const ListingDetailPage = () => {
   const { id } = useParams();

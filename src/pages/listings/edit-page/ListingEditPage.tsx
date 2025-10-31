@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import type { Response } from "../../../entities/Response";
 import type { Apartment } from "../../../entities/Apartment";
 import BackButton from "../../../components/BackButton";
-import ApartmentForm from "../form/ApartmentForm";
+import ApartmentForm from "../listing-form/ApartmentForm";
 
 const ListingEditPage = () => {
   const { id } = useParams();

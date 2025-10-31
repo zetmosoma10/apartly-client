@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import type { Apartment } from "../../../entities/Apartment";
-import ExpandableText from "../../../components/ExpandableText";
-import LandlordModal from "./LandlordModal";
+import type { Apartment } from "../../../../entities/Apartment";
+import ExpandableText from "../../../../components/ExpandableText";
+import LandlordModal from "../LandlordModal";
 
 const DescriptionSection = ({ apartment }: { apartment?: Apartment }) => {
   const landlordRef = useRef<HTMLDialogElement>(null);

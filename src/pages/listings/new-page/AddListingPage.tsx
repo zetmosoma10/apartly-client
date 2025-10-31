@@ -1,5 +1,5 @@
 import BackButton from "../../../components/BackButton";
-import ApartmentForm from "../form/ApartmentForm";
+import ApartmentForm from "../listing-form/ApartmentForm";
 
 const AddListingPage = () => {
   return (

@@ -9,7 +9,7 @@ import ApartmentMap from "../../listings/ApartmentMap";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import DeleteApartmentModal from "./DeleteApartmentModal";
 import useGetApartment from "../../../hooks/apartments/useGetApartment";
-import CommentsSection from "../../listings/details-page/CommentsSection";
+import CommentsSection from "../../listings/details-page/page-sections/CommentsSection";
 import ImageCarouselModal from "../../listings/details-page/ImageCarouselModal";
 import Rating from "../../listings/details-page/Rating";
 
