@@ -27,7 +27,7 @@ const ImageCarouselModal = ({ images, isOpen, onClose }: Props) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
-      <div className="relative w-full max-w-4xl p-4 bg-white rounded-lg shadow-lg h-[500px]">
+      <div className="relative w-full max-w-4xl p-4 bg-white rounded-lg shadow-lg">
         <button
           onClick={onClose}
           className="absolute z-10 p-2 text-white bg-black rounded-full top-2 right-2 hover:bg-gray-700"
