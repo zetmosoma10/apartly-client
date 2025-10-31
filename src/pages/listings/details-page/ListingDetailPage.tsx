@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { RiEdit2Fill } from "react-icons/ri";
 import { RiDeleteBin4Fill } from "react-icons/ri";
@@ -13,11 +13,10 @@ import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import Rating from "./Rating";
 import Comments from "./Comments";
-import ImageCarouselModal from "./ImageCarouselModal";
 import useGetApartment from "../../../hooks/apartments/useGetApartment";
+import ImageGrid from "./ImageGrid";
 
 const ListingDetailPage = () => {
-  const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const deleteRef = useRef<HTMLDialogElement>(null);
@@ -68,35 +67,7 @@ const ListingDetailPage = () => {
       </div>
 
       {/* IMAGE GRID */}
-      <div className="grid gap-2 mt-5 mb-8 sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 h-[500px] sm:mt-8 sm:mb-12">
-        <div
-          className="image-hover-container overflow-hidden cursor-pointer sm:col-span-2 sm:row-span-2 rounded-xl"
-          onClick={() => setIsCarouselOpen(true)}
-          style={{
-            backgroundImage: `url(${apartment?.images[0].url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
-        <div
-          className="image-hover-container overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
-          onClick={() => setIsCarouselOpen(true)}
-          style={{
-            backgroundImage: `url(${apartment?.images[1].url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
-        <div
-          className="image-hover-container overflow-hidden cursor-pointer sm:col-span-1 sm:row-span-1 rounded-xl"
-          onClick={() => setIsCarouselOpen(true)}
-          style={{
-            backgroundImage: `url(${apartment?.images[2].url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
-      </div>
+      <ImageGrid images={apartment?.images} />
 
       {/* DESCRIPTION */}
       <div className="flex flex-col gap-6 mt-5 md:flex-row md:items-start md:justify-between">
@@ -157,13 +128,6 @@ const ListingDetailPage = () => {
         ref={landlordRef}
         onClose={() => landlordRef?.current?.close()}
         landlord={apartment?.landlord}
-      />
-
-      {/* IMAGE CAROUSEL MODAL */}
-      <ImageCarouselModal
-        isOpen={isCarouselOpen}
-        images={apartment?.images || []}
-        onClose={() => setIsCarouselOpen(false)}
       />
     </section>
   );

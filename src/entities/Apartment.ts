@@ -18,10 +18,7 @@ export type Apartment = {
   ratings: Rating[];
   type: ApartmentType;
   amenities: string[];
-  images: {
-    _id: string;
-    url: string;
-  }[];
+  images: ApartmentImage[];
   coordinates: {
     lat: number;
     lng: number;
@@ -38,4 +35,7 @@ export type ApartmentType =
 
 export type Status = "available" | "rented" | "maintenance";
 
-
+export type ApartmentImage = {
+  _id: string;
+  url: string;
+};
