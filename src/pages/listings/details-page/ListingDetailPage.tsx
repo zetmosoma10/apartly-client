@@ -5,22 +5,21 @@ import { RiDeleteBin4Fill } from "react-icons/ri";
 import Badge from "../../../components/Badge";
 import BackButton from "../../../components/BackButton";
 import DeleteModal from "./DeleteModal";
-import LandlordModal from "./LandlordModal";
 import useAuthStore from "../../../store";
 import axios from "axios";
 import ApartmentMap from "../ApartmentMap";
-import ExpandableText from "../../../components/ExpandableText";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import Rating from "./Rating";
 import Comments from "./Comments";
 import useGetApartment from "../../../hooks/apartments/useGetApartment";
 import ImageGrid from "./ImageGrid";
+import Description from "./Description";
 
 const ListingDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const deleteRef = useRef<HTMLDialogElement>(null);
-  const landlordRef = useRef<HTMLDialogElement>(null);
+
   const { user } = useAuthStore();
   const { data, isLoading, error } = useGetApartment(id);
   const apartment = data?.results;
@@ -70,27 +69,13 @@ const ListingDetailPage = () => {
       <ImageGrid images={apartment?.images} />
 
       {/* DESCRIPTION */}
-      <div className="flex flex-col gap-6 mt-5 md:flex-row md:items-start md:justify-between">
-        <div>
-          <h3>Descriptions</h3>
-          <ExpandableText>{apartment?.description as string}</ExpandableText>
-        </div>
-        <div className="border p-4 min-w-[300px] max-w-[400px] bg-white shadow-md rounded-lg">
-          <h4 className="">R {apartment?.price} / month</h4>
-          <p className="mb-3 text-xs opacity-70">
-            <span>
-              {apartment?.bedrooms} bedroom(s) • {apartment?.bathrooms}{" "}
-              bathroom(s)
-            </span>
-          </p>
-          <button
-            onClick={() => landlordRef?.current?.showModal()}
-            className="w-full btn btn-sm btn-outline btn-warning rounded-2xl"
-          >
-            Contact Landlord
-          </button>
-        </div>
-      </div>
+      <Description
+        landlord={apartment?.landlord}
+        description={apartment?.description}
+        bathrooms={apartment?.bathrooms}
+        bedrooms={apartment?.bedrooms}
+        price={apartment?.price}
+      />
 
       {/* AMENITES */}
       <div className="mt-6">
@@ -121,13 +106,6 @@ const ListingDetailPage = () => {
         ref={deleteRef}
         onClose={() => deleteRef.current?.close()}
         apartment={apartment}
-      />
-
-      {/* LANDLORD MODAL */}
-      <LandlordModal
-        ref={landlordRef}
-        onClose={() => landlordRef?.current?.close()}
-        landlord={apartment?.landlord}
       />
     </section>
   );

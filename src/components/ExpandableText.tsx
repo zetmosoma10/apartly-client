@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 type Props = {
-  children: string;
+  children?: string;
 };
 
 const ExpandableText = ({ children }: Props) => {
@@ -16,10 +16,10 @@ const ExpandableText = ({ children }: Props) => {
 
   return (
     <p className="mt-1">
-      <span className="opacity-70 leading-tight">{summary}</span>
+      <span className="leading-tight opacity-70">{summary}</span>
       <button
         onClick={() => setIsExpended(!isExpanded)}
-        className="btn btn-xs btn-warning ml-1"
+        className="ml-1 btn btn-xs btn-warning"
       >
         {isExpanded ? "Show less" : "Show more"}
       </button>
