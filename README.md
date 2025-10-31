@@ -5,18 +5,18 @@ It connects to the [Apartly API](../apartly-api) to provide users with a seamles
 
 ## ✨ Features
 
-- View apartments with filters: search, price, type, pagination,and status
-- JWT-based login/register for users
-- Role based access control, tenant, landlord and admin
-- Tenant can add rating and review comments on apartments
-- Landlord can perform CRUD operation for apartments
-- Admin can perform CRUD operation on tenants, landlords and landlord's apartments
-- View Apartment location on Map with leaflet library
-- Image carousel for apartment galleries
-- Landlord profiles and contact details
-- Client-side routing with React Router
-- Responsive and mobile-friendly UI
-- Optimistic updates and caching via React Query
+- **User Roles** – Tenant, Landlord, and Admin
+- **Apartment Management** – Create, update, delete, and view apartments
+- **Advanced Filtering** – Search, sort, and filter by price, type, and status
+- **Image Uploads** – Managed via **Cloudinary**
+- **Reviews & Ratings** – Tenants can review and rate apartments
+- **JWT Authentication** – Secure authentication and token validation
+- **Pagination & Metadata** – Efficient listing responses
+- **Optimistic update and caching** - Data cache with Tanstack
+- **Map Location** - View apartment location on map using **leaflet**
+- **View Image Galleries** - View Image galleries with **react-image-gallery**
+- **Client-side routing** with **React Router**
+- **Responsive and mobile-friendly UI**
 
 ## 🧠 Tech Stack
 
@@ -29,6 +29,7 @@ It connects to the [Apartly API](../apartly-api) to provide users with a seamles
 - **React Icons**
 - **Leaflet**
 - **Zustand**
+- **react-hot-toast**
 - **Vite** (for fast builds)
 
 ## ⚙️ Environment Variables
