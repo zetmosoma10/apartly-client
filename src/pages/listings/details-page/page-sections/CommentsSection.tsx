@@ -117,8 +117,8 @@ const CommentsSection = ({ apartment }: Props) => {
                   ) : (
                     <div className="flex items-center justify-center w-10 h-10 bg-black rounded-full">
                       <span className="text-gray-100">
-                        {user?.firstName[0]}
-                        {user?.lastName[0]}
+                        {review?.tenant?.firstName[0]}
+                        {review?.tenant?.lastName[0]}
                       </span>
                     </div>
                   )}
