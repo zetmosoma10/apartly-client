@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import NavBar from "../components/navigation/NavBar";
-import Footer from "../components/Footer";
+import Footer from "../components/navigation/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 
 function Layout() {

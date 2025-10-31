@@ -1,7 +1,7 @@
 import { RiBuilding2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import useAuthStore from "../../store";
-import Navlinks from "./Navlinks";
+import TabletNavlink from "./TabletNavlink";
 import ProfileLink from "./ProfileLink";
 import MobileNav from "./MobileNav";
 
@@ -16,8 +16,18 @@ const NavBar = () => {
           Apartly
         </Link>
       </div>
-      <div className="hidden md:block">
-        <Navlinks />
+      <div className="hidden space-x-3 md:block">
+        <TabletNavlink to="/">Home</TabletNavlink>
+        <TabletNavlink end={true} to="/apartments">
+          Apartments
+        </TabletNavlink>
+        {user && user.role === "landlord" && (
+          <TabletNavlink to="/apartments/listings">Listings</TabletNavlink>
+        )}
+        {user && <TabletNavlink to="/account">Account</TabletNavlink>}
+        {user && user.role === "admin" && (
+          <TabletNavlink to="/admin">Admin</TabletNavlink>
+        )}
       </div>
       <div className="hidden md:block">
         {!user && (

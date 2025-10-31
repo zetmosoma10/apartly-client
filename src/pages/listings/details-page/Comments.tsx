@@ -97,8 +97,8 @@ const Comments = ({ apartment }: Props) => {
         </form>
       )}
 
-      <div className="h-[350px] overflow-y-auto">
-        {/* Reviews List */}
+      {/* Reviews List */}
+      <div className="max-h-[350px] overflow-y-auto">
         <div className="pr-2 space-y-5 overflow-y-auto max-h-80 scrollbar-thin scrollbar-thumb-neutral-300">
           {length > 0 ? (
             ratings

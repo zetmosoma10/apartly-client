@@ -87,7 +87,7 @@ export default function MobileNav() {
           <MobileNavLink end={true} to="/apartments" onClick={closeNav}>
             Apartments
           </MobileNavLink>
-          {user && user.role !== "landlord" && (
+          {user && user.role === "landlord" && (
             <MobileNavLink to="/apartments/listings" onClick={closeNav}>
               Listings
             </MobileNavLink>
