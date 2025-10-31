@@ -1,5 +1,11 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
+const markerIcon = new L.Icon({
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
 type Props = {
   coordinates?: {
     lat: number;
@@ -13,12 +19,12 @@ const ApartmentMap = ({ coordinates }: Props) => {
 
   return (
     <div className="h-[400px] w-full rounded-lg overflow-hidden">
-      <MapContainer center={[lat, lng]} zoom={15} className="h-full w-full">
+      <MapContainer center={[lat, lng]} zoom={15} className="w-full h-full">
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[lat, lng]}>
+        <Marker position={[lat, lng]} icon={markerIcon}>
           <Popup>Apartment Location</Popup>
         </Marker>
       </MapContainer>
