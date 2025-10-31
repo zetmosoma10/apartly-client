@@ -19,7 +19,7 @@ type Props = {
   apartment?: Apartment;
 };
 
-const Comments = ({ apartment }: Props) => {
+const CommentsSection = ({ apartment }: Props) => {
   const { user } = useAuthStore();
   const { mutate, isPending } = useAddComment();
   const length = apartment?.ratings?.filter((r) => r.comment).length as number;
@@ -167,4 +167,4 @@ const Comments = ({ apartment }: Props) => {
   );
 };
 
-export default Comments;
+export default CommentsSection;

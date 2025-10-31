@@ -9,7 +9,7 @@ import ApartmentMap from "../../listings/ApartmentMap";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
 import DeleteApartmentModal from "./DeleteApartmentModal";
 import useGetApartment from "../../../hooks/apartments/useGetApartment";
-import Comments from "../../listings/details-page/Comments";
+import CommentsSection from "../../listings/details-page/CommentsSection";
 import ImageCarouselModal from "../../listings/details-page/ImageCarouselModal";
 import Rating from "../../listings/details-page/Rating";
 
@@ -108,7 +108,7 @@ const AdminApartmentDetailsPage = () => {
       </div>
 
       {/* REVIEW SECTION */}
-      <Comments apartment={apartment} />
+      <CommentsSection apartment={apartment} />
 
       {/* DELETE MODAL */}
       <DeleteApartmentModal

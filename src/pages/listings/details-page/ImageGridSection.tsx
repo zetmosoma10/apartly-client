@@ -6,7 +6,7 @@ type Props = {
   images?: ApartmentImage[];
 };
 
-const ImageGrid = ({ images }: Props) => {
+const ImageGridSection = ({ images }: Props) => {
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
 
   return (
@@ -51,4 +51,4 @@ const ImageGrid = ({ images }: Props) => {
   );
 };
 
-export default ImageGrid;
+export default ImageGridSection;

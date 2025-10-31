@@ -1,4 +1,4 @@
-const Amenities = ({ amenities }: { amenities?: string[] }) => {
+const AmenitiesSection = ({ amenities }: { amenities?: string[] }) => {
   return (
     <div className="mt-6">
       <h3>Amenities</h3>
@@ -16,4 +16,4 @@ const Amenities = ({ amenities }: { amenities?: string[] }) => {
   );
 };
 
-export default Amenities;
+export default AmenitiesSection;

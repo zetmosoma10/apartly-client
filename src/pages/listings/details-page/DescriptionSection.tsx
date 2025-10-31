@@ -1,23 +1,9 @@
 import { useRef } from "react";
-import type { User } from "../../../entities/User";
+import type { Apartment } from "../../../entities/Apartment";
 import ExpandableText from "../../../components/ExpandableText";
 import LandlordModal from "./LandlordModal";
 
-type Props = {
-  description?: string;
-  price?: string;
-  bedrooms?: string;
-  bathrooms?: string;
-  landlord?: User;
-};
-
-const Description = ({
-  price,
-  bedrooms,
-  bathrooms,
-  description,
-  landlord,
-}: Props) => {
+const DescriptionSection = ({ apartment }: { apartment?: Apartment }) => {
   const landlordRef = useRef<HTMLDialogElement>(null);
 
   return (
@@ -25,13 +11,14 @@ const Description = ({
       <div className="flex flex-col gap-6 mt-5 md:flex-row md:items-start md:justify-between">
         <div>
           <h3>Descriptions</h3>
-          <ExpandableText>{description}</ExpandableText>
+          <ExpandableText>{apartment?.description}</ExpandableText>
         </div>
         <div className="border p-4 min-w-[300px] max-w-[400px] bg-white shadow-md rounded-lg">
-          <h4 className="">R {price} / month</h4>
+          <h4 className="">R {apartment?.price} / month</h4>
           <p className="mb-3 text-xs opacity-70">
             <span>
-              {bedrooms} bedroom(s) • {bathrooms} bathroom(s)
+              {apartment?.bedrooms} bedroom(s) • {apartment?.bathrooms}{" "}
+              bathroom(s)
             </span>
           </p>
           <button
@@ -47,10 +34,10 @@ const Description = ({
       <LandlordModal
         ref={landlordRef}
         onClose={() => landlordRef?.current?.close()}
-        landlord={landlord}
+        landlord={apartment?.landlord}
       />
     </>
   );
 };
 
-export default Description;
+export default DescriptionSection;
