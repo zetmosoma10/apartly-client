@@ -1,7 +1,7 @@
 # Apartly Client
 
 Apartly Client is a modern web application built with **React + TypeScript + Tailwindcss** and **React Query**.  
-It connects to the [Apartly API](../apartly-api) to provide users with a seamless way to browse, filter, and review apartments.
+It connects to the [Apartly API](https://github.com/zetmosoma10/apartly-api) to provide users with a seamless way to browse, filter, and review apartments.
 
 ## ✨ Features
 
