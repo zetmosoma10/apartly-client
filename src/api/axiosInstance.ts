@@ -41,7 +41,7 @@ api.interceptors.response.use(
 
     // ! Re-throw to let React Query handle it too
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

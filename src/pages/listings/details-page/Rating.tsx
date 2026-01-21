@@ -48,7 +48,7 @@ const Rating = ({ apartment }: { apartment?: Apartment }) => {
               onClick={() => handleRating(value)}
               className={`cursor-pointer ${
                 rating && value <= rating ? "text-yellow-400" : "text-gray-400"
-              } hover:text-yellow-500 transition`}
+              } `}
             />
           ))}
         </div>
