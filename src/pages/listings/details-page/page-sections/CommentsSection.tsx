@@ -58,10 +58,10 @@ const CommentsSection = ({ apartment }: Props) => {
             <img
               src={user?.avatar?.url}
               alt="User avatar"
-              className="object-cover w-10 h-10 border rounded-full"
+              className="hidden sm:block object-cover w-10 h-10 border rounded-full"
             />
           ) : (
-            <div className="flex items-center justify-center w-10 h-10 bg-black rounded-full">
+            <div className="hidden sm:flex items-center justify-center w-10 h-10 bg-black rounded-full">
               <span className="text-white">
                 {user?.firstName[0]}
                 {user?.lastName[0]}
