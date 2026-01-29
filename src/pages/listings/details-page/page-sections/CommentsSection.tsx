@@ -3,10 +3,10 @@ import { FiSend } from "react-icons/fi";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Apartment } from "../../../../entities/Apartment";
+import { FaStar } from "react-icons/fa";
 import dayjs from "dayjs";
 import useAuthStore from "../../../../store";
 import useAddComment from "../../../../hooks/apartments/useAddComment";
-import { FaStar } from "react-icons/fa";
 import LoadingSpinner from "../../../../components/loadingIndicators/LoadingSpinner";
 
 const schema = z.object({
@@ -130,7 +130,7 @@ const CommentsSection = ({ apartment }: Props) => {
                         </p>
 
                         {/* Rating */}
-                        {review.rating && (
+                        {review?.rating && (
                           <div className="flex items-center gap-1 text-yellow-500">
                             <FaStar className="text-yellow-400" />
                             <span className="text-sm text-gray-600">

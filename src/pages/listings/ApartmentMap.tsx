@@ -21,7 +21,12 @@ const ApartmentMap = ({ coordinates }: Props) => {
 
   return (
     <div className="h-[400px] w-full rounded-lg overflow-hidden">
-      <MapContainer center={[lat, lng]} zoom={15} className="w-full h-full">
+      <MapContainer
+        center={[lat, lng]}
+        zoom={15}
+        scrollWheelZoom={false}
+        className="w-full h-full"
+      >
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
