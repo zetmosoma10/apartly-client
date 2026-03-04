@@ -13,8 +13,26 @@ export const register = async (credentials: registerCredentials) => {
 };
 
 export const forgotPassword = async (email: string) => {
-  const { data } = await api.post<AuthResponse>("/auth/forgot-password", {
-    email,
-  });
+  const { data } = await api.post<{ success: boolean; message: string }>(
+    "/auth/forgot-password",
+    {
+      email,
+    },
+  );
+  return data;
+};
+
+type ResetPasswordPayload = {
+  id: string | null;
+  token: string | null;
+  password: string;
+};
+
+export const resetPassword = async (payload: ResetPasswordPayload) => {
+  const { data } = await api.patch<AuthResponse>(
+    "/auth/reset-password",
+    { password: payload.password },
+    { params: { token: payload.token, id: payload.id } },
+  );
   return data;
 };
