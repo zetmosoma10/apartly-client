@@ -13,7 +13,7 @@ const resetPasswordSchema = z
       .min(4, "Confirm Password too short")
       .max(100, "Confirm Password require 100+ characters"),
   })
-  .refine((data) => data.password !== data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
   });
 
