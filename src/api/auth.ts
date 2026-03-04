@@ -11,3 +11,10 @@ export const register = async (credentials: registerCredentials) => {
   const { data } = await api.post<AuthResponse>("/auth/register", credentials);
   return data;
 };
+
+export const forgotPassword = async (email: string) => {
+  const { data } = await api.post<AuthResponse>("/auth/forgot-password", {
+    email,
+  });
+  return data;
+};

@@ -63,7 +63,7 @@ const LoginPage = () => {
           </p>
         </div>
 
-        {/* Erver error */}
+        {/* Expected error */}
         {expectedError && <ErrorMessage errorMessage={expectedError} />}
 
         {/* REDIRECT ERROR MESSAGE */}
