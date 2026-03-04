@@ -79,7 +79,7 @@ const ForgotPasswordPage = () => {
             />
           </div>
           <button disabled={isPending} className="w-full mt-5 btn-main">
-            {isPending ? <LoadingSpinner /> : "Reset Password"}
+            {isPending ? <LoadingSpinner /> : "Submit"}
           </button>
         </form>
       </div>
