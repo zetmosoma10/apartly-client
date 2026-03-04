@@ -78,6 +78,7 @@ const ResetPasswordPage = () => {
             <Input
               id="password"
               label="Password"
+              type="password"
               autoFocus={true}
               placeholder="•••••••••"
               register={register("password")}
@@ -86,6 +87,7 @@ const ResetPasswordPage = () => {
             <Input
               id="confirmPassword"
               label="Confirm Password"
+              type="password"
               placeholder="•••••••••"
               register={register("confirmPassword")}
               error={errors.confirmPassword?.message}
