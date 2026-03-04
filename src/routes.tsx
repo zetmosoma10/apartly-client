@@ -17,6 +17,7 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminApartmensPage from "./pages/admin/apartments-page/AdminApartmensPage";
 import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
 import AdminApartmentDetailsPage from "./pages/admin/details-page/AdminApartmentDetailsPage";
+import ForgotPasswordPage from "./pages/auth/forgot-password/ForgotPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
           {
             path: "/auth/register",
             element: <RegisterPage />,
+          },
+          {
+            path: "/auth/forgot-password",
+            element: <ForgotPasswordPage />,
           },
         ],
       },

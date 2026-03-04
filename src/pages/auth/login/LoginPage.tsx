@@ -72,23 +72,33 @@ const LoginPage = () => {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4">
-            <Input
-              id="email"
-              label="Email"
-              autoFocus={true}
-              placeholder="e.g johndoe@gmail.com"
-              register={register("email")}
-              error={errors.email?.message}
-            />
-            <Input
-              id="password"
-              label="Password"
-              type="password"
-              placeholder="Enter password"
-              register={register("password")}
-              error={errors.password?.message}
-            />
+          <div>
+            <div className="space-y-4">
+              <Input
+                id="email"
+                label="Email"
+                autoFocus={true}
+                placeholder="e.g johndoe@gmail.com"
+                register={register("email")}
+                error={errors.email?.message}
+              />
+              <Input
+                id="password"
+                label="Password"
+                type="password"
+                placeholder="Enter password"
+                register={register("password")}
+                error={errors.password?.message}
+              />
+            </div>
+            <div className="mt-2 mb-4 text-end">
+              <Link
+                className="text-sm text-warning hover:underline"
+                to="/auth/forgot-password"
+              >
+                Forgot password?
+              </Link>
+            </div>
           </div>
           <button disabled={isPending} className="w-full mt-5 btn-main">
             Sign in

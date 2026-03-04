@@ -37,7 +37,7 @@ It connects to the [Apartly API](https://github.com/zetmosoma10/apartly-api) to 
 Create `.env` in the project root:
 
 ```env
-VITE_API_BASE_URL=http://localhost:3000/api
+VITE_BASE_URL=http://localhost:3000/api
 
 # 1️⃣ Install dependencies
 npm install
