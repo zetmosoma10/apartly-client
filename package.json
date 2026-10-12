@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -41,6 +43,7 @@
     "@types/react-dom": "^19.1.9",
     "@types/react-image-gallery": "^1.2.4",
     "@vitejs/plugin-react": "^5.0.3",
+    "@vitest/ui": "^5.0.3",
     "autoprefixer": "^10.4.21",
     "daisyui": "^5.1.26",
     "eslint": "^9.36.0",
