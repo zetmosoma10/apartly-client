@@ -43,7 +43,7 @@ describe("<ExpandableText/>", () => {
 
     await user.click(showMoreButton);
 
-    expect(longText).toBeInTheDocument();
+    expect(screen.getByText(longText)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /show less/i }),
     ).toBeInTheDocument();
