@@ -10,12 +10,12 @@ const ExpandableText = ({ children }: Props) => {
 
   if (!children) return null;
 
-  if (children.length <= limit) return <p>{children}</p>;
+  if (children.length <= limit) return <p role="definition">{children}</p>;
 
   const summary = isExpanded ? children : children.substring(0, limit) + "...";
 
   return (
-    <p className="mt-1">
+    <p className="mt-1" role="definition">
       <span className="leading-tight opacity-70">{summary}</span>
       <button
         onClick={() => setIsExpended(!isExpanded)}
