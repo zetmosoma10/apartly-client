@@ -73,7 +73,11 @@ const Input = ({
           }`}
         />
       )}
-      {error && <p className="text-sm text-error">{error}</p>}
+      {error && (
+        <p role="alert" className="text-sm text-error">
+          {error}
+        </p>
+      )}
     </div>
   );
 };
