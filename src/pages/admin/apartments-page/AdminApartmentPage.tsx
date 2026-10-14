@@ -1,11 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
-import type { Apartment } from "../../../entities/Apartment";
-import BackButton from "../../../components/BackButton";
 import ApartmentGrid from "../../../components/ApartmentGrid";
+import BackButton from "../../../components/BackButton";
 import ApartmentsGridSkeletons from "../../../components/loadingIndicators/ApartmentsGridSkeletons";
+import type { Apartment } from "../../../entities/Apartment";
 import useGetLandlordApartments from "../../../hooks/admin/useGetLandlordApartments";
 
-const AdminApartmensPage = () => {
+const AdminApartmentPage = () => {
   const params = useParams();
   const { state } = useLocation();
   const landlordId = params.landlordId as string;
@@ -30,4 +30,4 @@ const AdminApartmensPage = () => {
   );
 };
 
-export default AdminApartmensPage;
+export default AdminApartmentPage;
