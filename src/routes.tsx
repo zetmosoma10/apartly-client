@@ -1,24 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./pages/Layout";
-import HomePage from "./pages/HomePage";
-import ListingPage from "./pages/listings/ListingPage";
-import ApartmentsPage from "./pages/apartments/ApartmentsPage";
-import AuthPage from "./pages/auth/AuthPage";
-import LoginPage from "./pages/auth/login/LoginPage";
-import RegisterPage from "./pages/auth/register/RegisterPage";
+import AdminRoute from "./components/middlewares/AdminRoute";
 import ProtectRoute from "./components/middlewares/ProtectRoute";
+import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
+import HomePage from "./pages/HomePage";
+import Layout from "./pages/Layout";
 import NotFoundPage from "./pages/NotFoundPage";
 import AccountPage from "./pages/account/AccountPage";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminApartmentPage from "./pages/admin/apartments-page/AdminApartmentPage";
+import AdminApartmentDetailsPage from "./pages/admin/details-page/AdminApartmentDetailsPage";
+import ApartmentsPage from "./pages/apartments/ApartmentsPage";
+import AuthPage from "./pages/auth/AuthPage";
+import ForgotPasswordPage from "./pages/auth/forgot-password/ForgotPasswordPage";
+import LoginPage from "./pages/auth/login/LoginPage";
+import RegisterPage from "./pages/auth/register/RegisterPage";
+import ResetPasswordPage from "./pages/auth/reset-password/ResetPasswordPage";
+import ListingPage from "./pages/listings/ListingPage";
 import ListingDetailPage from "./pages/listings/details-page/ListingDetailPage";
 import ListingEditPage from "./pages/listings/edit-page/ListingEditPage";
 import AddListingPage from "./pages/listings/new-page/AddListingPage";
-import AdminRoute from "./components/middlewares/AdminRoute";
-import AdminPage from "./pages/admin/AdminPage";
-import AdminApartmensPage from "./pages/admin/apartments-page/AdminApartmensPage";
-import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
-import AdminApartmentDetailsPage from "./pages/admin/details-page/AdminApartmentDetailsPage";
-import ForgotPasswordPage from "./pages/auth/forgot-password/ForgotPasswordPage";
-import ResetPasswordPage from "./pages/auth/reset-password/ResetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/admin/users/:landlordId/apartments",
-                element: <AdminApartmensPage />,
+                element: <AdminApartmentPage />,
               },
               {
                 path: "/admin/users/apartments/:id",
