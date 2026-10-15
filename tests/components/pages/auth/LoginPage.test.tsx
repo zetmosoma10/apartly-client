@@ -1,24 +1,19 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "../../../../src/pages/auth/login/LoginPage";
 import HomePage from "../../../../src/pages/HomePage";
-
-// A small helper component to read the current URL path in tests
-const DisplayLocation = () => {
-  const { pathname } = useLocation();
-  return <div data-testid="display-location">{pathname}</div>;
-};
+import DisplayLocation from "./DisplayLocation";
 
 describe("<LoginPage/>", () => {
   const renderComponent = () => {
     const queryClient = new QueryClient();
     render(
-      <MemoryRouter initialEntries={["/login"]}>
+      <MemoryRouter initialEntries={["/auth/login"]}>
         <QueryClientProvider client={queryClient}>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/auth/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
           <DisplayLocation />

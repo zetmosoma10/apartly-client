@@ -1,15 +1,15 @@
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Input from "../../../components/Input";
-import registerSchema from "./registerSchema";
-import axios from "axios";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import ErrorMessage from "../ErrorMessage";
 import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
 import useRegister from "../../../hooks/auth/useRegister";
+import ErrorMessage from "../ErrorMessage";
+import registerSchema from "./registerSchema";
 
 type FormData = z.infer<typeof registerSchema>;
 
@@ -29,8 +29,8 @@ const RegisterPage = () => {
 
   const onSubmit = (data: FormData) => {
     const formData = data;
-    if (location.state.role === "landlord") formData.role = "landlord";
-    if (location.state.role === "tenant") formData.role = "tenant";
+    if (location.state?.role === "landlord") formData.role = "landlord";
+    if (location.state?.role === "tenant") formData.role = "tenant";
 
     mutate(formData, {
       onSuccess: () => {
@@ -116,7 +116,7 @@ const RegisterPage = () => {
               id="confirmPassword"
               label="Confirm Password"
               type="password"
-              placeholder="Enter password"
+              placeholder="Confirm password"
             />
           </div>
 
