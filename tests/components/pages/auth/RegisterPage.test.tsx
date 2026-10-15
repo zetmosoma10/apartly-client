@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import RegisterPage from "../../../../src/pages/auth/register/RegisterPage";
 import HomePage from "../../../../src/pages/HomePage";
-import DisplayLocation from "./DisplayLocation";
+import { DisplayLocation } from "../../../utils";
 
 describe("<RegisterPage/>", () => {
   const renderComponent = () => {

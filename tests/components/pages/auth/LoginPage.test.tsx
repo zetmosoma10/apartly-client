@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "../../../../src/pages/auth/login/LoginPage";
 import HomePage from "../../../../src/pages/HomePage";
-import DisplayLocation from "./DisplayLocation";
+import { DisplayLocation } from "../../../utils";
 
 describe("<LoginPage/>", () => {
   const renderComponent = () => {
