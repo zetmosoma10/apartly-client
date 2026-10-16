@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import Input from "../../../components/Input";
-import forgotPasswordSchema from "./forgotPasswordSchema";
-import axios from "axios";
-import toast from "react-hot-toast";
+import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
 import useForgotPassword from "../../../hooks/auth/useForgotPassword";
 import ErrorMessage from "../ErrorMessage";
-import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import forgotPasswordSchema from "./forgotPasswordSchema";
 
 type FormData = z.infer<typeof forgotPasswordSchema>;
 

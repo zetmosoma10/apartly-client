@@ -51,4 +51,24 @@ export const authHandlers = [
       { status: 201 },
     );
   }),
+  http.post(`${baseUrl}/auth/forgot-password`, async ({ request }) => {
+    const body = (await request.json()) as { email: string };
+
+    if (body.email === "notfound@gmail.com") {
+      return HttpResponse.json(
+        {
+          success: false,
+          message: "Invalid email",
+        },
+        { status: 400 },
+      );
+    }
+
+    return HttpResponse.json(
+      {
+        success: true,
+      },
+      { status: 200 },
+    );
+  }),
 ];
