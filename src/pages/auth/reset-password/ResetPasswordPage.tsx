@@ -1,15 +1,15 @@
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
-import toast from "react-hot-toast";
 import Input from "../../../components/Input";
-import axios from "axios";
-import resetPasswordSchema from "./resetPasswordSchema";
-import useResetPassword from "../../../hooks/auth/useResetPassword";
 import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import useResetPassword from "../../../hooks/auth/useResetPassword";
 import ErrorMessage from "../ErrorMessage";
+import resetPasswordSchema from "./resetPasswordSchema";
 
 type FormData = z.infer<typeof resetPasswordSchema>;
 
