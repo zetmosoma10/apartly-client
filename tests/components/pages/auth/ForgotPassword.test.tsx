@@ -63,4 +63,18 @@ describe("<ForgotPasswordPage/>", () => {
 
     expect(await screen.findByText(/Invalid email/i)).toBeInTheDocument();
   });
+
+  it("should toast success message when form submitted", async () => {
+    const { user, emailInput, submitButton } = renderComponent();
+
+    await user.type(emailInput, "john@gmail.com");
+
+    await user.click(submitButton);
+
+    expect(
+      await screen.findByText(
+        /We have sent you an email with instructions to reset your password/i,
+      ),
+    ).toBeInTheDocument();
+  });
 });
