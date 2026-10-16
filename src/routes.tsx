@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, type RouteObject } from "react-router-dom";
 import AdminRoute from "./components/middlewares/AdminRoute";
 import ProtectRoute from "./components/middlewares/ProtectRoute";
 import RedirectIfAuthenticated from "./components/middlewares/RedirectIfAuthenticated";
@@ -20,7 +20,7 @@ import ListingDetailPage from "./pages/listings/details-page/ListingDetailPage";
 import ListingEditPage from "./pages/listings/edit-page/ListingEditPage";
 import AddListingPage from "./pages/listings/new-page/AddListingPage";
 
-const router = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Layout />,
@@ -111,6 +111,8 @@ const router = createBrowserRouter([
     path: "*",
     element: <NotFoundPage />,
   },
-]);
+];
+
+const router = createBrowserRouter(routes);
 
 export default router;

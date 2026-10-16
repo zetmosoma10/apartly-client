@@ -7,6 +7,12 @@ import type {
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const authHandlers = [
+  http.get(`${baseUrl}/apartments`, async () => {
+    return HttpResponse.json(null, { status: 200 });
+  }),
+  http.get(`${baseUrl}/apartments/features`, async () => {
+    return HttpResponse.json(null, { status: 200 });
+  }),
   http.post(`${baseUrl}/auth/login`, async ({ request }) => {
     const body = (await request.json()) as loginCredentials;
 
