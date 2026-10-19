@@ -14,16 +14,21 @@ export const DisplayLocation = () => {
   return <div data-testid="display-location">{pathname}</div>;
 };
 
-export const navigateTo = (path: string) => {
+export const navigateTo = (
+  path: string,
+  queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  }),
+) => {
   const router = createMemoryRouter(routes, {
     initialEntries: [path],
   });
-
-  const queryClient = new QueryClient();
 
   render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>,
   );
+
+  return { queryClient, router };
 };

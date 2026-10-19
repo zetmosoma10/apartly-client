@@ -1,6 +1,9 @@
+import { QueryClient } from "@tanstack/react-query";
 import { screen } from "@testing-library/react";
+import type { Apartment } from "../src/entities/Apartment";
+import type { Response } from "../src/entities/Response";
 import useAuthStore from "../src/store";
-import { mockApartment, mockLandlordUser } from "./mocks/data";
+import { mockAdminUser, mockApartment, mockLandlordUser } from "./mocks/data";
 import { navigateTo } from "./utils";
 
 describe("Routes", () => {
@@ -40,30 +43,38 @@ describe("Routes", () => {
     it.each([
       {
         url: "/account",
+        scenario: "/account",
       },
       {
         url: "/apartments/listings",
+        scenario: "/apartments/listings",
       },
       {
         url: "/apartments/listings/new",
+        scenario: "/apartments/listings/new",
       },
       {
-        url: "/apartments/listings/:id",
+        url: `/apartments/listings/${mockLandlordUser}`,
+        scenario: "/apartments/listings/:id",
       },
       {
-        url: "/apartments/listings/:id/edit",
+        url: `/apartments/listings/${mockLandlordUser._id}/edit`,
+        scenario: "/apartments/listings/:id/edit",
       },
       {
         url: "/admin",
+        scenario: "/admin",
       },
       {
-        url: "/admin/users/:id/apartments",
+        url: `/admin/users/${mockAdminUser._id}/apartments`,
+        scenario: "/admin/users/:id/apartments",
       },
       {
-        url: "/admin/users/apartments/:id",
+        url: `/admin/users/apartments/${mockApartment._id}`,
+        scenario: "/admin/users/apartments/:id",
       },
     ])(
-      "should redirect unauthenticated user to login when navigating to $url",
+      "should redirect unauthenticated user to login when navigating to $scenario",
       ({ url }) => {
         navigateTo(url);
 
@@ -75,14 +86,59 @@ describe("Routes", () => {
       },
     );
 
-    it("should navigate to /account if user is authenticated", async () => {
+    it.each([
+      {
+        url: "/account",
+        value: `${mockLandlordUser.firstName} ${mockLandlordUser.lastName}`,
+        scenario: "/account",
+      },
+      {
+        url: "/apartments/listings",
+        value: "Your Listings",
+        scenario: "/apartments/listings",
+      },
+      {
+        url: "/apartments/listings/new",
+        value: "Create New Listing",
+        scenario: "/apartments/listings/new",
+      },
+      {
+        url: `/apartments/listings/${mockApartment._id}`,
+        value: `${mockApartment.title}`,
+        scenario: "/apartments/listings/:id",
+      },
+    ])(
+      "should navigate to $scenario if user is authenticated",
+      async ({ url, value }) => {
+        useAuthStore.setState({ user: mockLandlordUser });
+
+        navigateTo(url);
+
+        expect(
+          await screen.findByRole("heading", {
+            name: value,
+          }),
+        ).toBeInTheDocument();
+      },
+    );
+
+    it("should should navigate to /apartments/listings/:id/edit if user is authenticated", () => {
       useAuthStore.setState({ user: mockLandlordUser });
 
-      navigateTo("/account");
+      const queryClient = new QueryClient({
+        defaultOptions: { queries: { retry: false } },
+      });
+
+      queryClient.setQueryData<Response<Apartment>>(
+        ["apartments", mockApartment._id],
+        { success: true, results: mockApartment },
+      );
+
+      navigateTo(`/apartments/listings/${mockApartment._id}/edit`, queryClient);
 
       expect(
-        await screen.findByRole("heading", {
-          name: `${mockLandlordUser.firstName} ${mockLandlordUser.lastName}`,
+        screen.getByRole("heading", {
+          name: `Edit Apartment: ${mockApartment.title}`,
         }),
       ).toBeInTheDocument();
     });
