@@ -6,8 +6,8 @@ import useGetApartment from "../../../hooks/apartments/useGetApartment";
 import AmenitiesSection from "./page-sections/AmenitiesSection";
 import CommentsSection from "./page-sections/CommentsSection";
 import DescriptionSection from "./page-sections/DescriptionSection";
-import ImageGridSection from "./page-sections/ImageGridSection";
 import HeaderSection from "./page-sections/HeaderSection";
+import ImageGridSection from "./page-sections/ImageGridSection";
 import MapSection from "./page-sections/MapSection";
 
 const ListingDetailPage = () => {

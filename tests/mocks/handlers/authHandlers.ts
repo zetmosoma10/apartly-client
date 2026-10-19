@@ -2,13 +2,23 @@ import { http, HttpResponse } from "msw";
 import type {
   loginCredentials,
   registerCredentials,
-} from "../../src/entities/User";
+} from "../../../src/entities/User";
+import { mockApartment } from "../data";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const authHandlers = [
   http.get(`${baseUrl}/apartments`, async () => {
     return HttpResponse.json(null, { status: 200 });
+  }),
+  http.get(`${baseUrl}/apartments/:id`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockApartment,
+      },
+      { status: 200 },
+    );
   }),
   http.get(`${baseUrl}/apartments/features`, async () => {
     return HttpResponse.json(null, { status: 200 });

@@ -1,4 +1,5 @@
 import { screen } from "@testing-library/react";
+import { mockApartment } from "./mocks/data";
 import { navigateTo } from "./utils";
 
 describe("Routes", () => {
@@ -15,6 +16,14 @@ describe("Routes", () => {
 
     expect(
       screen.getByRole("heading", { name: /Apartments/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("should render apartments detail page for /apartments/:id ", async () => {
+    navigateTo(`/apartments/${mockApartment._id}`);
+
+    expect(
+      await screen.findByRole("heading", { name: mockApartment.title }),
     ).toBeInTheDocument();
   });
 });

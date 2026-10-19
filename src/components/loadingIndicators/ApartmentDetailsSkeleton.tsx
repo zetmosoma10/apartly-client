@@ -3,7 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const ApartmentDetailsSkeleton = () => {
   return (
-    <section className="max-container pt-10">
+    <section role="progressbar" className="pt-10 max-container">
       <Skeleton width="400px" />
       <Skeleton width="350px" />
       <Skeleton width="150px" />
