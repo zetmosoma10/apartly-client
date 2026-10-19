@@ -1,40 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import ApartmentCard from "../../src/components/ApartmentCard";
-import type { Apartment } from "../../src/entities/Apartment";
+import { mockApartment } from "../mocks/data";
 
 describe("<ApartmentCard/>", () => {
-  // Mock mock apartment object satisfying the type requirements
-  const mockApartment: Apartment = {
-    _id: "apt-123",
-    city: "Johannesburg",
-    title: "Modern Loft Apartment",
-    price: "8500",
-    status: "available",
-    address: "123 Main St",
-    landlord: {
-      _id: "lnd-123",
-      avatar: { url: "avatar.jpeg" },
-      email: "web@gmail.com",
-      firstName: "James",
-      lastName: "Bob",
-      phone: "00212314",
-      role: "landlord",
-      createdAt: new Date(),
-    },
-    createdAt: new Date(),
-    bedrooms: "1",
-    bathrooms: "1",
-    description: "A lovely loft.",
-    totalRatings: 0,
-    averageRatings: 0,
-    ratings: [],
-    type: "studio",
-    amenities: ["WiFi"],
-    images: [{ _id: "img-1", url: "https://example.com/image.jpg" }],
-    coordinates: { lat: 0, lng: 0 },
-  };
-
   it("should renders apartment details and standard client link correctly", () => {
     render(
       <MemoryRouter initialEntries={["/apartments"]}>

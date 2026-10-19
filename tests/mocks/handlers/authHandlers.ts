@@ -2,11 +2,42 @@ import { http, HttpResponse } from "msw";
 import type {
   loginCredentials,
   registerCredentials,
-} from "../../src/entities/User";
+} from "../../../src/entities/User";
+import { mockAdminUser, mockApartment, mockLandlordUser } from "../data";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const authHandlers = [
+  http.get(`${baseUrl}/apartments`, async () => {
+    return HttpResponse.json(null, { status: 200 });
+  }),
+  http.get(`${baseUrl}/apartments/:id`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockApartment,
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/apartments/features`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: [mockApartment],
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/apartments/:user_id/admin`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: [mockApartment],
+      },
+      { status: 200 },
+    );
+  }),
   http.post(`${baseUrl}/auth/login`, async ({ request }) => {
     const body = (await request.json()) as loginCredentials;
 
@@ -71,10 +102,28 @@ export const authHandlers = [
       { status: 200 },
     );
   }),
-  http.patch(`${baseUrl}/auth/reset-password?token=1234&id=1234`, async () => {
+  http.patch(`${baseUrl}/auth/reset-password`, async () => {
     return HttpResponse.json(
       {
         success: true,
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/users/me`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockLandlordUser,
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/users/admin`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockAdminUser,
       },
       { status: 200 },
     );
