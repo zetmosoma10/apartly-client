@@ -61,7 +61,7 @@ export const mockLandlordUser: User = {
   email: "email@gmail.com",
   avatar: { url: "url_123" },
   phone: "0992242812",
-  role: "admin",
+  role: "landlord",
   createdAt: new Date(),
 };
 

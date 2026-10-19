@@ -1,14 +1,15 @@
 import { useRef, useState } from "react";
-import BackButton from "../../components/BackButton";
-import type { User } from "../../entities/User";
-import UserCard from "./UserCard";
-import DeleteUserModal from "./DeleteUserModal";
-import UserGridCardSkeleton from "../../components/loadingIndicators/UserCardSkeleton";
-import useGetUsers from "../../hooks/admin/useGetUsers";
-import PaginationType from "../../components/filters/Pagination";
 import { useSearchParams } from "react-router-dom";
+import BackButton from "../../components/BackButton";
+import PaginationType from "../../components/filters/Pagination";
+import UserGridCardSkeleton from "../../components/loadingIndicators/UserCardSkeleton";
+import type { User } from "../../entities/User";
+import useGetUsers from "../../hooks/admin/useGetUsers";
+import DeleteUserModal from "./DeleteUserModal";
+import UserCard from "./UserCard";
 
 const AdminPage = () => {
+  console.log("Admin Page ");
   // * HOOKS
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedUser, setSelectedUser] = useState<User | null>(null);

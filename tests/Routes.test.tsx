@@ -141,6 +141,39 @@ describe("Routes", () => {
           name: `Edit Apartment: ${mockApartment.title}`,
         }),
       ).toBeInTheDocument();
+
+      queryClient.clear();
     });
+  });
+
+  describe("Admin Routes", () => {
+    beforeEach(() => useAuthStore.setState({ user: null }));
+
+    it.each([
+      {
+        url: "/admin",
+        scenario: "/admin",
+      },
+      {
+        url: `/admin/users/${mockLandlordUser._id}/apartments`,
+        scenario: "/admin/users/:landlordId/apartments",
+      },
+      {
+        url: `/admin/users/apartments/${mockApartment._id}`,
+        scenario: "/admin/users/apartments/:id",
+      },
+    ])(
+      "should redirect unauthorize users from $scenario to previous route",
+      async ({ url }) => {
+        useAuthStore.setState({ user: mockLandlordUser });
+
+        const { router } = navigateTo("/");
+        router.navigate(url);
+
+        expect(
+          screen.getByRole("heading", { name: /find your perfect home/i }),
+        ).toBeInTheDocument();
+      },
+    );
   });
 });
