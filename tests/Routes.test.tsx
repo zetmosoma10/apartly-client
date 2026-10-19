@@ -26,4 +26,10 @@ describe("Routes", () => {
       await screen.findByRole("heading", { name: mockApartment.title }),
     ).toBeInTheDocument();
   });
+
+  it("should should render 404 page for invalid routes", () => {
+    navigateTo("/not-found");
+
+    expect(screen.getByRole("heading", { name: "404" })).toBeInTheDocument();
+  });
 });
