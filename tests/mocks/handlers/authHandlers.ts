@@ -21,7 +21,13 @@ export const authHandlers = [
     );
   }),
   http.get(`${baseUrl}/apartments/features`, async () => {
-    return HttpResponse.json(null, { status: 200 });
+    return HttpResponse.json(
+      {
+        success: true,
+        results: [mockApartment],
+      },
+      { status: 200 },
+    );
   }),
   http.post(`${baseUrl}/auth/login`, async ({ request }) => {
     const body = (await request.json()) as loginCredentials;
