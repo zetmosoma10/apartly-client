@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { screen } from "@testing-library/react";
+import { act, screen } from "@testing-library/react";
 import type { Apartment } from "../src/entities/Apartment";
 import type { Response } from "../src/entities/Response";
 import useAuthStore from "../src/store";
@@ -167,8 +167,10 @@ describe("Routes", () => {
       async ({ url }) => {
         useAuthStore.setState({ user: mockLandlordUser });
 
-        const { router } = navigateTo("/");
-        router.navigate(url);
+        act(() => {
+          const { router } = navigateTo("/");
+          router.navigate(url);
+        });
 
         expect(
           screen.getByRole("heading", { name: /find your perfect home/i }),

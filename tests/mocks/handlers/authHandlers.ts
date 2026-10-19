@@ -102,7 +102,7 @@ export const authHandlers = [
       { status: 200 },
     );
   }),
-  http.patch(`${baseUrl}/auth/reset-password?token=1234&id=1234`, async () => {
+  http.patch(`${baseUrl}/auth/reset-password`, async () => {
     return HttpResponse.json(
       {
         success: true,
