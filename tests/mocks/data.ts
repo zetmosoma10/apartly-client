@@ -1,4 +1,5 @@
 import type { Apartment } from "../../src/entities/Apartment";
+import type { User } from "../../src/entities/User";
 
 // Mock mock apartment object satisfying the type requirements
 export const mockApartment: Apartment = {
@@ -51,4 +52,26 @@ export const mockApartment: Apartment = {
     { _id: "img-3", url: "https://example.com/image.jpg" },
   ],
   coordinates: { lat: 0, lng: 0 },
+};
+
+export const mockLandlordUser: User = {
+  _id: "user_id",
+  firstName: "Lorence",
+  lastName: "Pitt",
+  email: "email@gmail.com",
+  avatar: { url: "url_123" },
+  phone: "0992242812",
+  role: "landlord",
+  createdAt: new Date(),
+};
+
+export const mockAdminUser: User = {
+  _id: "admin_user_id",
+  firstName: "John",
+  lastName: "Pitt",
+  email: "email@gmail.com",
+  avatar: { url: "url_123" },
+  phone: "0992242812",
+  role: "admin",
+  createdAt: new Date(),
 };
