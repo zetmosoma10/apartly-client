@@ -1,5 +1,6 @@
 import { screen } from "@testing-library/react";
-import { mockApartment } from "./mocks/data";
+import useAuthStore from "../src/store";
+import { mockApartment, mockUser } from "./mocks/data";
 import { navigateTo } from "./utils";
 
 describe("Routes", () => {
@@ -31,5 +32,31 @@ describe("Routes", () => {
     navigateTo("/not-found");
 
     expect(screen.getByRole("heading", { name: "404" })).toBeInTheDocument();
+  });
+
+  describe("Protected Routes", () => {
+    beforeEach(() => useAuthStore.setState({ user: null }));
+
+    it("should redirect unauthenticated user to login when navigating to /account page", () => {
+      navigateTo("/account");
+
+      expect(
+        screen.getByRole("heading", {
+          name: /Sign in/i,
+        }),
+      ).toBeInTheDocument();
+    });
+
+    it("should navigate to /account if user is authenticated", async () => {
+      useAuthStore.setState({ user: mockUser });
+
+      navigateTo("/account");
+
+      expect(
+        await screen.findByRole("heading", {
+          name: `${mockUser.firstName} ${mockUser.lastName}`,
+        }),
+      ).toBeInTheDocument();
+    });
   });
 });

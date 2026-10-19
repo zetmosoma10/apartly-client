@@ -3,7 +3,7 @@ import type {
   loginCredentials,
   registerCredentials,
 } from "../../../src/entities/User";
-import { mockApartment } from "../data";
+import { mockApartment, mockUser } from "../data";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -97,6 +97,15 @@ export const authHandlers = [
     return HttpResponse.json(
       {
         success: true,
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/users/me`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockUser,
       },
       { status: 200 },
     );
