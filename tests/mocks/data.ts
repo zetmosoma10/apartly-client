@@ -54,13 +54,24 @@ export const mockApartment: Apartment = {
   coordinates: { lat: 0, lng: 0 },
 };
 
-export const mockUser: User = {
+export const mockLandlordUser: User = {
   _id: "user_id",
   firstName: "Lorence",
   lastName: "Pitt",
   email: "email@gmail.com",
   avatar: { url: "url_123" },
   phone: "0992242812",
-  role: "tenant",
+  role: "admin",
+  createdAt: new Date(),
+};
+
+export const mockAdminUser: User = {
+  _id: "admin_user_id",
+  firstName: "John",
+  lastName: "Pitt",
+  email: "email@gmail.com",
+  avatar: { url: "url_123" },
+  phone: "0992242812",
+  role: "admin",
   createdAt: new Date(),
 };

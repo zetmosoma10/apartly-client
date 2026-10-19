@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import useAuthStore from "../src/store";
-import { mockApartment, mockUser } from "./mocks/data";
+import { mockApartment, mockLandlordUser } from "./mocks/data";
 import { navigateTo } from "./utils";
 
 describe("Routes", () => {
@@ -37,24 +37,52 @@ describe("Routes", () => {
   describe("Protected Routes", () => {
     beforeEach(() => useAuthStore.setState({ user: null }));
 
-    it("should redirect unauthenticated user to login when navigating to /account page", () => {
-      navigateTo("/account");
+    it.each([
+      {
+        url: "/account",
+      },
+      {
+        url: "/apartments/listings",
+      },
+      {
+        url: "/apartments/listings/new",
+      },
+      {
+        url: "/apartments/listings/:id",
+      },
+      {
+        url: "/apartments/listings/:id/edit",
+      },
+      {
+        url: "/admin",
+      },
+      {
+        url: "/admin/users/:id/apartments",
+      },
+      {
+        url: "/admin/users/apartments/:id",
+      },
+    ])(
+      "should redirect unauthenticated user to login when navigating to $url",
+      ({ url }) => {
+        navigateTo(url);
 
-      expect(
-        screen.getByRole("heading", {
-          name: /Sign in/i,
-        }),
-      ).toBeInTheDocument();
-    });
+        expect(
+          screen.getByRole("heading", {
+            name: /Sign in/i,
+          }),
+        ).toBeInTheDocument();
+      },
+    );
 
     it("should navigate to /account if user is authenticated", async () => {
-      useAuthStore.setState({ user: mockUser });
+      useAuthStore.setState({ user: mockLandlordUser });
 
       navigateTo("/account");
 
       expect(
         await screen.findByRole("heading", {
-          name: `${mockUser.firstName} ${mockUser.lastName}`,
+          name: `${mockLandlordUser.firstName} ${mockLandlordUser.lastName}`,
         }),
       ).toBeInTheDocument();
     });
