@@ -1,17 +1,17 @@
 import { useRef, useState } from "react";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
-import type { Apartment } from "../../../entities/Apartment";
 import BackButton from "../../../components/BackButton";
 import Badge from "../../../components/Badge";
 import ExpandableText from "../../../components/ExpandableText";
-import ApartmentMap from "../../listings/ApartmentMap";
 import ApartmentDetailsSkeleton from "../../../components/loadingIndicators/ApartmentDetailsSkeleton";
-import DeleteApartmentModal from "./DeleteApartmentModal";
+import type { Apartment } from "../../../entities/Apartment";
 import useGetApartment from "../../../hooks/apartments/useGetApartment";
-import CommentsSection from "../../listings/details-page/page-sections/CommentsSection";
+import ApartmentMap from "../../listings/ApartmentMap";
 import ImageCarouselModal from "../../listings/details-page/ImageCarouselModal";
+import CommentsSection from "../../listings/details-page/page-sections/CommentsSection";
 import Rating from "../../listings/details-page/Rating";
+import DeleteApartmentModal from "./DeleteApartmentModal";
 
 const AdminApartmentDetailsPage = () => {
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);

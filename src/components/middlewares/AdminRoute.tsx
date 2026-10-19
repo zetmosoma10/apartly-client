@@ -5,7 +5,6 @@ import useAuthStore from "../../store";
 
 const AdminRoute = () => {
   const { user } = useAuthStore();
-  console.log("Auth middlewares");
 
   useEffect(() => {
     if (user?.role !== "admin") toast.error("Access denied. Admin only");

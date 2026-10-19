@@ -9,7 +9,6 @@ import DeleteUserModal from "./DeleteUserModal";
 import UserCard from "./UserCard";
 
 const AdminPage = () => {
-  console.log("Admin Page ");
   // * HOOKS
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedUser, setSelectedUser] = useState<User | null>(null);

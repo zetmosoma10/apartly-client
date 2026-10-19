@@ -175,5 +175,35 @@ describe("Routes", () => {
         ).toBeInTheDocument();
       },
     );
+
+    it("should navigate to /admin if user is admin", () => {
+      useAuthStore.setState({ user: mockAdminUser });
+
+      navigateTo("/admin");
+
+      expect(
+        screen.getByRole("heading", { name: /all users/i }),
+      ).toBeInTheDocument();
+    });
+
+    it("should navigate to /admin/users/:landlordId/apartments if user is admin", () => {
+      useAuthStore.setState({ user: mockAdminUser });
+
+      navigateTo(`/admin/users/${mockLandlordUser._id}/apartments`);
+
+      expect(
+        screen.getByRole("heading", { name: /Admin - Apartments/i }),
+      ).toBeInTheDocument();
+    });
+
+    it("should navigate to /admin/users/apartments/:id if user is admin", async () => {
+      useAuthStore.setState({ user: mockAdminUser });
+
+      navigateTo(`/admin/users/apartments/${mockApartment._id}`);
+
+      expect(
+        await screen.findByRole("heading", { name: mockApartment.title }),
+      ).toBeInTheDocument();
+    });
   });
 });

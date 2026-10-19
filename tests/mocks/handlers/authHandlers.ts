@@ -3,7 +3,7 @@ import type {
   loginCredentials,
   registerCredentials,
 } from "../../../src/entities/User";
-import { mockApartment, mockUser } from "../data";
+import { mockAdminUser, mockApartment, mockLandlordUser } from "../data";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -21,6 +21,15 @@ export const authHandlers = [
     );
   }),
   http.get(`${baseUrl}/apartments/features`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: [mockApartment],
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/apartments/:user_id/admin`, async () => {
     return HttpResponse.json(
       {
         success: true,
@@ -105,7 +114,16 @@ export const authHandlers = [
     return HttpResponse.json(
       {
         success: true,
-        results: mockUser,
+        results: mockLandlordUser,
+      },
+      { status: 200 },
+    );
+  }),
+  http.get(`${baseUrl}/users/admin`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockAdminUser,
       },
       { status: 200 },
     );
