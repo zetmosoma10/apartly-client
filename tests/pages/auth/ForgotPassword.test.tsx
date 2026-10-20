@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Toaster } from "react-hot-toast";
 import { MemoryRouter } from "react-router-dom";
-import ForgotPasswordPage from "../../../../src/pages/auth/forgot-password/ForgotPasswordPage";
+import ForgotPasswordPage from "../../../src/pages/auth/forgot-password/ForgotPasswordPage";
 
 describe("<ForgotPasswordPage/>", () => {
   const renderComponent = () => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import AuthPage from "../../../../src/pages/auth/AuthPage";
+import AuthPage from "../../../src/pages/auth/AuthPage";
 
 describe("<AuthPage/>", () => {
   it("should render correctly", () => {
