@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Toaster } from "react-hot-toast";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import ResetPasswordPage from "../../../../src/pages/auth/reset-password/ResetPasswordPage";
-import HomePage from "../../../../src/pages/HomePage";
-import { DisplayLocation } from "../../../utils";
+import ResetPasswordPage from "../../../src/pages/auth/reset-password/ResetPasswordPage";
+import HomePage from "../../../src/pages/HomePage";
+import { DisplayLocation } from "../../utils";
 
 describe("<ResetPasswordPage/>", () => {
   const renderComponent = () => {
@@ -118,6 +118,7 @@ describe("<ResetPasswordPage/>", () => {
 
       expect(screen.getByText(errorMessage)).toBeInTheDocument();
     },
+    5000,
   );
 
   // it("should redirect the user to Home page after a successful form submission", async () => {
