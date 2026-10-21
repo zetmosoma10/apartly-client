@@ -38,6 +38,18 @@ export const authHandlers = [
       { status: 200 },
     );
   }),
+  http.post(`${baseUrl}/apartments`, async () => {
+    return HttpResponse.json({
+      success: true,
+      results: mockApartment,
+    });
+  }),
+  http.post(`${baseUrl}/apartments/:id`, async () => {
+    return HttpResponse.json({
+      success: true,
+      results: mockApartment,
+    });
+  }),
   http.post(`${baseUrl}/auth/login`, async ({ request }) => {
     const body = (await request.json()) as loginCredentials;
 

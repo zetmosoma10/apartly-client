@@ -24,3 +24,11 @@ Object.defineProperty(window, "scrollTo", {
   writable: true,
   value: vi.fn(),
 });
+
+vi.stubGlobal(
+  "URL",
+  Object.assign(URL, {
+    createObjectURL: vi.fn(() => "blob:mock-image"),
+    revokeObjectURL: vi.fn(),
+  }),
+);
