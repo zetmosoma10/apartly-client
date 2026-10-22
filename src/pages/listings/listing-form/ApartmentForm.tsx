@@ -132,7 +132,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         return;
       }
 
-      if (!coordinates.lat && !coordinates.lng) {
+      if (coordinates.lat || coordinates.lng) {
         toast.error("Please pick apartment location on the map below");
         return;
       }
@@ -322,7 +322,14 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         <p className="block mb-2 text-sm font-medium">Location</p>
         <MapPicker
           setCoordinates={setCoordinates}
-          coordinates={apartment?.coordinates ? apartment.coordinates : null}
+          coordinates={
+            coordinates.lat !== null && coordinates.lng !== null
+              ? {
+                  lat: coordinates.lat,
+                  lng: coordinates.lng,
+                }
+              : null
+          }
         />
       </div>
 

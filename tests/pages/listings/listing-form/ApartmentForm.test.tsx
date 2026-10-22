@@ -5,33 +5,38 @@ import toast from "react-hot-toast";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "../../../../src/pages/auth/login/LoginPage";
 import ApartmentForm from "../../../../src/pages/listings/listing-form/ApartmentForm";
+import ListingPage from "../../../../src/pages/listings/ListingPage";
+import useAuthStore from "../../../../src/store";
 import { mockApartment } from "../../../mocks/data";
 import { DisplayLocation } from "../../../utils";
 
 // MOCKS
-vi.mock("./MapPicker", async () => {
-  const React = await import("react");
-
-  return {
-    default: ({
-      setCoordinates,
-    }: {
-      setCoordinates: React.Dispatch<
-        React.SetStateAction<{
-          lat: number | null;
-          lng: number | null;
-        }>
-      >;
-    }) => (
+vi.mock("../../../../src/pages/listings/listing-form/MapPicker", async () => ({
+  default: ({
+    setCoordinates,
+    coordinates,
+  }: {
+    coordinates?: { lat: number; lng: number } | null;
+    setCoordinates: React.Dispatch<
+      React.SetStateAction<{
+        lat: number | null;
+        lng: number | null;
+      }>
+    >;
+  }) => (
+    <div>
+      <p>
+        {coordinates?.lat} {coordinates?.lng}
+      </p>
       <button
         type="button"
         onClick={() => setCoordinates({ lat: -26.2041, lng: 28.0473 })}
       >
         Select test location
       </button>
-    ),
-  };
-});
+    </div>
+  ),
+}));
 
 vi.mock("react-hot-toast", () => ({
   default: {
@@ -41,6 +46,10 @@ vi.mock("react-hot-toast", () => ({
 }));
 
 describe("<ApartmentForm/>", () => {
+  beforeEach(() => {
+    useAuthStore.setState({ user: null });
+  });
+
   const renderComponent = (initialEntry = "/apartments/listings/new") => {
     const queryClient = new QueryClient({
       defaultOptions: {
@@ -53,6 +62,7 @@ describe("<ApartmentForm/>", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={[initialEntry]}>
           <Routes>
+            <Route path="/apartments/listings" element={<ListingPage />} />
             <Route
               path="/apartments/listings/new"
               element={<ApartmentForm />}
