@@ -3,13 +3,33 @@ import type {
   loginCredentials,
   registerCredentials,
 } from "../../../src/entities/User";
-import { mockAdminUser, mockApartment, mockLandlordUser } from "../data";
+import {
+  mockAdminUser,
+  mockAllApartments,
+  mockApartment,
+  mockLandlordUser,
+} from "../data";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const authHandlers = [
   http.get(`${baseUrl}/apartments`, async () => {
-    return HttpResponse.json(null, { status: 200 });
+    return HttpResponse.json(
+      {
+        success: true,
+        count: 2,
+        results: mockAllApartments,
+        pagination: {
+          currentPage: 1,
+          totalPages: 1,
+          currentCountPerPage: 1,
+          totalPerPage: 3,
+          totalDocuments: 2,
+          hasNextPage: false,
+        },
+      },
+      { status: 200 },
+    );
   }),
   http.get(`${baseUrl}/apartments/:id`, async () => {
     return HttpResponse.json(
