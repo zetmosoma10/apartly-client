@@ -159,6 +159,17 @@ export const mockAllApartments = [
   },
 ];
 
+export const mockTenantUser: User = {
+  _id: "user_id",
+  firstName: "Lorence",
+  lastName: "Pitt",
+  email: "email@gmail.com",
+  avatar: { url: "url_123" },
+  phone: "0992242812",
+  role: "tenant",
+  createdAt: new Date(),
+};
+
 export const mockLandlordUser: User = {
   _id: "user_id",
   firstName: "Lorence",
