@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import React, { useState } from "react";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 
 const markerIcon = new L.Icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -21,7 +21,7 @@ type Props = {
 
 const MapPicker = ({ setCoordinates, coordinates }: Props) => {
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(
-    coordinates || null
+    coordinates || null,
   );
 
   // *  handle map click
@@ -46,7 +46,7 @@ const MapPicker = ({ setCoordinates, coordinates }: Props) => {
       <MapContainer
         center={center as [number, number]}
         zoom={13}
-        className="h-full w-full"
+        className="w-full h-full"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

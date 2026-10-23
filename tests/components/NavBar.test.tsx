@@ -86,4 +86,6 @@ describe("<NavBar/>", () => {
       await screen.findByRole("button", { name: /logout/i }),
     ).toBeInTheDocument();
   });
+
+  it;
 });

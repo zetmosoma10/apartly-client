@@ -132,7 +132,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         return;
       }
 
-      if (coordinates.lat || coordinates.lng) {
+      if (!coordinates.lat || !coordinates.lng) {
         toast.error("Please pick apartment location on the map below");
         return;
       }
@@ -144,6 +144,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       // * append coordinates
       formData.append("coordinates", JSON.stringify(coordinates));
+      console.log(formData);
 
       // * Mutation
       createApartment(formData, {

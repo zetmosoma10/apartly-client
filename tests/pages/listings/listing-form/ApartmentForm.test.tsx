@@ -86,102 +86,80 @@ describe("<ApartmentForm/>", () => {
     );
 
     const user = userEvent.setup();
-    const titleInput = screen.getByRole("textbox", { name: /title/i });
-    const priceInput = screen.getByRole("textbox", { name: /price/i });
-    const bedroomsInput = screen.getByRole("textbox", { name: /bedrooms/i });
-    const addressInput = screen.getByRole("textbox", { name: /address/i });
-    const bathroomsInput = screen.getByRole("textbox", { name: /bathrooms/i });
-    const statusSelectInput = screen.getByRole("combobox", { name: /status/i });
-    const typeSelectInput = screen.getByRole("combobox", { name: /type/i });
-    const amenitiesInput = screen.getByRole("textbox", { name: /amenities/i });
-    const cityInput = screen.getByRole("textbox", { name: /city/i });
-    const uploadInput = screen.getByLabelText(/click to upload/i);
-    const descriptionInput = screen.getByRole("textbox", {
-      name: /description/i,
-    });
-    const submitButton = screen.getByRole("button", {
-      name: /Submit New Apartment/i,
-    });
+    const form = {
+      titleInput: screen.getByRole("textbox", { name: /title/i }),
+      priceInput: screen.getByRole("textbox", { name: /price/i }),
+      bedroomsInput: screen.getByRole("textbox", { name: /bedrooms/i }),
+      addressInput: screen.getByRole("textbox", { name: /address/i }),
+      bathroomsInput: screen.getByRole("textbox", { name: /bathrooms/i }),
+      statusSelectInput: screen.getByRole("combobox", { name: /status/i }),
+      typeSelectInput: screen.getByRole("combobox", { name: /type/i }),
+      amenitiesInput: screen.getByRole("textbox", { name: /amenities/i }),
+      cityInput: screen.getByRole("textbox", { name: /city/i }),
+      uploadInput: screen.getByLabelText(/click to upload/i),
+      descriptionInput: screen.getByRole("textbox", {
+        name: /description/i,
+      }),
+      submitButton: screen.getByRole("button", {
+        name: /Submit New Apartment/i,
+      }),
+    };
 
     const fillFormWithValidData = async () => {
-      await user.type(titleInput, "aaa");
-      await user.type(descriptionInput, "aaa");
-      await user.type(priceInput, "3600");
-      await user.type(cityInput, "aaa");
-      await user.type(bathroomsInput, "1");
-      await user.type(bedroomsInput, "2");
-      await user.type(addressInput, "aaa");
-      await user.selectOptions(statusSelectInput, "available");
-      await user.selectOptions(typeSelectInput, "2-bedrooms");
+      await user.type(form.titleInput, "aaa");
+      await user.type(form.descriptionInput, "aaa");
+      await user.type(form.priceInput, "3600");
+      await user.type(form.cityInput, "aaa");
+      await user.type(form.bathroomsInput, "1");
+      await user.type(form.bedroomsInput, "2");
+      await user.type(form.addressInput, "aaa");
+      await user.selectOptions(form.statusSelectInput, "available");
+      await user.selectOptions(form.typeSelectInput, "2-bedrooms");
     };
 
     return {
       user,
-      titleInput,
-      cityInput,
-      priceInput,
-      submitButton,
-      bedroomsInput,
-      bathroomsInput,
-      addressInput,
-      amenitiesInput,
-      descriptionInput,
-      statusSelectInput,
-      typeSelectInput,
-      uploadInput,
+      form,
       fillFormWithValidData,
     };
   };
 
   describe("Rendering", () => {
     it("should render correctly", () => {
-      const {
-        titleInput,
-        cityInput,
-        bedroomsInput,
-        addressInput,
-        priceInput,
-        submitButton,
-        bathroomsInput,
-        amenitiesInput,
-        descriptionInput,
-        statusSelectInput,
-        typeSelectInput,
-        uploadInput,
-      } = renderComponent();
+      const { form } = renderComponent();
 
       // Defaults values
-      expect(titleInput).toHaveValue("");
-      expect(priceInput).toHaveValue("");
-      expect(bedroomsInput).toHaveValue("");
-      expect(cityInput).toHaveValue("");
-      expect(addressInput).toHaveValue("");
-      expect(bathroomsInput).toHaveValue("");
-      expect(amenitiesInput).toHaveValue("");
-      expect(descriptionInput).toHaveValue("");
-      expect(typeSelectInput).toHaveValue("");
-      expect(statusSelectInput).toHaveValue("");
+      expect(form.titleInput).toHaveValue("");
+      expect(form.priceInput).toHaveValue("");
+      expect(form.bedroomsInput).toHaveValue("");
+      expect(form.cityInput).toHaveValue("");
+      expect(form.addressInput).toHaveValue("");
+      expect(form.bathroomsInput).toHaveValue("");
+      expect(form.amenitiesInput).toHaveValue("");
+      expect(form.descriptionInput).toHaveValue("");
+      expect(form.typeSelectInput).toHaveValue("");
+      expect(form.statusSelectInput).toHaveValue("");
 
-      expect(titleInput).toBeInTheDocument();
-      expect(priceInput).toBeInTheDocument();
-      expect(bedroomsInput).toBeInTheDocument();
-      expect(cityInput).toBeInTheDocument();
-      expect(addressInput).toBeInTheDocument();
-      expect(bathroomsInput).toBeInTheDocument();
-      expect(amenitiesInput).toBeInTheDocument();
-      expect(descriptionInput).toBeInTheDocument();
-      expect(typeSelectInput).toBeInTheDocument();
-      expect(statusSelectInput).toBeInTheDocument();
-      expect(uploadInput).toBeInTheDocument();
-      expect(submitButton).toBeInTheDocument();
+      expect(form.titleInput).toBeInTheDocument();
+      expect(form.priceInput).toBeInTheDocument();
+      expect(form.bedroomsInput).toBeInTheDocument();
+      expect(form.cityInput).toBeInTheDocument();
+      expect(form.addressInput).toBeInTheDocument();
+      expect(form.bathroomsInput).toBeInTheDocument();
+      expect(form.amenitiesInput).toBeInTheDocument();
+      expect(form.descriptionInput).toBeInTheDocument();
+      expect(form.typeSelectInput).toBeInTheDocument();
+      expect(form.statusSelectInput).toBeInTheDocument();
+      expect(form.uploadInput).toBeInTheDocument();
+      expect(form.submitButton).toBeInTheDocument();
     });
   });
 
   describe("Validation", () => {
     it("should show validation errors when submitted empty", async () => {
-      const { user, submitButton } = renderComponent();
+      const { user, form } = renderComponent();
 
-      await user.click(submitButton);
+      await user.click(form.submitButton);
 
       expect(await screen.findByText(/title required/i)).toBeInTheDocument();
       expect(await screen.findByText(/city required/i)).toBeInTheDocument();
@@ -246,31 +224,18 @@ describe("<ApartmentForm/>", () => {
     ])(
       "should show error for $field if it's $scenario",
       async ({ field, value, errorMessage }) => {
-        const {
-          user,
-          titleInput,
-          cityInput,
-          bedroomsInput,
-          addressInput,
-          priceInput,
-          bathroomsInput,
-          descriptionInput,
-          statusSelectInput,
-          typeSelectInput,
-          submitButton,
-          fillFormWithValidData,
-        } = renderComponent();
+        const { user, form, fillFormWithValidData } = renderComponent();
 
         const fields: Record<string, HTMLElement> = {
-          title: titleInput,
-          description: descriptionInput,
-          price: priceInput,
-          bedrooms: bedroomsInput,
-          bathrooms: bathroomsInput,
-          city: cityInput,
-          address: addressInput,
-          status: statusSelectInput,
-          type: typeSelectInput,
+          title: form.titleInput,
+          description: form.descriptionInput,
+          price: form.priceInput,
+          bedrooms: form.bedroomsInput,
+          bathrooms: form.bathroomsInput,
+          city: form.cityInput,
+          address: form.addressInput,
+          status: form.statusSelectInput,
+          type: form.typeSelectInput,
         };
 
         // Populate form with valid data
@@ -289,7 +254,7 @@ describe("<ApartmentForm/>", () => {
           await user.type(fields[field], value);
         }
 
-        await user.click(submitButton);
+        await user.click(form.submitButton);
 
         expect(screen.getByText(errorMessage)).toBeInTheDocument();
       },
@@ -298,7 +263,7 @@ describe("<ApartmentForm/>", () => {
 
   describe("Image Upload", () => {
     it("should show error if fewer than 3 images are uploaded", async () => {
-      const { user, uploadInput } = renderComponent();
+      const { user, form } = renderComponent();
 
       // Create Image File to be Uploaded
       const imageFile = new File(["image content"], "image1.png", {
@@ -306,7 +271,7 @@ describe("<ApartmentForm/>", () => {
       });
 
       // Upload the image
-      await user.upload(uploadInput, imageFile);
+      await user.upload(form.uploadInput, imageFile);
 
       expect(toast.error).toHaveBeenCalledWith(
         "Please select exactly 3 images. You selected 1",
@@ -314,7 +279,7 @@ describe("<ApartmentForm/>", () => {
     });
 
     it("should show error if more than 3 images are uploaded", async () => {
-      const { user, uploadInput } = renderComponent();
+      const { user, form } = renderComponent();
 
       // Create image files
       const imageFiles = Array.from({ length: 4 }, (_, index) => {
@@ -323,7 +288,7 @@ describe("<ApartmentForm/>", () => {
         });
       });
 
-      await user.upload(uploadInput, imageFiles);
+      await user.upload(form.uploadInput, imageFiles);
 
       expect(toast.error).toHaveBeenCalledWith(
         "Please select exactly 3 images. You selected 4",
@@ -331,7 +296,7 @@ describe("<ApartmentForm/>", () => {
     });
 
     it("should show error when uploading non-image files", async () => {
-      const { user, uploadInput } = renderComponent();
+      const { user, form } = renderComponent();
 
       // Create image files
       const imageFiles = [
@@ -346,7 +311,7 @@ describe("<ApartmentForm/>", () => {
         }),
       ];
 
-      await user.upload(uploadInput, imageFiles);
+      await user.upload(form.uploadInput, imageFiles);
 
       expect(toast.error).toHaveBeenCalledWith(
         expect.stringContaining("is not an image"),
@@ -354,7 +319,7 @@ describe("<ApartmentForm/>", () => {
     });
 
     it("should show error when uploading an image larger than 10 MB", async () => {
-      const { user, uploadInput } = renderComponent();
+      const { user, form } = renderComponent();
 
       const imageFiles = [
         new File(["image"], "one.png", { type: "image/png" }),
@@ -364,7 +329,7 @@ describe("<ApartmentForm/>", () => {
         }),
       ];
 
-      await user.upload(uploadInput, imageFiles);
+      await user.upload(form.uploadInput, imageFiles);
 
       expect(toast.error).toHaveBeenCalledWith(
         expect.stringContaining("too large"),
@@ -376,7 +341,7 @@ describe("<ApartmentForm/>", () => {
     });
 
     it("should accept 3 images and render the preview images", async () => {
-      const { user, uploadInput } = renderComponent();
+      const { user, form } = renderComponent();
 
       // Create image files
       const imageFiles = Array.from({ length: 3 }, (_, index) => {
@@ -385,7 +350,7 @@ describe("<ApartmentForm/>", () => {
         });
       });
 
-      await user.upload(uploadInput, imageFiles);
+      await user.upload(form.uploadInput, imageFiles);
 
       expect(await screen.findByAltText("preview-0")).toBeInTheDocument();
       expect(screen.getByAltText("preview-1")).toBeInTheDocument();
@@ -393,4 +358,44 @@ describe("<ApartmentForm/>", () => {
       expect(screen.getAllByRole("img")).toHaveLength(3);
     });
   });
+
+  // describe("Form Submission", async () => {
+  //   it("should submit the form successfully and navigate user to /apartments/listings", async () => {
+  //     useAuthStore.setState({ user: mockLandlordUser });
+
+  //     const { user, fillFormWithValidData, form } = renderComponent();
+
+  //     // Fill the form inputs
+  //     await fillFormWithValidData();
+
+  //     // Add Image File
+  //     const imageFiles = Array.from({ length: 3 }, (_, index) => {
+  //       return new File([`image-${index}`], `image${index}.png`, {
+  //         type: "image/png",
+  //       });
+  //     });
+
+  //     await user.upload(form.uploadInput, imageFiles);
+
+  //     // Add Coordinates
+  //     const coordinateBtn = screen.getByRole("button", {
+  //       name: /Select test location/i,
+  //     });
+
+  //     await user.click(coordinateBtn);
+
+  //     await user.click(form.submitButton);
+
+  //     // expect(form.submitButton).toBeDisabled();
+
+  //     screen.debug();
+  //     await waitForElementToBeRemoved(
+  //       async () => await screen.findByText(/Please wait.../i),
+  //     );
+
+  //     expect(screen.getByTestId("display-location")).toHaveTextContent(
+  //       "/apartments/listings",
+  //     );
+  //   });
+  // });
 });
