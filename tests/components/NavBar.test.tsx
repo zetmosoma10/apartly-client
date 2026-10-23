@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import NavBar from "../../src/components/navigation/NavBar";
 import useAuthStore from "../../src/store";
@@ -87,5 +88,22 @@ describe("<NavBar/>", () => {
     ).toBeInTheDocument();
   });
 
-  it;
+  it("should logout the user when click logout button and navigate user to /", async () => {
+    useAuthStore.setState({ user: mockTenantUser });
+
+    renderComponent();
+
+    const user = userEvent.setup();
+
+    const logoutBtn = await screen.findByRole("button", { name: /logout/i });
+
+    await user.click(logoutBtn);
+
+    expect(
+      screen.queryByRole("button", { name: /logout/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /login \/ register/i }),
+    ).toBeInTheDocument();
+  });
 });
