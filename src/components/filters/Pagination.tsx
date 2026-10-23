@@ -16,6 +16,7 @@ const Pagination = ({ page, pagination, handlePageChange }: Props) => {
       <button
         onClick={() => handlePageChange(page - 1)}
         disabled={page === 1}
+        aria-label="previous-page"
         className="bg-white join-item btn hover:text-white hover:bg-warning hover:border-warning"
       >
         «
@@ -38,6 +39,7 @@ const Pagination = ({ page, pagination, handlePageChange }: Props) => {
       <button
         onClick={() => handlePageChange(page + 1)}
         disabled={!pagination?.hasNextPage}
+        aria-label="next-page"
         className="bg-white join-item btn hover:text-white hover:bg-warning hover:border-warning"
       >
         »

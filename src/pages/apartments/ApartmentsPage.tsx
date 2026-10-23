@@ -57,7 +57,7 @@ const ApartmentsPage = () => {
         <div className="flex items-center justify-center mt-11">
           <PaginationType
             page={page}
-            pagination={data.pagination}
+            pagination={data?.pagination}
             handlePageChange={handlePageChange}
           />
         </div>

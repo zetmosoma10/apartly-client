@@ -9,6 +9,7 @@ import { http, HttpResponse } from "msw";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import ApartmentsPage from "../../../src/pages/apartments/ApartmentsPage";
 import ListingDetailPage from "../../../src/pages/listings/details-page/ListingDetailPage";
+import { mockAllApartments } from "../../mocks/data";
 import { server } from "../../server";
 import { DisplayLocation } from "../../utils";
 
@@ -127,10 +128,161 @@ describe("<ApartmentsPage/>", () => {
     const links = await screen.findAllByRole("link");
 
     await user.click(links[0]);
-    screen.debug();
 
     expect(
       await screen.findByRole("heading", { name: "Modern Loft Apartment" }),
     ).toBeInTheDocument();
   });
+
+  it("should render pagination if totalPage > 1", async () => {
+    server.use(
+      http.get(`${baseUrl}/apartments`, () =>
+        HttpResponse.json({
+          success: true,
+          count: 3,
+          totalDocuments: 3,
+          results: mockAllApartments,
+          pagination: {
+            currentPage: 1,
+            totalPages: 2,
+            currentCountPerPage: 2,
+            totalPerPage: 3,
+            totalDocuments: 3,
+            hasNextPage: true,
+          },
+        }),
+      ),
+    );
+
+    renderComponent();
+
+    await waitForElementToBeRemoved(() => screen.getByRole("progressbar"));
+
+    expect(
+      await screen.findByRole("button", { name: "previous-page" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "previous-page" }),
+    ).toBeDisabled();
+
+    expect(
+      screen.getByRole("button", { name: "next-page" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "next-page" }),
+    ).not.toBeDisabled();
+
+    expect(screen.getByRole("button", { name: "1" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "2" })).toBeInTheDocument();
+  });
+
+  it("should not render pagination if totalPage < 1", async () => {
+    server.use(
+      http.get(`${baseUrl}/apartments`, () =>
+        HttpResponse.json({
+          success: true,
+          count: 0,
+          totalDocuments: 1,
+          results: mockAllApartments,
+          pagination: {
+            currentPage: 1,
+            totalPages: 1,
+            currentCountPerPage: 1,
+            totalPerPage: 1,
+            totalDocuments: 1,
+            hasNextPage: false,
+          },
+        }),
+      ),
+    );
+
+    renderComponent();
+
+    await waitForElementToBeRemoved(() => screen.getByRole("progressbar"));
+
+    expect(
+      screen.queryByRole("button", { name: "previous-page" }),
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByRole("button", { name: "next-page" }),
+    ).not.toBeInTheDocument();
+  });
+
+  // it("should render next page when clicking Next button", async () => {
+  //   server.use(
+  //     http.get(`${baseUrl}/apartments`, ({ request }) => {
+  //       const url = new URL(request.url);
+  //       const page = Number(url.searchParams.get("page") ?? 1);
+
+  //       if (page === 2) {
+  //         return HttpResponse.json({
+  //           success: true,
+  //           count: 1,
+  //           totalDocuments: 2,
+  //           results: [mockAllApartments[1]],
+  //           pagination: {
+  //             currentPage: 2,
+  //             totalPages: 2,
+  //             currentCountPerPage: 1,
+  //             totalPerPage: 1,
+  //             totalDocuments: 2,
+  //             hasNextPage: false,
+  //           },
+  //         });
+  //       }
+
+  //       return HttpResponse.json({
+  //         success: true,
+  //         count: 1,
+  //         totalDocuments: 2,
+  //         results: [mockAllApartments[0]],
+  //         pagination: {
+  //           currentPage: 1,
+  //           totalPages: 2,
+  //           currentCountPerPage: 1,
+  //           totalPerPage: 1,
+  //           totalDocuments: 2,
+  //           hasNextPage: true,
+  //         },
+  //       });
+  //     }),
+  //   );
+
+  //   const { user } = renderComponent();
+
+  //   await waitForElementToBeRemoved(() => screen.getByRole("progressbar"));
+
+  //   const nextButton = screen.getByRole("button", {
+  //     name: "next-page",
+  //   });
+  //   const previousButton = screen.getByRole("button", {
+  //     name: "previous-page",
+  //   });
+  //   const location = screen.getByTestId("display-location");
+
+  //   expect(location).toHaveTextContent("/apartments");
+  //   expect(previousButton).toBeDisabled();
+
+  //   await user.click(nextButton);
+
+  //   expect(location).toHaveTextContent("?page=2");
+
+  //   // Verify that page-two content has rendered.
+  //   expect(
+  //     await screen.findByText(mockAllApartments[1].title),
+  //   ).toBeInTheDocument();
+
+  //   screen.debug(undefined, Infinity);
+  //   // expect(nextButton).toBeDisabled();
+  //   // expect(previousButton).toBeEnabled();
+
+  //   await user.click(previousButton);
+
+  //   expect(location).toHaveTextContent("/apartments");
+
+  //   expect(
+  //     await screen.findByText(mockAllApartments[0].title),
+  //   ).toBeInTheDocument();
+  // });
 });

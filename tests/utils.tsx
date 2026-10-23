@@ -10,8 +10,13 @@ import { routes } from "../src/routes";
 
 // A small helper component to read the current URL path in tests
 export const DisplayLocation = () => {
-  const { pathname } = useLocation();
-  return <div data-testid="display-location">{pathname}</div>;
+  const { pathname, search } = useLocation();
+  return (
+    <div data-testid="display-location">
+      {pathname}
+      {search}
+    </div>
+  );
 };
 
 export const navigateTo = (
