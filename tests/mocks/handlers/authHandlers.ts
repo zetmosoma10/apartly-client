@@ -160,4 +160,13 @@ export const authHandlers = [
       { status: 200 },
     );
   }),
+  http.get(`${baseUrl}/apartments/me`, async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        results: mockAllApartments,
+      },
+      { status: 200 },
+    );
+  }),
 ];

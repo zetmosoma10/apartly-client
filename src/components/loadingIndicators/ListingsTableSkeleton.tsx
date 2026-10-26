@@ -13,7 +13,7 @@ const ListingsTableSkeleton = () => {
             <th>Date Added</th>
           </tr>
         </thead>
-        <tbody className="bg-white">
+        <tbody role="progressbar" className="bg-white">
           {[...Array(5)].map((_, indx) => (
             <tr key={indx}>
               <td>

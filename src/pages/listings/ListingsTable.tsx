@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import type { Response } from "../../entities/Response";
-import type { Apartment } from "../../entities/Apartment";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 import Badge from "../../components/Badge";
+import type { Apartment } from "../../entities/Apartment";
+import type { Response } from "../../entities/Response";
 
 const ListingsTable = ({ data }: { data?: Response<Apartment[]> }) => {
   return (
