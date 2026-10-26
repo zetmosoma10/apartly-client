@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import SelectFilter from "./SelectFilter";
 import ClearButton from "./ClearButton";
+import SelectFilter from "./SelectFilter";
 
 const statuses = ["available", "rented", "maintenance"];
 const prices = [2000, 5000, 8000, 10_000, 15_000, 20_000];
@@ -35,12 +35,13 @@ const FiltersBar = () => {
 
   return (
     <div className="bg-white mx-auto backdrop-blur-md rounded-2xl shadow px-4 pb-4 pt-2 mb-9 border md:max-w-[500px]">
-      <p className="text-center sm:text-start mb-1 font-semibold ">Filters</p>
+      <p className="mb-1 font-semibold text-center sm:text-start ">Filters</p>
       <div className="space-y-3">
         {/* Type Filter */}
-        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3">
+        <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3">
           <SelectFilter
             paramKey="type"
+            testId="type"
             defaultOption="All Types"
             value={searchParams.get("type") || ""}
             handleFilterChange={handleFilterChange}
@@ -50,6 +51,7 @@ const FiltersBar = () => {
           {/* Status Filter */}
           <SelectFilter
             paramKey="status"
+            testId="status"
             defaultOption="All Status"
             value={searchParams.get("status") || ""}
             handleFilterChange={handleFilterChange}
@@ -59,6 +61,7 @@ const FiltersBar = () => {
           {/* Price Filter */}
           <SelectFilter
             paramKey="minPrice"
+            testId="minPrice"
             defaultOption="minPrice"
             value={searchParams.get("minPrice") || ""}
             handleFilterChange={handleFilterChange}
@@ -66,6 +69,7 @@ const FiltersBar = () => {
           />
           <SelectFilter
             paramKey="maxPrice"
+            testId="maxPrice"
             defaultOption="maxPrice"
             value={searchParams.get("maxPrice") || ""}
             handleFilterChange={handleFilterChange}

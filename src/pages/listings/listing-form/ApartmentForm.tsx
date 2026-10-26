@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { apartmentSchema } from "./validationSchemas";
-import { z } from "zod";
-import type { Apartment } from "../../../entities/Apartment";
-import toast from "react-hot-toast";
 import axios from "axios";
-import MapPicker from "./MapPicker";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+import { z } from "zod";
 import Input from "../../../components/Input";
 import LoaderOverlay from "../../../components/loadingIndicators/LoaderOverlay";
+import type { Apartment } from "../../../entities/Apartment";
 import useCreateApartment from "../../../hooks/apartments/useCreateApartment";
 import useUpdateApartment from "../../../hooks/apartments/useUpdateApartment";
 import useAuthStore from "../../../store";
+import MapPicker from "./MapPicker";
 import SelectInput from "./SelectInput";
 import UploadBox from "./UploadBox";
+import { apartmentSchema } from "./validationSchemas";
 
 type FormData = z.infer<typeof apartmentSchema>;
 
@@ -62,7 +62,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
     // * Check that images are 3
     if (selectedFiles.length !== 3) {
       toast.error(
-        `Please select exactly 3 images. You selected ${selectedFiles.length}`
+        `Please select exactly 3 images. You selected ${selectedFiles.length}`,
       );
       e.target.value = "";
       return;
@@ -80,7 +80,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
       // * validate size
       if (file.size > MAX_MB_SIZE) {
         toast.error(
-          `file: ${file}, too large (max : ${MAX_MB_SIZE}mb). It will be removed`
+          `file: ${file}, too large (max : ${MAX_MB_SIZE}mb). It will be removed`,
         );
         return false;
       }
@@ -93,7 +93,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
       toast.error(
         `Please select exactly 3 valid images. ${
           3 - validFiles.length
-        } images were invalid`
+        } images were invalid`,
       );
       e.target.value = "";
       return;
@@ -132,7 +132,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         return;
       }
 
-      if (!coordinates.lat && !coordinates.lng) {
+      if (!coordinates.lat || !coordinates.lng) {
         toast.error("Please pick apartment location on the map below");
         return;
       }
@@ -144,6 +144,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
 
       // * append coordinates
       formData.append("coordinates", JSON.stringify(coordinates));
+      console.log(formData);
 
       // * Mutation
       createApartment(formData, {
@@ -183,7 +184,7 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
           },
           onSuccess: () =>
             navigate(`/apartments/listings/${apartmentId}`, { replace: true }),
-        }
+        },
       );
     }
     //
@@ -298,6 +299,8 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
                     className="object-cover w-full h-32 rounded-lg"
                   />
                   <button
+                    type="button"
+                    aria-label={`remove image ${i + 1}`}
                     className="absolute px-1 text-xs text-white bg-opacity-50 rounded bg-warning top-1 left-1"
                     onClick={() =>
                       setPreviews(previews.filter((p) => p !== src))
@@ -320,7 +323,14 @@ const ApartmentForm = ({ apartment }: { apartment?: Apartment }) => {
         <p className="block mb-2 text-sm font-medium">Location</p>
         <MapPicker
           setCoordinates={setCoordinates}
-          coordinates={apartment?.coordinates ? apartment.coordinates : null}
+          coordinates={
+            coordinates.lat !== null && coordinates.lng !== null
+              ? {
+                  lat: coordinates.lat,
+                  lng: coordinates.lng,
+                }
+              : null
+          }
         />
       </div>
 

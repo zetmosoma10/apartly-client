@@ -31,7 +31,7 @@ describe("<ApartmentCard/>", () => {
 
   it("should render admin link correctly", () => {
     render(
-      <MemoryRouter initialEntries={["admin/users/lnd-123/apartments"]}>
+      <MemoryRouter initialEntries={["admin/users/:id/apartments"]}>
         <ApartmentCard apartment={mockApartment} />
       </MemoryRouter>,
     );

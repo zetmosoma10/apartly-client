@@ -12,20 +12,20 @@ export const apartmentSchema = z.object({
     .min(1, "price is required"),
   bedrooms: z.coerce
     .number({ invalid_type_error: "bedrooms must be a number" })
-    .min(1, "bedrooms is required"),
+    .min(1, "bedrooms required"),
   bathrooms: z.coerce
     .number({
       invalid_type_error: "bathrooms must be a number",
     })
-    .min(1, "bathrooms is required"),
+    .min(1, "bathrooms required"),
   address: z.string().min(1, "address required").max(255, "address too long"),
   city: z.string().min(1, "city required").max(255, "city to long"),
   status: z.enum(["available", "rented", "maintenance"], {
-    message: "status is required",
+    message: "status required",
   }),
   type: z.enum(
     ["1-bedroom", "2-bedrooms", "3-bedrooms", "studio", "bachelor", "other"],
-    { message: "type is required" }
+    { message: "type required" },
   ),
   amenities: z.string().optional(),
 });

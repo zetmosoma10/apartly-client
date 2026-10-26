@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import type { Apartment } from "../../entities/Apartment";
+import ApartmentGrid from "../../components/ApartmentGrid";
 import BackButton from "../../components/BackButton";
-import PaginationType from "../../components/filters/Pagination";
 import FiltersBar from "../../components/filters/FiltersBar";
-import Heading from "./Heading";
+import PaginationType from "../../components/filters/Pagination";
 import Search from "../../components/filters/Search";
 import ApartmentsGridSkeletons from "../../components/loadingIndicators/ApartmentsGridSkeletons";
-import ApartmentGrid from "../../components/ApartmentGrid";
+import type { Apartment } from "../../entities/Apartment";
 import useGetAllApartments from "../../hooks/apartments/useGetAllApartments";
+import Heading from "./Heading";
 
 const ApartmentsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -57,7 +57,7 @@ const ApartmentsPage = () => {
         <div className="flex items-center justify-center mt-11">
           <PaginationType
             page={page}
-            pagination={data.pagination}
+            pagination={data?.pagination}
             handlePageChange={handlePageChange}
           />
         </div>
