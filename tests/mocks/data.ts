@@ -10,7 +10,7 @@ export const mockApartment: Apartment = {
   status: "available",
   address: "123 Main St",
   landlord: {
-    _id: "lnd-123",
+    _id: "user_id",
     avatar: { url: "avatar.jpeg" },
     email: "web@gmail.com",
     firstName: "James",
@@ -160,7 +160,7 @@ export const mockAllApartments = [
 ];
 
 export const mockTenantUser: User = {
-  _id: "user_id",
+  _id: "tenant_id",
   firstName: "Lorence",
   lastName: "Pitt",
   email: "email@gmail.com",

@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import { RiDeleteBin4Fill, RiEdit2Fill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import Badge from "../../../../components/Badge";
 import type { Apartment } from "../../../../entities/Apartment";
 import useAuthStore from "../../../../store";
-import Rating from "../Rating";
-import Badge from "../../../../components/Badge";
 import DeleteModal from "../DeleteModal";
+import Rating from "../Rating";
 
 type Props = {
   apartment?: Apartment;

@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import type { Apartment } from "../../../entities/Apartment";
 import axios from "axios";
 import toast from "react-hot-toast";
-import useAuthStore from "../../../store";
+import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../../components/loadingIndicators/LoadingSpinner";
+import type { Apartment } from "../../../entities/Apartment";
 import useDeleteApartment from "../../../hooks/apartments/useDeleteApartment";
+import useAuthStore from "../../../store";
 
 type Props = {
   apartment?: Apartment;
@@ -46,6 +46,7 @@ const DeleteModal = ({ ref, onClose, apartment }: Props) => {
   return (
     <dialog
       ref={ref}
+      role="dialog"
       id="my_modal_5"
       className="modal modal-bottom sm:modal-middle"
     >
